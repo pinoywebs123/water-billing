@@ -22,14 +22,14 @@
           
            <li >
             <a class="" href="{{route('admin_home')}}">
-                  <i class="icon_house_alt"></i>
+                  <i class="icon_currency_alt"></i>
                   <span>Water Rates</span>
             </a>
           </li>
 
            <li >
             <a class="" href="{{route('admin_home')}}">
-                  <i class="icon_house_alt"></i>
+                  <i class="icon_documents_alt"></i>
                   <span>Reports</span>
             </a>
           </li>
