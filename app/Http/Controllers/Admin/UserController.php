@@ -14,6 +14,26 @@ class UserController extends Controller
     	return view('admin.home');
     }
 
+    public function staffs()
+    {
+    	return view('admin.staffs');
+    }
+
+    public function consumers()
+    {
+    	return view('admin.consumers');
+    }
+
+    public function water_rates()
+    {
+    	return view('admin.water_rates');
+    }
+
+    public function reports()
+    {
+    	return view('admin.reports');
+    }
+
     public function logout()
     {
     	Auth::logout();

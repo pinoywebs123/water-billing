@@ -16,6 +16,11 @@ Route::group(['namespace'=> 'Cashier', 'middleware'=> 'cashier_check'], function
 	Route::get('/home', [
 		'as'	=> 'cashier_home',
 		'uses'	=> 'UserController@home'
+    ]);
+    
+    Route::get('/client_records', [
+		'as'	=> 'cashier_client_records',
+		'uses'	=> 'UserController@client_records'
 	]);
 
 	Route::get('/logout', [

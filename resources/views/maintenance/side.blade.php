@@ -10,7 +10,7 @@
           </li>
 
           <li >
-            <a class="" href="{{route('maintenance_home')}}">
+            <a class="" href="{{route('maintenance_client_records')}}">
                   <i class="icon_house_alt"></i>
                   <span>Client Records</span>
             </a>
@@ -24,8 +24,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="">Pending</a></li>
-              <li><a class="" href="">Approved</a></li>
+              <li><a class="" href="{{route('maintenance_pending_bills')}}">Pending</a></li>
+              <li><a class="" href="{{route('maintenance_approved_bills')}}">Approved</a></li>
             </ul>
           </li>
           

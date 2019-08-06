@@ -10,7 +10,7 @@
           </li>
 
            <li >
-            <a class="" href="{{route('billing_home')}}">
+            <a class="" href="{{route('billing_clients')}}">
                   <i class="icon_house_alt"></i>
                   <span>Clients</span>
             </a>
@@ -25,8 +25,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="">Pending</a></li>
-              <li><a class="" href="">Approved</a></li>
+              <li><a class="" href="{{route('billing_pending_bills')}}">Pending</a></li>
+              <li><a class="" href="{{route('billing_approved_bills')}}">Approved</a></li>
             </ul>
           </li>
           

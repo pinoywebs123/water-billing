@@ -14,6 +14,11 @@ class UserController extends Controller
     	return view('cashier.home');
     }
 
+    public function client_records()
+    {
+    	return view('cashier.client_records');
+    }
+
     public function logout()
     {
     	Auth::logout();

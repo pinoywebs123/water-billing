@@ -15,20 +15,20 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="">Staff</a></li>
-              <li><a class="" href="">Consumer</a></li>
+              <li><a class="" href="{{route('admin_staffs')}}">Staff</a></li>
+              <li><a class="" href="{{route('admin_consumers')}}">Consumer</a></li>
             </ul>
           </li>
           
            <li >
-            <a class="" href="{{route('admin_home')}}">
+            <a class="" href="{{route('admin_water_rates')}}">
                   <i class="icon_currency_alt"></i>
                   <span>Water Rates</span>
             </a>
           </li>
 
            <li >
-            <a class="" href="{{route('admin_home')}}">
+            <a class="" href="{{route('admin_reports')}}">
                   <i class="icon_documents_alt"></i>
                   <span>Reports</span>
             </a>
