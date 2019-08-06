@@ -39,6 +39,16 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapWebRoutesAdmin();
+
+        $this->mapWebRoutesBilling();
+
+        $this->mapWebRoutesCashier();
+
+        $this->mapWebRoutesClient();
+
+        $this->mapWebRoutesMaintenance();
+
         //
     }
 
@@ -54,6 +64,46 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));
+    }
+
+    protected function mapWebRoutesAdmin()
+    {
+        Route::prefix('admin')
+            ->middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/admin.php'));
+    }
+
+    protected function mapWebRoutesBilling()
+    {
+        Route::prefix('billing')
+            ->middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/billing.php'));
+    }
+
+    protected function mapWebRoutesCashier()
+    {
+        Route::prefix('cashier')
+            ->middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/cashier.php'));
+    }
+
+    protected function mapWebRoutesClient()
+    {
+        Route::prefix('client')
+            ->middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/client.php'));
+    }
+
+    protected function mapWebRoutesMaintenance()
+    {
+        Route::prefix('maintenance')
+            ->middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/maintenance.php'));
     }
 
     /**

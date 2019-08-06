@@ -60,7 +60,11 @@
 
 
 <div class="container">
+    <center>
+       <img src="{{URL::to('images/logo.png')}}" width="120px">
+    </center>
     <div class="col-md-6 col-md-offset-3 well">
+
       @if(Session::has('error'))
         <div class="alert alert-danger">
           {{Session::get('error')}}
