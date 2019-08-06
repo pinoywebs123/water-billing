@@ -34,7 +34,7 @@ Route::group(['namespace'=> 'Admin', 'middleware'=> 'admin_check'], function()
     ]);
     
     Route::get('/reports', [
-		'as'	=> 'admin_wreports',
+		'as'	=> 'admin_reports',
 		'uses'	=> 'UserController@reports'
 	]);
 
