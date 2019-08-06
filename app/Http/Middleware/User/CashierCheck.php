@@ -3,6 +3,7 @@
 namespace App\Http\Middleware\User;
 
 use Closure;
+use Auth;
 
 class CashierCheck
 {
@@ -15,6 +16,9 @@ class CashierCheck
      */
     public function handle($request, Closure $next)
     {
+        if(Auth::user()->role_id != 3){
+            abort(404);
+        }
         return $next($request);
     }
 }
