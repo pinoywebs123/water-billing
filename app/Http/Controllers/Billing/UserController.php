@@ -14,6 +14,21 @@ class UserController extends Controller
     	return view('billing.home');
     }
 
+    public function clients()
+    {
+    	return view('billing.clients');
+    }
+
+    public function pending_bills()
+    {
+    	return view('billing.pending_bills');
+    }
+
+    public function approved_bills()
+    {
+    	return view('billing.approved_bills');
+    }
+
     public function logout()
     {
     	Auth::logout();

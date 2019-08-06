@@ -16,7 +16,22 @@ Route::group(['namespace'=> 'Billing', 'middleware' => 'billing_check'], functio
 	Route::get('/home', [
 		'as'	=> 'billing_home',
 		'uses'	=> 'UserController@home'
+    ]);
+    
+    Route::get('/clients', [
+		'as'	=> 'billing_clients',
+		'uses'	=> 'UserController@clients'
+    ]);
+
+    Route::get('/pending_bills', [
+		'as'	=> 'billing_pending_bills',
+		'uses'	=> 'UserController@pending_bills'
 	]);
+    
+    Route::get('/approved_bills', [
+		'as'	=> 'billing_approved_bills',
+		'uses'	=> 'UserController@approved_bills'
+    ]);
 
 	Route::get('/logout', [
 		'as'	=> 'billing_logout',
