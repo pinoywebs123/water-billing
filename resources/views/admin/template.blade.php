@@ -14,6 +14,7 @@
 
   <link href="{{URL::to('dashboard/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{URL::to('dashboard/css/bootstrap-theme.css')}}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css/>
  
   <link href="{{URL::to('dashboard/css/elegant-icons-style.css')}}" rel="stylesheet" />
   <link href="{{URL::to('dashboard/css/font-awesome.min.css')}}" rel="stylesheet" />
@@ -21,6 +22,9 @@
   <link href="{{URL::to('dashboard/css/style.css')}}" rel="stylesheet">
  
   <script src="{{URL::to('tables/jquery-1.12.3.js')}}"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+
   @yield('styles')
 </head>
 
