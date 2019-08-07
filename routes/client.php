@@ -22,6 +22,18 @@ Route::group(['namespace'=> 'Client', 'middleware'=> 'client_check'], function()
 		'uses'	=> 'UserController@trans_history'
 	]);
 
+	//request
+    Route::get('/request_pending', [
+		'as'	=> 'client_request_pending',
+		'uses'	=> 'RequestController@request_pending'
+	]);
+
+	Route::get('/request_approved', [
+		'as'	=> 'client_request_approved',
+		'uses'	=> 'RequestController@request_approved'
+	]);
+
+
 	Route::get('/logout', [
 		'as'	=> 'client_logout',
 		'uses'	=> 'UserController@logout'

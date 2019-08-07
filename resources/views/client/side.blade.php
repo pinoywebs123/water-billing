@@ -23,6 +23,18 @@
             </a>
           </li>
 
+          <li class="sub-menu">
+            <a href="javascript:;" class="">
+                          <i class="icon_document_alt"></i>
+                          <span>Request Services</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+            <ul class="sub">
+              <li><a class="" href="{{route('client_request_pending')}}">Pending</a></li>
+              <li><a class="" href="{{route('client_request_approved')}}">Approved</a></li>
+            </ul>
+          </li>
+
           <li >
             <a class="" href="{{route('client_trans_history')}}">
                   <i class="icon_house_alt"></i>
