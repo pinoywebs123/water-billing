@@ -30,6 +30,8 @@ class UserController extends Controller
             'password' => 'required',
             'role_id' => 'required'
         ]);
+
+        $data['password'] = bcrypt(request()->password);
         
         User::create($data);
 
