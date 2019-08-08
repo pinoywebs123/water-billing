@@ -14,9 +14,9 @@
 
   <link href="{{URL::to('dashboard/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{URL::to('dashboard/css/bootstrap-theme.css')}}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{URL::to('dashboard/css/elegant-icons-style.css')}}">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css/>
  
-  <link href="{{URL::to('dashboard/css/elegant-icons-style.css')}}" rel="stylesheet" />
   <link href="{{URL::to('dashboard/css/font-awesome.min.css')}}" rel="stylesheet" />
   <link href="{{URL::to('dashboard/css/widgets.css')}}" rel="stylesheet">
   <link href="{{URL::to('dashboard/css/style.css')}}" rel="stylesheet">
