@@ -23,7 +23,7 @@
             <tr>
               <td>{{$req->title}}</td>
               <td>{{$req->content}}</td>
-              <td>{{$req->user->email}}</td>
+              <td>{{$req->status->name}}</td>
               <td>{{$req->created_at->diffForHumans()}}</td>
             </tr>
           @endforeach
