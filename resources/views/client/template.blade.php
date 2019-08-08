@@ -19,8 +19,11 @@
   <link href="{{URL::to('dashboard/css/font-awesome.min.css')}}" rel="stylesheet" />
   <link href="{{URL::to('dashboard/css/widgets.css')}}" rel="stylesheet">
   <link href="{{URL::to('dashboard/css/style.css')}}" rel="stylesheet">
- 
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
   <script src="{{URL::to('tables/jquery-1.12.3.js')}}"></script>
+   
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
   @yield('styles')
 </head>
 
@@ -46,5 +49,6 @@
   <script src="{{URL::to('dashboard/js/jquery.scrollTo.min.js')}}"></script>
   <script src="{{URL::to('dashboard/js/jquery.nicescroll.js')}}"></script>
   <script src="{{URL::to('dashboard/js/scripts.js')}}"></script>
+
   @yield('scripts');
 </html>

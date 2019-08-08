@@ -23,15 +23,20 @@ Route::group(['namespace'=> 'Client', 'middleware'=> 'client_check'], function()
 	]);
 
 	//request
-    Route::get('/request_pending', [
-		'as'	=> 'client_request_pending',
-		'uses'	=> 'RequestController@request_pending'
-	]);
+	    Route::get('/request_pending', [
+			'as'	=> 'client_request_pending',
+			'uses'	=> 'RequestController@request_pending'
+		]);
 
-	Route::get('/request_approved', [
-		'as'	=> 'client_request_approved',
-		'uses'	=> 'RequestController@request_approved'
-	]);
+		Route::post('/request_pending_store', [
+			'as'	=> 'client_request_pending_store',
+			'uses'	=> 'RequestController@request_pending_store'
+		]);
+
+		Route::get('/request_approved', [
+			'as'	=> 'client_request_approved',
+			'uses'	=> 'RequestController@request_approved'
+		]);
 
 
 	Route::get('/logout', [
