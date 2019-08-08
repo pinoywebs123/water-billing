@@ -25,12 +25,12 @@ Route::group(['namespace'=> 'Billing', 'middleware' => 'billing_check'], functio
 
     Route::get('/pending_bills', [
 		'as'	=> 'billing_pending_bills',
-		'uses'	=> 'UserController@pending_bills'
+		'uses'	=> 'ClientRequestController@pending_bills'
 	]);
     
     Route::get('/approved_bills', [
 		'as'	=> 'billing_approved_bills',
-		'uses'	=> 'UserController@approved_bills'
+		'uses'	=> 'ClientRequestController@approved_bills'
     ]);
 
 	Route::get('/logout', [

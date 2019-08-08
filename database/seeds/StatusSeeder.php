@@ -16,6 +16,8 @@ class StatusSeeder extends Seeder
 
         Status::create(['name'=> 'Approved']);
 
+        Status::create(['name'=> 'Working']);
+
         Status::create(['name'=> 'Finished']);
     }
 }

@@ -13,13 +13,14 @@ class RequestController extends Controller
     
     public function request_pending()
     {
-    	$all_request = CientRequest::where('client_id',Auth::id())->get();
+    	$all_request = CientRequest::where('client_id',Auth::id())->where('status_id',1)->get();
     	return view('client.request.pending',compact('all_request'));
     }
 
     public function request_approved()
     {
-    	return view('client.request.approved');
+    	$all_request = CientRequest::where('client_id',Auth::id())->where('status_id','!=',1)->get();
+    	return view('client.request.approved',compact('all_request'));
     }
 
     public function request_pending_store(Request $request,CreateRequest $create_request)
