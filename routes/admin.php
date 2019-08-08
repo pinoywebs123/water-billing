@@ -22,6 +22,16 @@ Route::group(['namespace'=> 'Admin', 'middleware'=> 'admin_check'], function()
 		'as'	=> 'admin_staffs',
 		'uses'	=> 'UserController@staffs'
     ]);
+
+    Route::post('/staffs/store', [
+		'as'	=> 'admin_store_staffs',
+		'uses'	=> 'UserController@staffs_store'
+    ]);
+
+    Route::post('/staffs/update', [
+		'as'	=> 'admin_update_staffs',
+		'uses'	=> 'UserController@staffs_update'
+    ]);
     
     Route::get('/consumers', [
 		'as'	=> 'admin_consumers',
