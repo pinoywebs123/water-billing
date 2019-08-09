@@ -16,7 +16,7 @@
                       </a>
             <ul class="sub">
               <li><a class="" href="{{route('admin_staffs')}}">Staff</a></li>
-              <li><a class="" href="{{route('admin_consumers')}}">Consumer</a></li>
+              <li><a class="" href="{{route('admin_clients')}}">Client</a></li>
             </ul>
           </li>
           

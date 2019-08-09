@@ -18,47 +18,14 @@ class UserController extends Controller
 
     public function staffs()
     {
-        $staffs = User::all();
+        $staffs = User::where('role_id', '!=', 4)->get();
     	return view('admin.staffs', compact('staffs'));
     }
 
-    public function staffs_store()
+    public function clients()
     {
-        $data = request()->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'role_id' => 'required'
-        ]);
-
-        $data['password'] = bcrypt(request()->password);
-        
-        User::create($data);
-
-        return back();
-    }
-
-    public function staffs_update()
-    {
-        $data = request()->validate([
-            'id' => 'required',
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => '',
-            'role_id' => 'required'
-        ]);
-
-        if ($data['password'] == '')
-            unset($data['password']);
-
-        User::find($data['id'])->update($data);
-
-        return back();
-    }
-
-    public function consumers()
-    {
-    	return view('admin.consumers');
+        $clients = User::where('role_id', 4)->get();
+    	return view('admin.clients', compact('clients'));
     }
 
     public function water_rates()

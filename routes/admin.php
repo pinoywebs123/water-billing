@@ -25,17 +25,27 @@ Route::group(['namespace'=> 'Admin', 'middleware'=> 'admin_check'], function()
 
     Route::post('/staffs/store', [
 		'as'	=> 'admin_store_staffs',
-		'uses'	=> 'UserController@staffs_store'
+		'uses'	=> 'StaffsController@staffs_store'
     ]);
 
     Route::post('/staffs/update', [
 		'as'	=> 'admin_update_staffs',
-		'uses'	=> 'UserController@staffs_update'
+		'uses'	=> 'StaffsController@staffs_update'
     ]);
     
-    Route::get('/consumers', [
-		'as'	=> 'admin_consumers',
-		'uses'	=> 'UserController@consumers'
+    Route::get('/clients', [
+		'as'	=> 'admin_clients',
+		'uses'	=> 'UserController@clients'
+    ]);
+
+    Route::post('/clients/store', [
+		'as'	=> 'admin_store_clients',
+		'uses'	=> 'ClientsController@clients_store'
+    ]);
+
+    Route::post('/clients/update', [
+		'as'	=> 'admin_update_clients',
+		'uses'	=> 'ClientsController@clients_update'
     ]);
     
     Route::get('/water_rates', [
