@@ -21,10 +21,17 @@
   .well{
     border-radius: 30px;
     margin-top: 10%;
+    opacity: 0.9;
   }
   .input-group{
     margin-bottom: 15px;
   }
+  body {
+  background: url('{{URL::to('images/bg.jpg')}}') no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
  
   </style>
 </head>
@@ -35,31 +42,36 @@
 
 <div class="container">
     
-    <div class="col-md-6 col-md-offset-3 well">
+    <div class="col-md-4 col-md-offset-4 well">
       <center>
        <img src="{{URL::to('images/logo.jpg')}}" width="120px">
     </center>
       @if(Session::has('error'))
         <div class="alert alert-danger">
-          {{Session::get('error')}}
+          <p>{{Session::get('error')}}</p>
         </div>
       @endif
       <form action="{{route('loginCheck')}}" method="POST">
       
         <div class="input-group">
           <span class="input-group-addon" id="basic-addon1">@</span>
-          <input type="email" name="email" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+          <input type="email" name="email" class="form-control"  aria-describedby="basic-addon1" data-toggle="tooltip" title="Enter Email" data-placement="right">
         </div>
         <div class="input-group">
           <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon1"></span>
-          <input type="password" name="password" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+          <input type="password" name="password" class="form-control"  aria-describedby="basic-addon1" data-toggle="tooltip" title="Enter Password" data-placement="right">
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-primary">Login</button>
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
           @csrf
         </div>
       </form>
     </div>
 </div>
 </body>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
 </html>

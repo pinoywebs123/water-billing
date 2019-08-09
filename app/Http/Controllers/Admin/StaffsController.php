@@ -37,13 +37,17 @@ class StaffsController extends Controller
             'role_id' => 'required'
         ]);
 
-        if ($data['password'] == '')
-            unset($data['password']);
+        $user = User::find($data['id'])->first();
 
-        $data['password'] = bcrypt(request()->password);
-        
-        User::find($data['id'])->update($data);
+        if(request()->password == '' || request()->password == null){
+            $data['password'] = $user->password;
+            $user->update($data);
+        }else{
+            $data['password'] = bcrypt(request()->password);
+            $user->update($data);
+        }
 
         return back();
+       
     }
 }
