@@ -14,70 +14,45 @@
     font: 20px Montserrat, sans-serif;
     line-height: 1.8;
     color: #f5f6f7;
+    background: #2c3e50;
   }
   p {font-size: 16px;}
   
-  .container-fluid {
-    padding-top: 70px;
-    padding-bottom: 70px;
+  .well{
+    border-radius: 30px;
+    margin-top: 10%;
   }
-  .navbar {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border: 0;
-    border-radius: 0;
-    margin-bottom: 0;
-    font-size: 12px;
-    letter-spacing: 5px;
+  .input-group{
+    margin-bottom: 15px;
   }
-  .navbar-nav  li a:hover {
-    color: #1abc9c !important;
-  }
+ 
   </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">Me</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">WHO</a></li>
-        <li><a href="#">WHAT</a></li>
-        <li><a href="#">WHERE</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+
 
 
 <div class="container">
-    <center>
-       <img src="{{URL::to('images/logo.png')}}" width="120px">
-    </center>
+    
     <div class="col-md-6 col-md-offset-3 well">
-
+      <center>
+       <img src="{{URL::to('images/logo.jpg')}}" width="120px">
+    </center>
       @if(Session::has('error'))
         <div class="alert alert-danger">
           {{Session::get('error')}}
         </div>
       @endif
-      <form action="" method="POST">
-        <div class="form-group">
-          <label>Email</label>
-          <input type="text" name="email" class="form-control" placeholder="Enter Email">
+      <form action="{{route('loginCheck')}}" method="POST">
+      
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">@</span>
+          <input type="email" name="email" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
         </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" name="password" class="form-control" placeholder="Enter Password">
+        <div class="input-group">
+          <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon1"></span>
+          <input type="password" name="password" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-primary">Login</button>

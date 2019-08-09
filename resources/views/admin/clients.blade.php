@@ -23,7 +23,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th hidden></th>
-                            <th></th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,7 +35,7 @@
                                 <td>{{ $client->email }}</td>
                                 <td hidden>{{ $client->role->id }}</td>
                                 <td>
-                                    <a class="edit" href="#" data-id="{{ $client->id }}" data-toggle="modal" data-target="#addeditmodal"> 
+                                    <a class="edit btn btn-primary btn-xs" href="#" data-id="{{ $client->id }}" data-toggle="modal" data-target="#addeditmodal"> 
                                         <i class="menu-icon fa fa-edit"></i> Edit 
                                     </a>
     
