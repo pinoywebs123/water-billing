@@ -41,12 +41,11 @@ class StaffsController extends Controller
 
         if(request()->password == '' || request()->password == null){
             $data['password'] = $user->password;
-            $user->update($data);
         }else{
             $data['password'] = bcrypt(request()->password);
-            $user->update($data);
+            
         }
-
+        $user->update($data);
         return back();
        
     }
