@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Maintenance;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\Model\Request as CientRequest;
 
 class UserController extends Controller
 {
@@ -21,7 +22,8 @@ class UserController extends Controller
 
     public function pending_bills()
     {
-    	return view('maintenance.pending_bills');
+        $all_request = CientRequest::where('status_id',2)->get();
+    	return view('maintenance.pending_bills',compact('all_request'));
     }
 
     public function approved_bills()

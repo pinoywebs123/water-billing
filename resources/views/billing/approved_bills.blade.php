@@ -14,7 +14,7 @@
                 <th>Content</th>
                 <th>Status</th>
                 <th>Date Created</th>
-                <th>Actions</th>
+                <th>Maintenance</th>
                 
             </tr>
         </thead>
@@ -27,8 +27,11 @@
               <td>{{$req->status->name}}</td>
               <td>{{$req->created_at->diffForHumans()}}</td>
               <td>
-                <button class="btn btn-primary btn-xs">Approved</button>
-                <button class="btn btn-danger btn-xs">Declined</button>
+                @if($req->maintenance)
+                  {{$req->maintenance->email}}
+                @else
+                  No Maintenance
+                @endif
               </td>
             </tr>
           @endforeach

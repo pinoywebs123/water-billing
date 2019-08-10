@@ -28,8 +28,18 @@
               <td>{{$req->status->name}}</td>
               <td>{{$req->created_at->diffForHumans()}}</td>
               <td>
-                <button class="btn btn-primary btn-xs">Approved</button>
-                <button class="btn btn-danger btn-xs">Declined</button>
+                
+                <form action="{{route('billing_approved_bills_submit',$req->id)}}" method="POST" id="form{{$req->id}}">
+                  @csrf
+                  <button class="btn btn-primary btn-xs approved" type="submit" data-toggle="modal" data-target="#appovedModal" value="{{$req->id}}">Approved</button>
+
+                </form>
+                <form action="{{route('billing_approved_bills_submit',$req->id)}}" method="POST">
+                  @csrf
+                  <button class="btn btn-danger btn-xs" type="submit">Declined</button>
+
+                </form>
+                
               </td>
             </tr>
           @endforeach
@@ -37,12 +47,43 @@
         
         
     </table>
+
+
+ <div id="appovedModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Informations!!!</h4>
+      </div>
+      <div class="modal-body">
+        <h3>Are you sure want yo approved?</h3>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary approved_yes">Yes</button>
+        
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div>
+
+  </div>
+</div>   
 @endsection
 
 @section('scripts')
 <script type="text/javascript">
   $(document).ready(function() {
     $('#example').DataTable();
+
+    $('.approved').click(()=> {
+      var id = $('.approved').val();
+      
+      $('.approved_yes').click(()=> {
+        $( "#form"+id ).submit();
+      })
+    });
   } );
 </script>
 @endsection

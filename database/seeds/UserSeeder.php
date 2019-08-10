@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
         User::create([
             'name'      => 'Maintenance Ako',
             'role_id'   => 5,   
-            'email'     => 'maintennace@yahoo.com',
+            'email'     => 'maintenance@yahoo.com',
             'password'  => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'
         ]);
     }

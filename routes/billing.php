@@ -33,6 +33,11 @@ Route::group(['namespace'=> 'Billing', 'middleware' => 'billing_check'], functio
 		'uses'	=> 'ClientRequestController@approved_bills'
     ]);
 
+    Route::post('/approved_bills/{id}', [
+		'as'	=> 'billing_approved_bills_submit',
+		'uses'	=> 'ClientRequestController@approved_bills_submit'
+    ]);
+
 	Route::get('/logout', [
 		'as'	=> 'billing_logout',
 		'uses'	=> 'UserController@logout'

@@ -11,6 +11,8 @@
                 <th>Title</th>
                 <th>Content</th>
                 <th>Status</th>
+                <th>Approved by</th>
+                <th>Maintenance Working</th>
                 <th>Date Created</th>
                 
             </tr>
@@ -21,6 +23,14 @@
               <td>{{$req->title}}</td>
               <td>{{$req->content}}</td>
               <td>{{$req->status->name}}</td>
+              <td>{{$req->biller->email}}</td>
+              <td>
+                @if($req->maintenance)
+                  {{$req->maintenance->email}}
+                @else
+                  No working Maintenance
+                @endif
+              </td>
               <td>{{$req->created_at->diffForHumans()}}</td>
             </tr>
           @endforeach
