@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
-
 use App\User;
+use App\Billing\Traits\UserManagement;
 
 class UserController extends Controller
 {
+    use UserManagement;
     
     public function home()
     {
@@ -24,7 +25,7 @@ class UserController extends Controller
 
     public function clients()
     {
-        $clients = User::where('role_id', 4)->get();
+        $clients = $this->getAllClient();
     	return view('admin.clients', compact('clients'));
     }
 

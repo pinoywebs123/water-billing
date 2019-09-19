@@ -42,6 +42,9 @@
                                     {{-- <a class="remove" href="#" data-row="{{ $r }}" data-id="{{ $client->id }}" data-toggle="modal" data-target="#removemodal"> 
                                         <i class="menu-icon fa fa-minus"></i> Remove 
                                     </a> --}}
+
+                                    <a href="#" class="btn btn-info btn-xs">View Records</a>
+                                    <a href="{{route('admin_client_lock',['id'=> $client->id])}}" class="btn btn-danger btn-xs">Lock</a>
                                 </td>
                             </tr>
     

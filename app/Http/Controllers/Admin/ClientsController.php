@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
-
 use App\User;
+use App\Billing\Traits\UserManagement;
 
 class ClientsController extends Controller
 {
+    use UserManagement;
 
     public function clients_store()
     {
@@ -45,5 +46,12 @@ class ClientsController extends Controller
         User::find($data['id'])->update($data);
 
         return back();
+    }
+
+    public function client_lock($id)
+    {
+        if($this->lockClient($id)){
+            return redirect()->back();
+        }
     }
 }

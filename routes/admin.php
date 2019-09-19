@@ -47,6 +47,11 @@ Route::group(['namespace'=> 'Admin', 'middleware'=> 'admin_check'], function()
 		'as'	=> 'admin_update_clients',
 		'uses'	=> 'ClientsController@clients_update'
     ]);
+
+    Route::get('/clients-lock/{id}',[
+    	'as'	=> 'admin_client_lock',
+    	'uses'	=> 'ClientsController@client_lock'
+    ]);
     
     Route::get('/water_rates', [
 		'as'	=> 'admin_water_rates',
