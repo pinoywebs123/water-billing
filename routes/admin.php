@@ -52,10 +52,17 @@ Route::group(['namespace'=> 'Admin', 'middleware'=> 'admin_check'], function()
     	'as'	=> 'admin_client_lock',
     	'uses'	=> 'ClientsController@client_lock'
     ]);
+
+    //Water Rates
     
     Route::get('/water_rates', [
 		'as'	=> 'admin_water_rates',
-		'uses'	=> 'UserController@water_rates'
+		'uses'	=> 'WaterRatesControlller@water_rates'
+    ]);
+
+    Route::post('/water_rates',[
+    	'as'	=> 'admin_water_store',
+    	'uses'	=> 'WaterRatesControlller@store'
     ]);
     
     Route::get('/reports', [

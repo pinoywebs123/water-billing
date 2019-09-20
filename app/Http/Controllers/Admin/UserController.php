@@ -29,11 +29,6 @@ class UserController extends Controller
     	return view('admin.clients', compact('clients'));
     }
 
-    public function water_rates()
-    {
-    	return view('admin.water_rates');
-    }
-
     public function reports()
     {
     	return view('admin.reports');
