@@ -7,10 +7,11 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
 use App\Billing\Traits\UserManagement;
+use App\Billing\Traits\Billing;
 
 class ClientsController extends Controller
 {
-    use UserManagement;
+    use UserManagement, Billing;
 
     public function clients_store()
     {
@@ -53,5 +54,17 @@ class ClientsController extends Controller
         if($this->lockClient($id)){
             return redirect()->back();
         }
+    }
+
+    public function view_records($id)
+    {
+        $client = $this->findClient($id);
+        $records = $this->getWaterCosumption($id);
+        return view('shared.client_records',compact('client','records'));
+    }
+
+    public function view_records_Store($id)
+    {
+        return $this->storeWaterConsumption($id);
     }
 }

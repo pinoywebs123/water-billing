@@ -17,6 +17,8 @@ Route::group(['namespace'=> 'Admin', 'middleware'=> 'admin_check'], function()
 		'as'	=> 'admin_home',
 		'uses'	=> 'UserController@home'
     ]);
+
+    //Staff
     
     Route::get('/staffs', [
 		'as'	=> 'admin_staffs',
@@ -32,6 +34,8 @@ Route::group(['namespace'=> 'Admin', 'middleware'=> 'admin_check'], function()
 		'as'	=> 'admin_update_staffs',
 		'uses'	=> 'StaffsController@staffs_update'
     ]);
+
+    //Clients
     
     Route::get('/clients', [
 		'as'	=> 'admin_clients',
@@ -53,6 +57,16 @@ Route::group(['namespace'=> 'Admin', 'middleware'=> 'admin_check'], function()
     	'uses'	=> 'ClientsController@client_lock'
     ]);
 
+    Route::get('/clients-records/{id}', [
+    	'as'	=> 'admin_view_client_records',
+    	'uses'	=> 'ClientsController@view_records'
+    ]);
+
+    Route::post('/clients-records/{id}', [
+    	'as'	=> 'admin_view_client_records_store',
+    	'uses'	=> 'ClientsController@view_records_Store'
+    ]);
+
     //Water Rates
     
     Route::get('/water_rates', [
@@ -64,6 +78,9 @@ Route::group(['namespace'=> 'Admin', 'middleware'=> 'admin_check'], function()
     	'as'	=> 'admin_water_store',
     	'uses'	=> 'WaterRatesControlller@store'
     ]);
+
+
+    //Reports
     
     Route::get('/reports', [
 		'as'	=> 'admin_reports',

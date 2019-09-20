@@ -3,6 +3,7 @@
 namespace App\Billing\Traits;
 use Illuminate\Http\Request;
 use App\User;
+use App\Billing;
 
 trait UserManagement {
 
@@ -16,6 +17,11 @@ trait UserManagement {
 	{
 		$clients = User::where('role_id',4)->where('status_id','!=',5)->get();
 		return $clients;
+	}
+
+	public function findClient($id)
+	{
+		return User::where('id',$id)->where('role_id',4)->first();
 	}
 
 	public function editClient($id)
@@ -34,11 +40,16 @@ trait UserManagement {
 
 	public function viewClientRecords($id)
 	{
-
+		return Billing::where('client_id',$id)->orderBy('id','desc')->get();
 	}
 	public function updateClientRecords($id)
 	{
-		
+		$user = Billing::where('client_id',$id)->first();
+
+	}
+	public function storeClientRecords($id)
+	{
+
 	}
 
 }
