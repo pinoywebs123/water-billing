@@ -40,8 +40,9 @@ class ClientsController extends Controller
 
         if ($data['password'] == '')
             unset($data['password']);
-
-        $data['password'] = bcrypt(request()->password);
+		else
+			$data['password'] = bcrypt(request()->password);
+		
         $data['role_id'] = 4;
         
         User::find($data['id'])->update($data);
