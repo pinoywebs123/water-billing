@@ -53,12 +53,15 @@ hr {
     <div class="col-md-6 col-md-offset-3 well">
       <center>
        <img src="{{URL::to('images/logo2.png')}}" width="120px">
+       <br /><br />
     </center>
       @if(Session::has('error'))
         <div class="alert alert-danger">
           <p>{{Session::get('error')}}</p>
         </div>
       @endif
+
+      @include('shared.notif')
 
         <form action="{{ route('store_profile_user') }}" method="post">
             <div class="form-group">
@@ -113,28 +116,12 @@ hr {
 
             <div class="text-center"> 
                 <button type="submit" class="btn btn-primary">Submit</button> 
-                <a href="{{ route('login') }}" class="btn btn-default">Done</button> 
+                <a href="{{ route('login') }}" class="btn btn-default">Done</a> 
             </div>
 
             @csrf
         </form>
 
-      {{-- <form action="{{route('loginCheck')}}" method="POST">
-      
-        <div class="input-group">
-          <span class="input-group-addon" id="basic-addon1">@</span>
-          <input type="email" name="email" class="form-control"  aria-describedby="basic-addon1" data-toggle="tooltip" title="Enter Email" data-placement="right">
-        </div>
-        <div class="input-group">
-          <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon1"></span>
-          <input type="password" name="password" class="form-control"  aria-describedby="basic-addon1" data-toggle="tooltip" title="Enter Password" data-placement="right">
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-block">Login</button>
-          <a href="{{ route('register') }}" class="btn btn-default btn-block">Register</a>
-          @csrf
-        </div>
-      </form> --}}
     </div>
 </div>
 </body>

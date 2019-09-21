@@ -45,6 +45,7 @@
     <div class="col-md-4 col-md-offset-4 well">
       <center>
        <img src="{{URL::to('images/logo2.png')}}" width="120px">
+       <br /><br />
     </center>
       @if(Session::has('error'))
         <div class="alert alert-danger">
