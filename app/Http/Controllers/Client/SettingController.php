@@ -38,7 +38,7 @@ class SettingController extends Controller
 
         $new_pass = request()->input('password');
         $confirm_new_pass = request()->input('confirm_password');
-
+      
         if (!(Hash::check($old_pass, $real_old_pass) && $new_pass == $confirm_new_pass))
             return false;
         else 
