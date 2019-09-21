@@ -37,7 +37,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <p class="text-secondary">{{ $profile->first_name }} {{ $profile->middle_name }} {{ $profile->last_name }}</p>
+                            <p class="text-secondary">&nbsp;</p>
                         </div>
                     </div>
             
@@ -48,14 +48,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <p class="text-secondary">
-                                <?php
-                                    
-                                    $date = new DateTime($profile->birth_date);
-                                    echo $date->format('F d, Y');
-                                    
-                                ?>
-                            </p>
+                            <p class="text-secondary">&nbsp;</p>
                         </div>
                     </div>
             
@@ -66,7 +59,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <p class="text-secondary">{{ $profile->gender }}</p>
+                            <p class="text-secondary">&nbsp;</p>
                         </div>
                     </div>
             
@@ -77,7 +70,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <p class="text-secondary">{{ $profile->contact }}</p>
+                            <p class="text-secondary">&nbsp;</p>
                         </div>
                     </div>        
             
@@ -99,7 +92,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <p class="text-secondary">{{ $profile->address }}, {{ $profile->city }}, {{ $profile->province }}</p>
+                            <p class="text-secondary">&nbsp;</p>
                         </div>
                     </div>
                     <div class="row ">
@@ -116,30 +109,30 @@
                             <form action="{{ route('client_store_profile') }}" method="post">
                                 <div class="form-group">
                                     <label for="" class="col-form-label col-form-label-sm" class="col-form-label col-form-label-sm">First Name:</label>
-                                    <input type="text" class="form-control form-control-sm" id="first_name" name="first_name" required placeholder="Enter first name" value="{{ $profile->first_name }}">
+                                    <input type="text" class="form-control form-control-sm" id="first_name" name="first_name" required placeholder="Enter first name">
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="col-form-label col-form-label-sm">Middle Name:</label>
-                                    <input type="text" class="form-control form-control-sm" id="middle_name" name="middle_name" required placeholder="Enter middle name" value="{{ $profile->middle_name }}">
+                                    <input type="text" class="form-control form-control-sm" id="middle_name" name="middle_name" required placeholder="Enter middle name">
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="col-form-label col-form-label-sm">Last Name:</label>
-                                    <input type="text" class="form-control form-control-sm" id="last_name" name="last_name" required placeholder="Enter last name" value="{{ $profile->last_name }}">
+                                    <input type="text" class="form-control form-control-sm" id="last_name" name="last_name" required placeholder="Enter last name">
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="col-form-label col-form-label-sm">Birth Date:</label>
-                                    <input type="date" class="form-control form-control-sm" id="birth_date" name="birth_date" required value="{{ $profile->birth_date }}">
+                                    <input type="date" class="form-control form-control-sm" id="birth_date" name="birth_date" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="col-form-label col-form-label-sm">Gender</label>
-                                    <select class="form-control form-control-sm" id="gender" name="gender" required value="{{ $profile->gender }}">
+                                    <select class="form-control form-control-sm" id="gender" name="gender" required>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="col-form-label col-form-label-sm">Contact number</label>
-                                    <input type="tel" class="form-control form-control-sm" id="contact" name="contact" required pattern="[0-9]{11}" placeholder="09123456789" value="{{ $profile->contact }}">
+                                    <input type="tel" class="form-control form-control-sm" id="contact" name="contact" required pattern="[0-9]{11}" placeholder="09123456789"">
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="col-form-label col-form-label-sm">E-mail:</label>
@@ -147,15 +140,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="col-form-label col-form-label-sm">Address:</label>
-                                    <input type="text" class="form-control form-control-sm" id="address" name="address" required placeholder="123 Street" value="{{ $profile->address }}">
+                                    <input type="text" class="form-control form-control-sm" id="address" name="address" required placeholder="123 Street">
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="col-form-label col-form-label-sm">City:</label>
-                                    <input type="text" class="form-control form-control-sm" id="city" name="city" required placeholder="Cebu City" value="{{ $profile->city }}">
+                                    <input type="text" class="form-control form-control-sm" id="city" name="city" required placeholder="Cebu City">
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="col-form-label col-form-label-sm">Province:</label>
-                                    <input type="text" class="form-control form-control-sm" id="province" name="province" required placeholder="Cebu" value="{{ $profile->province }}">
+                                    <input type="text" class="form-control form-control-sm" id="province" name="province" required placeholder="Cebu">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Submit</button>

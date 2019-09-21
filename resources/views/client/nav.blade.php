@@ -25,6 +25,9 @@
               <div class="log-arrow-up"></div>
               
               <li>
+                <a href="{{route('client_change_pass')}}"><i class="icon_key_alt"></i>Change password</a>
+              </li>
+              <li>
                 <a href="{{route('client_logout')}}"><i class="icon_key_alt"></i> Log Out</a>
               </li>
              

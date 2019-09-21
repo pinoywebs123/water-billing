@@ -7,9 +7,24 @@ Route::group(['namespace'=> 'Client', 'middleware'=> 'client_check'], function()
 		'uses'	=> 'UserController@home'
     ]);
     
+    Route::get('/change_pass', [
+		'as'	=> 'client_change_pass',
+		'uses'	=> 'UserController@change_pass'
+    ]);
+
+    Route::post('/change_pass/store', [
+		'as'	=> 'client_store_change_pass',
+		'uses'	=> 'SettingController@change_pass_store'
+    ]);
+    
     Route::get('/profile', [
 		'as'	=> 'client_profile',
 		'uses'	=> 'UserController@profile'
+    ]);
+
+    Route::post('/profile/store', [
+		'as'	=> 'client_store_profile',
+		'uses'	=> 'ProfileController@profile_store'
     ]);
     
     Route::get('/current_balance', [
