@@ -38,6 +38,6 @@ class SettingController extends Controller
         $confirm_new_pass = request()->input('confirm_password');
 
         if (!($old_pass == $real_old_pass && $new_pass == $confirm_new_pass))
-            return back();
+            return redirect()->back()->with('success','Password Successfully Updated!');
     }
 }
