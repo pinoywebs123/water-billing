@@ -47,9 +47,5 @@ trait UserManagement {
 		$user = Billing::where('client_id',$id)->first();
 
 	}
-	public function storeClientRecords($id)
-	{
-
-	}
 
 }

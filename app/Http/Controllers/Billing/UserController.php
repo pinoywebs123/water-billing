@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Billing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\Billing\Traits\UserManagement;
 
 class UserController extends Controller
 {
+    use UserManagement;
     
     public function home()
     {
@@ -16,7 +18,8 @@ class UserController extends Controller
 
     public function clients()
     {
-    	return view('billing.clients');
+        $clients = $this->getAllClient();
+    	return view('billing.clients',compact('clients'));
     }
 
     public function logout()
