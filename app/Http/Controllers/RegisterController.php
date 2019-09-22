@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 use App\Profile;
 use App\user;
 use Str;
+use App\Mail\ClientRegistrationVerification;
 
 class RegisterController extends Controller
 {
@@ -40,6 +42,12 @@ class RegisterController extends Controller
         $data2['user_id'] = User::orderBy('updated_at', 'desc')->first()->id;
         Profile::create($data2);
 
-        return redirect()->back()->with('success','You have successfully registered.' . $password );
+        $user = User::where('id', $data2['user_id'])->first();
+
+        $profile = Profile::where('user_id', $data2['user_id'])->first();
+
+        Mail::to($data['email'])->send(new ClientRegistrationVerification($user, $profile, $password));
+
+        return redirect()->back()->with('success','You have successfully registered. <br /> Check your email for your login and registration info.');
     }
 }

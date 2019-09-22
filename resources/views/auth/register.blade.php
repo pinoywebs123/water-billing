@@ -33,12 +33,12 @@
   height: 100%;
 }
 
-label {
+p, label {
     color: #000;
 }
-
-hr {
-    border-color: #ccc;
+ 
+.container {
+    width: auto;
 }
  
   </style>

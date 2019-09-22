@@ -5,18 +5,21 @@ namespace App\Http\Controllers\Cashier;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\Billing\Traits\UserManagement;
 
 class UserController extends Controller
 {
+    use UserManagement;
     
     public function home()
     {
     	return view('cashier.home');
     }
 
-    public function client_records()
+    public function clients()
     {
-    	return view('cashier.client_records');
+        $clients = $this->getAllClient();
+    	return view('cashier.clients',compact('clients'));
     }
 
     public function logout()
