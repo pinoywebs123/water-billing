@@ -8,6 +8,7 @@ use Auth;
 use App\User;
 use App\Billing\Traits\UserManagement;
 use App\Billing\Traits\Billing;
+use App\Billing\Admin\WaterRates;
 
 class ClientsController extends Controller
 {
@@ -64,8 +65,23 @@ class ClientsController extends Controller
         return view('shared.client_records',compact('client','records'));
     }
 
-    public function view_records_Store($id)
+    public function view_records_Store($id, WaterRates $water_rates)
     {
-        return $this->storeWaterConsumption($id);
+        return $this->storeWaterConsumption($id,$water_rates);
+    }
+
+    public function admin_client_paid($id)
+    {
+        return $this->paidWaterClient($id);
+    }
+
+    public function admin_get_client_info(Request $request)
+    {
+        return response()->json($this->getWaterInfo($request->biller_id));
+    }
+
+    public function admin_client_update_water(Request $request, WaterRates $water)
+    {
+        return $this->editWaterConsumption($request->except('_token'),$water);
     }
 }
