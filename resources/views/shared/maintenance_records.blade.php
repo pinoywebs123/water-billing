@@ -33,8 +33,7 @@
 						@endif
 					</td>
 					<td>
-						<button class="btn btn-info btn-xs">Edit</button>
-						
+						<button class="btn btn-info btn-xs biller_edit" data-toggle="modal" data-target="#myModal2" value="{{$rec->id}}">Edit</button>
 					</td>
 				</tr>
 			@endforeach
@@ -75,8 +74,57 @@
     </form>
   </div>
 </div>	
+
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+    	<form action="{{route('billing_client_update_water')}}" method="POST">
+    		@csrf
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Client Water Consumption</h4>
+      </div>
+      <div class="modal-body">
+        
+        	<div class="form-group">
+        		<label>Current Water Cosumption</label>
+        		<input type="number" name="water_consumption" class="form-control" id="waterConsumption">
+        		<input type="text" name="bill_id" id="bill_id" class="bill_id" hidden="">
+        	</div>
+        
+      </div>
+      <div class="modal-footer">
+      	<button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      </form>
+    </div>
+
+  </div>
+</div>	
 @endsection
 
 @section('scripts')
-
+<script>
+	var token = '{{Session::token()}}';
+	var url = '{{route('maintenance_get_client_info')}}';
+	$(document).ready(function(){
+		$(".biller_edit").click(function(){
+			var biller_id = $(this).val();
+			console.log(biller_id); 
+			$(".bill_id").val(biller_id);
+			$.ajax({
+				method: 'POST',
+				data: {biller_id: biller_id, _token: token},
+				url: url,
+				success: function(data){
+					console.log(data.water_consumption);
+					$("#waterConsumption").val(data.water_consumption);
+				}
+			});
+		});
+	});
+</script>
 @endsection

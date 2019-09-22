@@ -50,6 +50,16 @@ Route::group(['namespace'=> 'Billing', 'middleware' => 'billing_check'], functio
     	'uses'	=> 'ClientsController@view_records_Store'
     ]);
 
+    Route::post('/client-get-info',[
+        'as'    => 'billing_get_client_info',
+        'uses'  => 'ClientsController@admin_get_client_info'
+    ]);
+
+    Route::post('/client-waterbiller-update',[
+        'as'    => 'billing_client_update_water',
+        'uses'  => 'ClientsController@admin_client_update_water'
+    ]);
+
     //request
     Route::get('/pending_bills', [
 		'as'	=> 'billing_pending_bills',

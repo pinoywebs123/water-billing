@@ -29,6 +29,16 @@ Route::group(['namespace'=> 'Maintenance'], function()
 		'uses'	=> 'UserController@approved_bills'
     ]);
 
+    Route::post('/client-get-info',[
+        'as'    => 'maintenance_get_client_info',
+        'uses'  => 'UserController@maintenance_get_client_info'
+    ]);
+
+    Route::post('/client-waterbiller-update',[
+        'as'    => 'maintenance_client_update_water',
+        'uses'  => 'UserController@maintenance_client_update_water'
+    ]);
+
 	Route::get('/logout', [
 		'as'	=> 'maintenance_logout',
 		'uses'	=> 'UserController@logout'

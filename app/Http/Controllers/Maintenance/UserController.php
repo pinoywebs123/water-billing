@@ -47,4 +47,14 @@ class UserController extends Controller
     	Auth::logout();
     	return redirect()->route('login');
     }
+
+    public function maintenance_get_client_info(Request $request)
+    {
+        return response()->json($this->getWaterInfo($request->biller_id));
+    }
+
+    public function maintenance_client_update_water()
+    {
+        
+    }
 }
