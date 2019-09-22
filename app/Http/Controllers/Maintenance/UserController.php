@@ -6,18 +6,29 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\Model\Request as CientRequest;
+use App\Billing\Traits\UserManagement;
+use App\Billing\Traits\Billing;
 
 class UserController extends Controller
 {
+    use UserManagement, Billing;
 
     public function home()
     {
     	return view('maintenance.home');
     }
-
+    //clients
     public function client_records()
     {
-    	return view('maintenance.client_records');
+        $clients = $this->getAllClient();
+    	return view('maintenance.client_records',compact('clients'));
+    }
+
+    public function maintenance_client_view_records($id)
+    {
+        $client = $this->findClient($id);
+        $records = $this->getWaterCosumption($id);
+        return view('shared.maintenance_records',compact('records','client'));
     }
 
     public function pending_bills()

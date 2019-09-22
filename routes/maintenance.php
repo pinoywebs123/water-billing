@@ -6,6 +6,8 @@ Route::group(['namespace'=> 'Maintenance'], function()
 		'as'	=> 'maintenance_home',
 		'uses'	=> 'UserController@home'
     ]);
+
+    //Clients
     
     Route::get('/client_records', [
 		'as'	=> 'maintenance_client_records',
@@ -15,6 +17,11 @@ Route::group(['namespace'=> 'Maintenance'], function()
     Route::get('/pending_bills', [
 		'as'	=> 'maintenance_pending_bills',
 		'uses'	=> 'UserController@pending_bills'
+	]);
+
+	Route::get('/client-view-records/{id}',[
+		'as'	=> 'maintenance_client_view_records',
+		'uses'	=> 'UserController@maintenance_client_view_records'
 	]);
     
     Route::get('/approved_bills', [

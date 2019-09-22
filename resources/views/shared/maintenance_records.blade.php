@@ -1,5 +1,5 @@
 
-@extends('billing.template')
+@extends('maintenance.template')
 
 @section('styles')
 
@@ -7,7 +7,7 @@
 
 @section('contents')
 	<h1 class="text-center">{{$client->name}} Records</h1>
-	<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">New Bill</button>
+	<!-- <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">New Bill</button> -->
 	@include('shared.notif')
 	<table class="table">
 		<thead>
