@@ -44,7 +44,8 @@
     
     <div class="col-md-4 col-md-offset-4 well">
       <center>
-       <img src="{{URL::to('images/logo.jpg')}}" width="120px">
+       <img src="{{URL::to('images/logo2.png')}}" width="120px">
+       <br /><br />
     </center>
       @if(Session::has('error'))
         <div class="alert alert-danger">
@@ -63,6 +64,7 @@
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-primary btn-block">Login</button>
+          <a href="{{ route('register') }}" class="btn btn-default btn-block">Register</a>
           @csrf
         </div>
       </form>

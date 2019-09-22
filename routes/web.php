@@ -10,6 +10,16 @@ Route::group(['prefix'=> 'auth'], function()
 	Route::get('/login', [
 		'as' 	=> 'login',
 		'uses'	=> 'AuthController@login'
+    ]);
+    
+    Route::get('/register', [
+		'as' 	=> 'register',
+		'uses'	=> 'AuthController@register'
+    ]);
+    
+    Route::post('/register/store', [
+		'as' 	=> 'store_profile_user',
+		'uses'	=> 'RegisterController@register_store'
 	]);
 
 	Route::post('/login', [
