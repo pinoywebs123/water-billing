@@ -25,6 +25,16 @@ Route::group(['namespace'=> 'Billing', 'middleware' => 'billing_check'], functio
 		'uses'	=> 'UserController@clients'
     ]);
 
+    Route::post('/clients',[
+    	'as'	=> 'billing_create_client',
+    	'uses'	=> 'ClientsController@clients_store'
+    ]);
+
+    Route::post('/clients-update/',[
+    	'as'	=> 'billing_client_update',
+    	'uses'	=> 'ClientsController@clients_update'
+    ]);
+
     Route::get('/client-lock/{id}',[
     	'as'	=> 'billing_client_lock',
     	'uses'	=> 'ClientsController@client_lock'

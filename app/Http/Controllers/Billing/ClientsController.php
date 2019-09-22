@@ -23,10 +23,11 @@ class ClientsController extends Controller
 
         $data['password'] = bcrypt(request()->password);
         $data['role_id'] = 4;
+        $data['status_id'] = 3;
         
         User::create($data);
 
-        return back();
+       return back()->with('success','Client Added Successfully!');
     }
 
     public function clients_update()
@@ -47,7 +48,7 @@ class ClientsController extends Controller
         
         User::find($data['id'])->update($data);
 
-        return back();
+        return back()->with('success','Client Information Updated Successfully!');
     }
 
     public function client_lock($id)

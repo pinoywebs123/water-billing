@@ -131,7 +131,7 @@
 
             $(".add").click(function () {
                 $("#addeditmodal .modal-title").html("Add client");
-                $("#addedit_user").attr("action", "{{ route('admin_store_clients') }}");
+                $("#addedit_user").attr("action", "{{ route('billing_create_client') }}");
                 $("#name").val("");
                 $("#email").val("");
                 $("#submit").html("Add");
@@ -139,7 +139,7 @@
 
             $(".edit").click(function () {
                 $("#addeditmodal .modal-title").html("Edit staff");
-                $("#addedit_user").attr("action", "{{ route('admin_update_clients') }}");
+                $("#addedit_user").attr("action", "{{ route('billing_client_update') }}");
                 $("#id").val($(this).data('id'));
                 $("#name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(0)").html());
                 $("#email").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(1)").html());
