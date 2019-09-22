@@ -18,18 +18,22 @@
 					<th>Date</th>
 				</thead>
 				<tbody>
-					@foreach($rates as $rate)
+					@if($rates->count() > 0)
+
+						@foreach($rates as $rate)
 						<tr>
 							<td><strong>P</strong>{{$rate->rates}}</td>
 							<td>{{$rate->created_at->diffForHumans()}}</td>
 						</tr>
 					@endforeach
+
+					@endif
 				</tbody>
 			</table>
 		</div>
 		<div class="col-md-6">
 			
-			<h3>Current Rates: P{{$current->rates}}</h3>
+			<h3>Current Rates: P @if( !is_null($current) ) {{$current->rates}} @else 0 @endif</h3>
 			
 		</div>
 	</div>

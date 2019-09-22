@@ -1,4 +1,5 @@
-@extends('admin.template')
+
+@extends('maintenance.template')
 
 @section('styles')
 
@@ -6,7 +7,7 @@
 
 @section('contents')
 	<h1 class="text-center">{{$client->name}} Records</h1>
-	<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">New Bill</button>
+	<!-- <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">New Bill</button> -->
 	@include('shared.notif')
 	<table class="table">
 		<thead>
@@ -33,7 +34,6 @@
 					</td>
 					<td>
 						<button class="btn btn-info btn-xs biller_edit" data-toggle="modal" data-target="#myModal2" value="{{$rec->id}}">Edit</button>
-							<a href="{{route('admin_client_paid',['id'=> $rec->id])}}" class="btn btn-danger btn-xs">Paid</a>
 					</td>
 				</tr>
 			@endforeach
@@ -44,7 +44,7 @@
 
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-  	<form action="{{route('admin_view_client_records_store',['id'=> Request::segment(3)])}}" method="POST">
+  	<form action="{{route('billing_client_store',['id'=> Request::segment(3)])}}" method="POST">
   	@csrf	
     <!-- Modal content-->
     <div class="modal-content">
@@ -73,14 +73,14 @@
     </div>
     </form>
   </div>
-</div>
+</div>	
 
 <div id="myModal2" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
-    	<form action="{{route('admin_client_update_water')}}" method="POST">
+    	<form action="{{route('maintenance_client_update_water')}}" method="POST">
     		@csrf
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -109,7 +109,7 @@
 @section('scripts')
 <script>
 	var token = '{{Session::token()}}';
-	var url = '{{route('admin_get_client_info')}}';
+	var url = '{{route('maintenance_get_client_info')}}';
 	$(document).ready(function(){
 		$(".biller_edit").click(function(){
 			var biller_id = $(this).val();

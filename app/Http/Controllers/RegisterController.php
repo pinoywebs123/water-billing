@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 
 use App\Profile;
 use App\user;
+use Str;
 
 class RegisterController extends Controller
 {
     public function register_store()
     {
         $data = request()->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+            'email' => 'required|email'
         ]);
 
         $data2 = request()->validate([
@@ -30,7 +30,8 @@ class RegisterController extends Controller
         
         $data['name'] = '';
         
-        $data['password'] = bcrypt($data['password']);
+        $password = Str::random(10);
+        $data['password'] = bcrypt($password);
         $data['role_id'] = '4';
         $data['status_id'] = '1';
 
@@ -39,6 +40,6 @@ class RegisterController extends Controller
         $data2['user_id'] = User::orderBy('updated_at', 'desc')->first()->id;
         Profile::create($data2);
 
-        return redirect()->back()->with('success','You have successfully registered.');
+        return redirect()->back()->with('success','You have successfully registered.' . $password );
     }
 }

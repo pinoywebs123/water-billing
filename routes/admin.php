@@ -67,6 +67,21 @@ Route::group(['namespace'=> 'Admin', 'middleware'=> 'admin_check'], function()
     	'uses'	=> 'ClientsController@view_records_Store'
     ]);
 
+    Route::get('/client-bill-pay/{id}',[
+        'as'    => 'admin_client_paid',
+        'uses'  => 'ClientsController@admin_client_paid'
+    ]);
+
+    Route::post('/client-get-info',[
+        'as'    => 'admin_get_client_info',
+        'uses'  => 'ClientsController@admin_get_client_info'
+    ]);
+
+    Route::post('/client-waterbiller-update',[
+        'as'    => 'admin_client_update_water',
+        'uses'  => 'ClientsController@admin_client_update_water'
+    ]);
+
     //Water Rates
     
     Route::get('/water_rates', [

@@ -67,12 +67,7 @@ hr {
             <div class="form-group">
                 <label for="" class="col-form-label col-form-label-sm">E-mail:</label>
                 <input type="email" class="form-control form-control-sm" id="email" name="email" required placeholder="my_name@email.com">
-
-                <label for="" class="col-form-label col-form-label-sm">Password:</label>
-                <input type="password" class="form-control form-control-sm" id="password" name="password" required>
             </div>
-
-            <hr />
 
             <div class="form-group">
                 <label for="" class="col-form-label col-form-label-sm" class="col-form-label col-form-label-sm">First Name:</label>

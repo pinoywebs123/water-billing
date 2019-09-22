@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Billing;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,7 +12,7 @@ use App\Billing\Admin\WaterRates;
 
 class ClientsController extends Controller
 {
-    use UserManagement, Billing;
+	use UserManagement, Billing;
 
     public function clients_store()
     {
@@ -24,10 +24,11 @@ class ClientsController extends Controller
 
         $data['password'] = bcrypt(request()->password);
         $data['role_id'] = 4;
+        $data['status_id'] = 3;
         
         User::create($data);
 
-        return back();
+       return back()->with('success','Client Added Successfully!');
     }
 
     public function clients_update()
@@ -48,13 +49,13 @@ class ClientsController extends Controller
         
         User::find($data['id'])->update($data);
 
-        return back();
+        return back()->with('success','Client Information Updated Successfully!');
     }
 
     public function client_lock($id)
     {
         if($this->lockClient($id)){
-            return redirect()->back();
+            return redirect()->back()->with('success','Client Account Successfully Locked!');
         }
     }
 
@@ -62,17 +63,12 @@ class ClientsController extends Controller
     {
         $client = $this->findClient($id);
         $records = $this->getWaterCosumption($id);
-        return view('shared.client_records',compact('client','records'));
+        return view('shared.billing_records',compact('client','records'));
     }
 
-    public function view_records_Store($id, WaterRates $water_rates)
+    public function view_records_Store($id)
     {
-        return $this->storeWaterConsumption($id,$water_rates);
-    }
-
-    public function admin_client_paid($id)
-    {
-        return $this->paidWaterClient($id);
+        return $this->storeWaterConsumption($id);
     }
 
     public function admin_get_client_info(Request $request)

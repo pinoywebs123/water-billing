@@ -6,6 +6,8 @@ Route::group(['namespace'=> 'Maintenance'], function()
 		'as'	=> 'maintenance_home',
 		'uses'	=> 'UserController@home'
     ]);
+
+    //Clients
     
     Route::get('/client_records', [
 		'as'	=> 'maintenance_client_records',
@@ -16,10 +18,25 @@ Route::group(['namespace'=> 'Maintenance'], function()
 		'as'	=> 'maintenance_pending_bills',
 		'uses'	=> 'UserController@pending_bills'
 	]);
+
+	Route::get('/client-view-records/{id}',[
+		'as'	=> 'maintenance_client_view_records',
+		'uses'	=> 'UserController@maintenance_client_view_records'
+	]);
     
     Route::get('/approved_bills', [
 		'as'	=> 'maintenance_approved_bills',
 		'uses'	=> 'UserController@approved_bills'
+    ]);
+
+    Route::post('/client-get-info',[
+        'as'    => 'maintenance_get_client_info',
+        'uses'  => 'UserController@maintenance_get_client_info'
+    ]);
+
+    Route::post('/client-waterbiller-update',[
+        'as'    => 'maintenance_client_update_water',
+        'uses'  => 'UserController@maintenance_client_update_water'
     ]);
 
 	Route::get('/logout', [

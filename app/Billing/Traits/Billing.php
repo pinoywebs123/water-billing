@@ -4,6 +4,7 @@ namespace App\Billing\Traits;
 use Illuminate\Http\Request;
 use Auth;
 use App\Billing as ClientBill;
+use App\Billing\Admin\WaterRates;
 
 trait Billing {
 
@@ -12,20 +13,37 @@ trait Billing {
 		return ClientBill::where('client_id',$id)->orderBy('id','desc')->get();
 	}
 
-	public function storeWaterConsumption($id)
+	public function getWaterInfo($id)
 	{
+		return ClientBill::findOrFail($id);
+	}
 
+	public function storeWaterConsumption($id, $water)
+	{
 			$data = $this->validateRequest();
 			$data['client_id'] = $id;
 			$data['status_id'] = 0;
-			$data['bill'] = 0;
+			$data['bill'] = $this->request->water_consumption * $water->getCurrentRate()->rates;
 			
 			ClientBill::create($data);
 			return redirect()->back()->with('success','Client New Bill Successfully Added!');
 	}
 
-	public function editWaterConsumption($id)
+	public function editWaterConsumption($data, $water)
 	{
+		$findAndUpdate =  ClientBill::findOrFail($data['bill_id']);
+		$findAndUpdate->update([
+			'water_consumption'		=> $data['water_consumption'],
+			'bill'					=> $data['water_consumption'] * $water->getCurrentRate()->rates	
+		]);
+		return redirect()->back()->with('success','Client Water Consumption has been Updated Successfully!');
+	}
+
+	public function paidWaterClient($id)
+	{
+		$findClient = ClientBill::where('id',$id)->first();
+		$findClient->update(['status_id'=> 1]);
+		return redirect()->back()->with('success','Client Has Paid Successfully!');
 
 	}
 
