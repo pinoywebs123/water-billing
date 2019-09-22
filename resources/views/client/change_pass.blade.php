@@ -24,6 +24,8 @@
 @endsection
 
 @section('contents')
+    @include('shared.notif')
+
     <h1>Change password</h1>
     @include('shared.notif')
     <form action="{{ route('client_store_change_pass') }}" method="post" style="width: 600px">
@@ -42,7 +44,7 @@
         
         <button type="submit" class="btn btn-primary">Change password</button>
 
-        @csrf;
+        @csrf
     </form>
 @endsection
 
