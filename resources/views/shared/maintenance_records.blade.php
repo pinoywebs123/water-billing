@@ -80,7 +80,7 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-    	<form action="{{route('billing_client_update_water')}}" method="POST">
+    	<form action="{{route('maintenance_client_update_water')}}" method="POST">
     		@csrf
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>

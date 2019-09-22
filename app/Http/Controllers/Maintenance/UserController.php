@@ -8,6 +8,7 @@ use Auth;
 use App\Model\Request as CientRequest;
 use App\Billing\Traits\UserManagement;
 use App\Billing\Traits\Billing;
+use App\Billing\Admin\WaterRates;
 
 class UserController extends Controller
 {
@@ -53,8 +54,8 @@ class UserController extends Controller
         return response()->json($this->getWaterInfo($request->biller_id));
     }
 
-    public function maintenance_client_update_water()
+    public function maintenance_client_update_water(Request $request, WaterRates $water)
     {
-        
+        return $this->editWaterConsumption($request->except('_token'),$water);
     }
 }
