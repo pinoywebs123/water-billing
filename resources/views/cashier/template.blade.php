@@ -20,7 +20,10 @@
   <link href="{{URL::to('dashboard/css/widgets.css')}}" rel="stylesheet">
   <link href="{{URL::to('dashboard/css/style.css')}}" rel="stylesheet">
  
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
   <script src="{{URL::to('tables/jquery-1.12.3.js')}}"></script>
+   
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
   @yield('styles')
 </head>
 

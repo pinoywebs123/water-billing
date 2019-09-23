@@ -10,7 +10,7 @@
           </li>
 
           <li >
-            <a class="" href="{{route('cashier_client_records')}}">
+            <a class="" href="{{route('cashier_clients')}}">
                   <i class="icon_house_alt"></i>
                   <span>Client Records</span>
             </a>

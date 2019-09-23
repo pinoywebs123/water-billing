@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Billing;
+namespace App\Http\Controllers\Cashier;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -63,7 +63,7 @@ class ClientsController extends Controller
     {
         $client = $this->findClient($id);
         $records = $this->getWaterCosumption($id);
-        $usertype = 'billing';
+        $usertype = 'cashier';
 
         return view('shared.billing_records',compact('client','records', 'usertype'));
     }
