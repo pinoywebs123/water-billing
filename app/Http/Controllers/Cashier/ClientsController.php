@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
+use App\Profile;
 use App\Billing\Traits\UserManagement;
 use App\Billing\Traits\Billing;
 use App\Billing\Admin\WaterRates;
@@ -17,9 +18,14 @@ class ClientsController extends Controller
     public function clients_store()
     {
         $data = request()->validate([
-            'name' => 'required',
             'email' => 'required|email',
             'password' => 'required'
+        ]);
+
+        $data2 = request()->validate([
+            'first_name' => 'required',
+            'middle_name' => 'required',
+            'last_name' => 'required'
         ]);
 
         $data['password'] = bcrypt(request()->password);
@@ -28,16 +34,32 @@ class ClientsController extends Controller
         
         User::create($data);
 
-       return back()->with('success','Client Added Successfully!');
+        $user_id = User::orderBy('updated_at', 'desc')->first()->id;
+        $data2['user_id'] = $user_id;
+        $data2['birth_date'] = $date = date('Y-m-d', time());;
+        $data2['gender'] = '';
+        $data2['contact'] = '';
+        $data2['address'] = '';
+        $data2['city'] = '';
+        $data2['province'] = '';
+
+        Profile::create($data2);
+
+        return back();
     }
 
     public function clients_update()
     {
         $data = request()->validate([
             'id' => 'required',
-            'name' => 'required',
             'email' => 'required|email',
             'password' => ''
+        ]);
+
+        $data2 = request()->validate([
+            'first_name' => 'required',
+            'middle_name' => 'required',
+            'last_name' => 'required',
         ]);
 
         if ($data['password'] == '')
@@ -48,8 +70,9 @@ class ClientsController extends Controller
         $data['role_id'] = 4;
         
         User::find($data['id'])->update($data);
+        Profile::where('user_id', $data['id'])->update($data2);
 
-        return back()->with('success','Client Information Updated Successfully!');
+        return back();
     }
 
     public function client_lock($id)
