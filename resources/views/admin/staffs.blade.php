@@ -32,7 +32,7 @@
                             @foreach ($staffs as $staff)
                                 <?php $r++; ?>
                             <tr>
-                                <td>{{ $staff->name }}</td>
+                                <td>{{ $staff->profile->first_name }} {{ $staff->profile->middle_name }} {{ $staff->profile->last_name }}</td>
                                 <td>{{ $staff->email }}</td>
                                 <td>{{ $staff->role->name }}</td>
                                 <td hidden>{{ $staff->role->id }}</td>
