@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 use App\Profile;
-use App\user;
+use App\User;
 use Str;
 use App\Mail\ClientRegistrationVerification;
 
