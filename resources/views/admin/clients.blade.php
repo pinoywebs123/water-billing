@@ -31,7 +31,7 @@
                             @foreach ($clients as $client)
                                 <?php $r++; ?>
                             <tr>
-                                <td>{{ $client->name }}</td>
+                                <td>{{ $client->profile->first_name }} {{ $client->profile->middle_name }} {{ $client->profile->last_name }}</td>
                                 <td>{{ $client->email }}</td>
                                 <td hidden>{{ $client->role->id }}</td>
                                 <td>
