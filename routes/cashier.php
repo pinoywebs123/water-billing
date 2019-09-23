@@ -23,7 +23,7 @@ Route::group(['namespace'=> 'Cashier', 'middleware'=> 'cashier_check'], function
 		'uses'	=> 'UserController@clients'
     ]);
 
-    Route::post('/clients',[
+    Route::post('/clients-store',[
     	'as'	=> 'cashier_create_client',
     	'uses'	=> 'ClientsController@clients_store'
     ]);

@@ -23,6 +23,9 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
+                            <th hidden></th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -33,7 +36,10 @@
                             <tr>
                                 <td>{{ $client->profile->first_name }} {{ $client->profile->middle_name }} {{ $client->profile->last_name }}</td>
                                 <td>{{ $client->email }}</td>
-                                <td hidden>{{ $client->role->id }}</td>
+                                <td class="hidden">{{ $client->role->id }}</td>
+                                <td class="hidden">{{ $client->profile->first_name }}</td>
+                                <td class="hidden">{{ $client->profile->middle_name }}</td>
+                                <td class="hidden">{{ $client->profile->last_name }}</td>
                                 <td>
                                     <a class="edit btn btn-primary btn-xs" href="#" data-id="{{ $client->id }}" data-toggle="modal" data-target="#addeditmodal"> 
                                         <i class="menu-icon fa fa-edit"></i> Edit 
@@ -75,13 +81,19 @@
                             <div class="col" style="padding: 5px 20px;">
                                 <input type="text" class="form-control" id="id" name="id" style="display: none;">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter the username">
+                                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter first name">
                                 </div>
                                 <div class="form-group">
-                                    <input  class="form-control" id="email" type="string" name="email" placeholder="Enter the email">
+                                    <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder="Enter middle name">
                                 </div>
                                 <div class="form-group">
-                                    <input  class="form-control" id="email" type="password" name="password" placeholder="Enter the password">
+                                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter last name">
+                                </div>
+                                <div class="form-group">
+                                    <input  class="form-control" id="email" type="string" name="email" placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                    <input  class="form-control" id="email" type="password" name="password" placeholder="Enter password">
                                 </div>
                             </div>
                         </div>
@@ -140,7 +152,9 @@
                 $("#addeditmodal .modal-title").html("Edit staff");
                 $("#addedit_user").attr("action", "{{ route('admin_update_clients') }}");
                 $("#id").val($(this).data('id'));
-                $("#name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(0)").html());
+                $("#first_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(3)").html());
+                $("#middle_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(4)").html());
+                $("#last_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(5)").html());
                 $("#email").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(1)").html());
                 $("#submit").html("Update");
             });
