@@ -22,7 +22,7 @@
 
 						@foreach($rates as $rate)
 						<tr>
-							<td><strong>P</strong>{{$rate->rates}}</td>
+							<td><strong>P</strong>{{$rate->rates}} <strong style="color: red">(cu.m)</strong></td>
 							<td>{{$rate->created_at->diffForHumans()}}</td>
 						</tr>
 					@endforeach
@@ -33,7 +33,7 @@
 		</div>
 		<div class="col-md-6">
 			
-			<h3>Current Rates: P @if( !is_null($current) ) {{$current->rates}} @else 0 @endif</h3>
+			<h3>Current Rates: P @if( !is_null($current) ) {{$current->rates}} @else 0 @endif <strong style="color: red">(cu.m)</h3>
 			
 		</div>
 	</div>
