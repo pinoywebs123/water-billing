@@ -10,6 +10,7 @@
   <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
+                <th>Account ID</th>
                 <th>Name</th>
                 <th>Title</th>
                 <th>Content</th>
@@ -22,11 +23,12 @@
         <tbody>
           @foreach($all_request as $req)
             <tr>
+              <td>{{$req->user->account_id}}</td>
               <td>{{$req->user->email}}</td>
               <td>{{$req->title}}</td>
               <td>{{$req->content}}</td>
               <td>{{$req->status->name}}</td>
-              <td>{{$req->created_at->diffForHumans()}}</td>
+              <td>{{$req->created_at->toDayDateTimeString()}}</td>
               <td>
                 
                 <form action="{{route('billing_approved_bills_submit',$req->id)}}" method="POST" id="form{{$req->id}}">

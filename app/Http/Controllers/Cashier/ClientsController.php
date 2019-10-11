@@ -91,9 +91,9 @@ class ClientsController extends Controller
         return view('shared.billing_records',compact('client','records', 'usertype'));
     }
 
-    public function view_records_Store($id)
+    public function view_records_Store($id, WaterRates $water)
     {
-        return $this->storeWaterConsumption($id);
+        return $this->storeWaterConsumption($id, $water);
     }
 
     public function admin_get_client_info(Request $request)

@@ -18,9 +18,10 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <table id="datatable" class="table table-hover">
+                <table class="table table-hover" id="example" class="display" style="width:100%">
                     <thead>
                         <tr>
+                            <th>Account ID</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th hidden></th>
@@ -32,6 +33,7 @@
                             @foreach ($clients as $client)
                                 <?php $r++; ?>
                             <tr>
+                                <td>{{ $client->account_id }}</td>
                                 <td>{{ $client->profile->first_name }} {{ $client->profile->middle_name }} {{ $client->profile->last_name }}</td>
                                 <td>{{ $client->email }}</td>
                                 <td hidden>{{ $client->role->id }}</td>
@@ -54,6 +56,10 @@
 
 @section('scripts')
 
-    
+    <script type="text/javascript">
+  $(document).ready(function() {
+    $('#example').DataTable();
+  } );
+</script>
 
 @endsection
