@@ -28,7 +28,7 @@
               <td>{{$req->title}}</td>
               <td>{{$req->content}}</td>
               <td>{{$req->status->name}}</td>
-              <td>{{$req->created_at->diffForHumans()}}</td>
+              <td>{{$req->created_at->toDayDateTimeString()}}</td>
               <td>
                 
                 <form action="{{route('billing_approved_bills_submit',$req->id)}}" method="POST" id="form{{$req->id}}">

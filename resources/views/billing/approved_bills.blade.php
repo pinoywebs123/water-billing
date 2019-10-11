@@ -27,7 +27,7 @@
               <td>{{$req->title}}</td>
               <td>{{$req->content}}</td>
               <td>{{$req->status->name}}</td>
-              <td>{{$req->created_at->diffForHumans()}}</td>
+              <td>{{$req->created_at->toDayDateTimeString()}}</td>
               <td>
                 @if($req->maintenance)
                   {{$req->maintenance->email}}
