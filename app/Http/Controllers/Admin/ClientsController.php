@@ -64,7 +64,8 @@ class ClientsController extends Controller
         $data = request()->validate([
             'id' => 'required',
             'email' => 'required|email',
-            'password' => ''
+            'password' => '',
+            'account_id' => 'required'
         ]);
 
         $data2 = request()->validate([

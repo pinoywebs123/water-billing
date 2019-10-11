@@ -95,7 +95,7 @@
                                     <input  class="form-control" id="email" type="string" name="email" placeholder="Enter email">
                                 </div>
                                 <div class="form-group">
-                                    <input  class="form-control" id="email" type="password" name="password" placeholder="Enter password">
+                                    <input  class="form-control" id="password" type="password" name="password" placeholder="Enter password">
                                 </div>
                                 <div class="form-group">
                                     <label for="passw">Role</label>
