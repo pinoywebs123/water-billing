@@ -161,7 +161,9 @@
             $(".add").click(function () {
                 $("#addeditmodal .modal-title").html("Add staff");
                 $("#addedit_user").attr("action", "{{ route('admin_store_staffs') }}");
-                $("#name").val("");
+                $("#first_name").val("");
+                $("#middle_name").val("");
+                $("#last_name").val("");
                 $("#email").val("");
                 $("#submit").html("Add");
             });
