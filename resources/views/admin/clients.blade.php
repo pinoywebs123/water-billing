@@ -101,6 +101,41 @@
                                 <div class="form-group">
                                     <input  class="form-control" id="password" type="password" name="password" placeholder="Enter password">
                                 </div>
+                                
+                                <div id="profile">
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label col-form-label-sm">Birth Date:</label>
+                                        <input type="date" class="form-control form-control-sm" id="birth_date" name="birth_date" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label col-form-label-sm">Gender</label>
+                                        <select class="form-control form-control-sm" id="gender" name="gender" required>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label col-form-label-sm">Contact number</label>
+                                        <input type="tel" class="form-control form-control-sm" id="contact" name="contact" required pattern="[0-9]{11}" placeholder="09123456789"">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label col-form-label-sm">Address:</label>
+                                        <input type="text" class="form-control form-control-sm" id="address" name="address" required placeholder="123 Street">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label col-form-label-sm">City:</label>
+                                        <input type="text" class="form-control form-control-sm" id="city" name="city" required placeholder="Cebu City">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label col-form-label-sm">Province:</label>
+                                        <input type="text" class="form-control form-control-sm" id="province" name="province" required placeholder="Cebu">
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
                                     <label>Account ID</label>
@@ -153,8 +188,11 @@
 
             $(".add").click(function () {
                 $("#addeditmodal .modal-title").html("Add client");
+                $("#profile").show();
                 $("#addedit_user").attr("action", "{{ route('admin_store_clients') }}");
-                $("#name").val("");
+                $("#first_name").val("");
+                $("#middle_name").val("");
+                $("#last_name").val("");
                 $("#email").val("");
                 $("#submit").html("Add");
             });
@@ -162,6 +200,7 @@
             $(".edit").click(function () {
                 $("#addeditmodal .modal-title").html("Edit staff");
                 $("#addedit_user").attr("action", "{{ route('admin_update_clients') }}");
+                $("#profile").hide();
                 $("#id").val($(this).data('id'));
                 $("#first_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(4)").html());
                 $("#middle_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(5)").html());
