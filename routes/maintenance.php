@@ -39,6 +39,12 @@ Route::group(['namespace'=> 'Maintenance'], function()
         'uses'  => 'UserController@maintenance_client_update_water'
     ]);
 
+    Route::post('/client-accept-job',[
+    	'as'	=> 'maintenance_accpet_job',
+    	'uses'	=> 'UserController@maintenance_accpet_job'
+    ]);	
+
+
 	Route::get('/logout', [
 		'as'	=> 'maintenance_logout',
 		'uses'	=> 'UserController@logout'

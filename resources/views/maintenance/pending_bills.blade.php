@@ -6,6 +6,7 @@
 
 @section('contents')
 	<table id="example" class="display" style="width:100%">
+    @include('shared.notif')
         <thead>
             <tr>
               <th>Account ID</th>
@@ -28,7 +29,8 @@
               	<td>{{$req->status->name}}</td>
               	<td>{{$req->created_at->toDayDateTimeString()}}</td>
               	<td>
-              		<form action="#" method="POST" id="form{{$req->id}}">
+              		<form action="{{route('maintenance_accpet_job')}}" method="POST" id="form{{$req->id}}">
+                    @csrf
                     <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">View</button>
                     <input type="hidden" name="request_id" value="{{$req->id}}">
                     <button class="btn btn-success btn-xs request_modal" data-toggle="modal" data-target="#myModal2" value="{{$req->id}}">Accept Job</button>  
@@ -94,11 +96,11 @@
 
     $(".request_modal").click(function(){
       id = $(this).val();
-      alert(id);
+      
     });
 
     $(".approved_request").click(function(){
-      alert("Aw");
+      $("#form"+id).submit();
     });
   } );
 </script>
