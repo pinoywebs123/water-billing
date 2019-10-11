@@ -64,7 +64,7 @@
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-primary btn-block">Login</button>
-          <a href="{{ route('register') }}" class="btn btn-default btn-block">Register</a>
+          <!-- <a href="{{ route('register') }}" class="btn btn-default btn-block">Register</a> -->
           @csrf
         </div>
       </form>

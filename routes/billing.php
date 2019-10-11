@@ -25,7 +25,7 @@ Route::group(['namespace'=> 'Billing', 'middleware' => 'billing_check'], functio
 		'uses'	=> 'UserController@clients'
     ]);
 
-    Route::post('/clients',[
+    Route::post('/clients-store/',[
     	'as'	=> 'billing_create_client',
     	'uses'	=> 'ClientsController@clients_store'
     ]);
