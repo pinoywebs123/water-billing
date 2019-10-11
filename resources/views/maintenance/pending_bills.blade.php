@@ -26,7 +26,7 @@
               	<td>{{$req->title}}</td>
               	<td>{{$req->biller->email}}</td>
               	<td>{{$req->status->name}}</td>
-              	<td>{{$req->created_at->diffForHumans()}}</td>
+              	<td>{{$req->created_at->toDayDateTimeString()}}</td>
               	<td>
               		<button class="btn btn-info btn-xs">View</button>
               		<button class="btn btn-success btn-xs">Accept Job</button>
