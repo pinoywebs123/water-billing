@@ -71,7 +71,7 @@
     <div class="modal fade" id="addeditmodal" tabindex="-1" role="dialog" aria-labelledby="addeditmodalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form id="addedit_user" action="store" method="post">
+                <form id="addedit_user" action="{{ route('admin_store_staffs') }}" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title" id="addeditmodalLabel">New add</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: relative; top:-25px;">
@@ -111,7 +111,7 @@
 
                                 <div class="form-group">
                                     <label>Account ID</label>
-                                    <input type="text" name="account_id" class="form-control" minlength="3" maxlength="3" required="" placeholder="001 - 009">
+                                    <input type="text" class="form-control" id="account_id" name="account_id" required="" placeholder="001 - 009">
                                 </div>
                             </div>
                         </div>
@@ -127,7 +127,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="removemodal" tabindex="-1" role="dialog" aria-labelledby="removemodalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="removemodal" tabindex="-1" role="dialog" aria-labelledby="removemodalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form id="remove_user" action="remove_user" method="post">
@@ -148,7 +148,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
     
 @endsection
 
@@ -170,12 +170,13 @@
                 $("#addeditmodal .modal-title").html("Edit staff");
                 $("#addedit_user").attr("action", "{{ route('admin_update_staffs') }}");
                 $("#id").val($(this).data('id'));
-                $("#first_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(4)").html());
-                $("#middle_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(5)").html());
-                $("#last_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(6)").html());
+                $("#first_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(5)").html());
+                $("#middle_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(6)").html());
+                $("#last_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(7)").html());
                 
-                $("#email").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(1)").html());
-                $("#role_id").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(3)").html());
+                $("#account_id").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(0)").html());
+                $("#email").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(2)").html());
+                $("#role_id").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(4)").html());
                 $("#submit").html("Update");
             });
 
