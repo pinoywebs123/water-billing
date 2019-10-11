@@ -20,7 +20,7 @@
 		<tbody>
 			@foreach($records as $rec)
 				<tr>
-					<td>{{$rec->water_consumption}}</td>
+					<td>{{$rec->water_consumption}} <strong style="color: red">(cu.m)</strong></td>
 					<td>{{$rec->start_date}}</td>
 					<td>{{$rec->end_date}}</td>
 					<td>{{$rec->bill}}</td>

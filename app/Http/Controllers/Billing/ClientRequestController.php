@@ -17,7 +17,7 @@ class ClientRequestController extends Controller
 
     public function approved_bills()
     {
-    	$all_request = CientRequest::where('approved_by',Auth::id())->where('status_id',2)->get();
+    	$all_request = CientRequest::where('approved_by',Auth::id())->where('status_id','!=',1)->get();
     	return view('billing.approved_bills',compact('all_request'));
     }
 

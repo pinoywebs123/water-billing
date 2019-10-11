@@ -40,7 +40,8 @@ class UserController extends Controller
 
     public function approved_bills()
     {
-    	return view('maintenance.approved_bills');
+        $all_request = CientRequest::where('status_id',3)->where('worked_by',Auth::id())->get();
+    	return view('maintenance.approved_bills',compact('all_request'));
     }
 
     public function logout()
@@ -57,5 +58,22 @@ class UserController extends Controller
     public function maintenance_client_update_water(Request $request, WaterRates $water)
     {
         return $this->editWaterConsumption($request->except('_token'),$water);
+    }
+
+    public function maintenance_accpet_job(Request $request){
+        $find = CientRequest::findOrFail($request->request_id);
+        $find->update(['worked_by'=> Auth::id(),'status_id'=> 3]);
+        return back()->with('success','Sucessfully Accept Job');
+    }
+
+    public function maintenance_client_job_info(Request $request){
+        $req = CientRequest::findOrFail($request->data);
+        return $req->with('user')->first();
+    }
+
+    public function maintenance_job_finished($id){
+        $req = CientRequest::findOrFail($id);
+        $req->update(['status_id'=> 4]);
+        return back()->with('success','Client Job Request has been Finished!');
     }
 }

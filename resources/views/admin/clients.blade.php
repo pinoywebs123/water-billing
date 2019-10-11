@@ -67,7 +67,7 @@
         </div>
         <div class="row">
             <div id="user" class="col">
-                <a href="#" class="btn btn-primary add" data-toggle="modal" data-target="#addeditmodal">Add new user</a>
+                <a href="#" class="btn btn-primary add" data-toggle="modal" data-target="#addeditmodal">Add new client</a>
             </div>
         </div>
     </div>
@@ -86,21 +86,6 @@
                         <div id='resproc' class="row">
                             <div class="col" style="padding: 5px 20px;">
                                 <input type="text" class="form-control" id="id" name="id" style="display: none;">
-                                <div class="row">
-                                    <div class="form-group col-md-4">
-                                        <label>zone number & meter</label>
-                                        <input type="text" name="zone" class="form-control" placeholder="Ex: 071" required="" minlength="3" maxlength="3">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label>consumer and meter size</label>
-                                        <input type="text" name="meter" class="form-control" placeholder="Ex: 12" required="" minlength="2" maxlength="2">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label>concessionaire </label>
-                                        <input type="text" name="account_id" class="form-control" placeholder="Ex: 001" required="" minlength="3" maxlength="3">
-                                    </div>
-
-                                </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter first name">
                                 </div>
@@ -114,7 +99,47 @@
                                     <input  class="form-control" id="email" type="string" name="email" placeholder="Enter email">
                                 </div>
                                 <div class="form-group">
-                                    <input  class="form-control" id="email" type="password" name="password" placeholder="Enter password">
+                                    <input  class="form-control" id="password" type="password" name="password" placeholder="Enter password">
+                                </div>
+                                
+                                <div id="profile">
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label col-form-label-sm">Birth Date:</label>
+                                        <input type="date" class="form-control form-control-sm" id="birth_date" name="birth_date" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label col-form-label-sm">Gender</label>
+                                        <select class="form-control form-control-sm" id="gender" name="gender" required>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label col-form-label-sm">Contact number</label>
+                                        <input type="tel" class="form-control form-control-sm" id="contact" name="contact" required pattern="[0-9]{11}" placeholder="09123456789"">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label col-form-label-sm">Address:</label>
+                                        <input type="text" class="form-control form-control-sm" id="address" name="address" required placeholder="123 Street">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label col-form-label-sm">City:</label>
+                                        <input type="text" class="form-control form-control-sm" id="city" name="city" required placeholder="Cebu City">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label col-form-label-sm">Province:</label>
+                                        <input type="text" class="form-control form-control-sm" id="province" name="province" required placeholder="Cebu">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Account ID</label>
+                                    <input type="text" class="form-control" id="account_id" name="account_id" required="" placeholder="001 - 009">
                                 </div>
                             </div>
                         </div>
@@ -163,8 +188,11 @@
 
             $(".add").click(function () {
                 $("#addeditmodal .modal-title").html("Add client");
+                $("#profile").show();
                 $("#addedit_user").attr("action", "{{ route('admin_store_clients') }}");
-                $("#name").val("");
+                $("#first_name").val("");
+                $("#middle_name").val("");
+                $("#last_name").val("");
                 $("#email").val("");
                 $("#submit").html("Add");
             });
@@ -172,10 +200,13 @@
             $(".edit").click(function () {
                 $("#addeditmodal .modal-title").html("Edit staff");
                 $("#addedit_user").attr("action", "{{ route('admin_update_clients') }}");
+                $("#profile").hide();
                 $("#id").val($(this).data('id'));
                 $("#first_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(4)").html());
                 $("#middle_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(5)").html());
                 $("#last_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(6)").html());
+
+                $("#account_id").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(0)").html());
                 $("#email").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(2)").html());
                 $("#submit").html("Update");
             });

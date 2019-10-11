@@ -63,7 +63,7 @@
         </div>
         <div class="row">
             <div id="user" class="col">
-                <a href="#" class="btn btn-primary add" data-toggle="modal" data-target="#addeditmodal">Add new user</a>
+                <a href="#" class="btn btn-primary add" data-toggle="modal" data-target="#addeditmodal">Add new staff</a>
             </div>
         </div>
     </div>
@@ -95,7 +95,7 @@
                                     <input  class="form-control" id="email" type="string" name="email" placeholder="Enter email">
                                 </div>
                                 <div class="form-group">
-                                    <input  class="form-control" id="email" type="password" name="password" placeholder="Enter password">
+                                    <input  class="form-control" id="password" type="password" name="password" placeholder="Enter password">
                                 </div>
                                 <div class="form-group">
                                     <label for="passw">Role</label>
@@ -161,7 +161,9 @@
             $(".add").click(function () {
                 $("#addeditmodal .modal-title").html("Add staff");
                 $("#addedit_user").attr("action", "{{ route('admin_store_staffs') }}");
-                $("#name").val("");
+                $("#first_name").val("");
+                $("#middle_name").val("");
+                $("#last_name").val("");
                 $("#email").val("");
                 $("#submit").html("Add");
             });
