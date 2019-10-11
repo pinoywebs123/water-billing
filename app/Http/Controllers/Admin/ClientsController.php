@@ -18,8 +18,11 @@ class ClientsController extends Controller
     public function clients_store()
     {
         $data = request()->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+            'zone'      => 'required',
+            'meter'     => 'required',
+            'account_id' => 'required'    
         ]);
 
         $data2 = request()->validate([
@@ -32,7 +35,15 @@ class ClientsController extends Controller
         $data['role_id'] = 4;
         $data['status_id'] = 3;
         
-        User::create($data);
+        $data['account_id'] = $data['zone'].'-'.$data['meter'].'-'.$data['account_id'];
+        //dd($data);
+        $user = new User;
+        $user->role_id = $data['role_id'];
+        $user->account_id = $data['account_id'];
+        $user->email = $data['email'];
+        $user->password = $data['password'];
+        $user->status_id = $data['status_id'];
+        $user->save();
 
         $user_id = User::orderBy('updated_at', 'desc')->first()->id;
         $data2['user_id'] = $user_id;
@@ -45,7 +56,7 @@ class ClientsController extends Controller
 
         Profile::create($data2);
 
-        return back();
+        return back()->with('success','New Client Successfully Added!');
     }
 
     public function clients_update()

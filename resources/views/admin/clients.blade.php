@@ -16,10 +16,15 @@
     <h1>List of Clients</h1>
     <div class="container">
         <div class="row">
+            @include('shared.notif')
+            @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger">{{ $error }}</div>
+                @endforeach
             <div class="col">
                 <table id="datatable" class="table table-hover">
                     <thead>
                         <tr>
+                            <th>Account ID</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th hidden></th>
@@ -34,6 +39,7 @@
                             @foreach ($clients as $client)
                                 <?php $r++; ?>
                             <tr>
+                                <td>{{ $client->account_id }}</td>
                                 <td>{{ $client->profile->first_name }} {{ $client->profile->middle_name }} {{ $client->profile->last_name }}</td>
                                 <td>{{ $client->email }}</td>
                                 <td class="hidden">{{ $client->role->id }}</td>
@@ -80,6 +86,21 @@
                         <div id='resproc' class="row">
                             <div class="col" style="padding: 5px 20px;">
                                 <input type="text" class="form-control" id="id" name="id" style="display: none;">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label>zone number & meter</label>
+                                        <input type="text" name="zone" class="form-control" placeholder="Ex: 071" required="" minlength="3" maxlength="3">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>consumer and meter size</label>
+                                        <input type="text" name="meter" class="form-control" placeholder="Ex: 12" required="" minlength="2" maxlength="2">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>concessionaire </label>
+                                        <input type="text" name="account_id" class="form-control" placeholder="Ex: 001" required="" minlength="3" maxlength="3">
+                                    </div>
+
+                                </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter first name">
                                 </div>
