@@ -85,7 +85,8 @@ class StaffsController extends Controller
             'id' => 'required',
             'email' => 'required|email',
             'password' => '',
-            'role_id' => 'required'
+            'role_id' => 'required',
+            'account_id' => 'required'
         ]);
 
         $data2 = request()->validate([
@@ -98,7 +99,7 @@ class StaffsController extends Controller
             unset($data['password']);
 		else
 			$data['password'] = bcrypt(request()->password);
-    
+
         User::find($data['id'])->update($data);
         Profile::where('user_id', $data['id'])->update($data2);
 

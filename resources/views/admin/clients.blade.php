@@ -173,10 +173,10 @@
                 $("#addeditmodal .modal-title").html("Edit staff");
                 $("#addedit_user").attr("action", "{{ route('admin_update_clients') }}");
                 $("#id").val($(this).data('id'));
-                $("#first_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(3)").html());
-                $("#middle_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(4)").html());
-                $("#last_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(5)").html());
-                $("#email").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(1)").html());
+                $("#first_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(4)").html());
+                $("#middle_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(5)").html());
+                $("#last_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(6)").html());
+                $("#email").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(2)").html());
                 $("#submit").html("Update");
             });
 
