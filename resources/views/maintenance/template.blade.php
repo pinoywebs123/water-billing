@@ -9,7 +9,7 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>Reservation</title>
+  <title>Water Billing System</title>
 
 
   <link href="{{URL::to('dashboard/css/bootstrap.min.css')}}" rel="stylesheet">

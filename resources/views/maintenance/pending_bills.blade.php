@@ -28,8 +28,11 @@
               	<td>{{$req->status->name}}</td>
               	<td>{{$req->created_at->toDayDateTimeString()}}</td>
               	<td>
-              		<button class="btn btn-info btn-xs">View</button>
-              		<button class="btn btn-success btn-xs">Accept Job</button>
+              		<form action="#" method="POST" id="form{{$req->id}}">
+                    <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">View</button>
+                    <input type="hidden" name="request_id" value="{{$req->id}}">
+                    <button class="btn btn-success btn-xs request_modal" data-toggle="modal" data-target="#myModal2" value="{{$req->id}}">Accept Job</button>  
+                  </form>
               	</td>
             </tr>
           @endforeach
@@ -37,12 +40,66 @@
         
         
     </table>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Oppps!!!</h4>
+      </div>
+      <div class="modal-body">
+        <h3 class="text-center">Are you sure want to approved?</h3>
+      </div>
+      <div class="modal-footer">
+        <form>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default approved_request">Yes</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>    
 @endsection
 
 @section('scripts')
 <script type="text/javascript">
+  var id;
   $(document).ready(function() {
     $('#example').DataTable();
+
+    $(".request_modal").click(function(){
+      id = $(this).val();
+      alert(id);
+    });
+
+    $(".approved_request").click(function(){
+      alert("Aw");
+    });
   } );
 </script>
 @endsection
