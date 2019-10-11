@@ -20,23 +20,25 @@ class ClientsController extends Controller
         $data = request()->validate([
             'email' => 'required|email|unique:users',
             'password' => 'required',
-            'zone'      => 'required',
-            'meter'     => 'required',
             'account_id' => 'required'    
         ]);
 
         $data2 = request()->validate([
             'first_name' => 'required',
             'middle_name' => 'required',
-            'last_name' => 'required'
+            'last_name' => 'required',
+            'birth_date' => 'required|date',
+            'gender' => 'required',
+            'contact' => 'required|numeric',
+            'address' => 'required',
+            'city' => 'required',
+            'province' => 'required'
         ]);
 
         $data['password'] = bcrypt(request()->password);
         $data['role_id'] = 4;
         $data['status_id'] = 3;
         
-        $data['account_id'] = $data['zone'].'-'.$data['meter'].'-'.$data['account_id'];
-        //dd($data);
         $user = new User;
         $user->role_id = $data['role_id'];
         $user->account_id = $data['account_id'];
@@ -47,12 +49,6 @@ class ClientsController extends Controller
 
         $user_id = User::orderBy('updated_at', 'desc')->first()->id;
         $data2['user_id'] = $user_id;
-        $data2['birth_date'] = $date = date('Y-m-d', time());;
-        $data2['gender'] = '';
-        $data2['contact'] = '';
-        $data2['address'] = '';
-        $data2['city'] = '';
-        $data2['province'] = '';
 
         Profile::create($data2);
 
@@ -64,7 +60,8 @@ class ClientsController extends Controller
         $data = request()->validate([
             'id' => 'required',
             'email' => 'required|email',
-            'password' => ''
+            'password' => '',
+            'account_id' => 'required'
         ]);
 
         $data2 = request()->validate([
