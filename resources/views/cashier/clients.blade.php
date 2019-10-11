@@ -20,6 +20,7 @@
                 <table id="datatable" class="table table-hover">
                     <thead>
                         <tr>
+                            <th>Account ID</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th hidden></th>
@@ -34,6 +35,7 @@
                             @foreach ($clients as $client)
                                 <?php $r++; ?>
                             <tr>
+                                <td>{{ $client->account_id }}</td>
                                 <td>{{ $client->profile->first_name }} {{ $client->profile->middle_name }} {{ $client->profile->last_name }}</td>
                                 <td>{{ $client->email }}</td>
                                 <td class="hidden">{{ $client->role->id }}</td>
