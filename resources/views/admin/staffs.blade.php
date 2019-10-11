@@ -16,10 +16,12 @@
     <h1>List of Staff</h1>
     <div class="container">
         <div class="row">
+            @include('shared.notif')
             <div class="col">
                 <table id="datatable" class="table table-hover">
                     <thead>
                         <tr>
+                            <th>Account ID</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
@@ -35,6 +37,7 @@
                             @foreach ($staffs as $staff)
                                 <?php $r++; ?>
                             <tr>
+                                <td>{{ $staff->account_id }}</td>
                                 <td>{{ $staff->profile->first_name }} {{ $staff->profile->middle_name }} {{ $staff->profile->last_name }}</td>
                                 <td>{{ $staff->email }}</td>
                                 <td>{{ $staff->role->name }}</td>
@@ -104,6 +107,11 @@
                                         <option value='4'>staff</option>
                                         <option value='5'>Maintenance</option>
                                     </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Account ID</label>
+                                    <input type="text" name="account_id" class="form-control" minlength="3" maxlength="3" required="" placeholder="001 - 009">
                                 </div>
                             </div>
                         </div>
