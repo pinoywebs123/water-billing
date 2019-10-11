@@ -84,7 +84,7 @@
                     </div>
                     <div class="modal-body">
                         <div id='resproc' class="row">
-                            <div class="col" style="padding: 5px 20px;">
+                            <div class="col" id="edit_client_profile" style="padding: 5px 20px;">
                                 <input type="text" class="form-control" id="id" name="id" style="display: none;">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter first name">
@@ -186,9 +186,14 @@
         $(document).ready( function () {
             $('#datatable').DataTable();
 
+            var profile = $("#profile");
+
             $(".add").click(function () {
                 $("#addeditmodal .modal-title").html("Add client");
-                $("#profile").show();
+                
+                $("#profile").remove();
+                profile.appendTo('#edit_client_profile');
+
                 $("#addedit_user").attr("action", "{{ route('admin_store_clients') }}");
                 $("#first_name").val("");
                 $("#middle_name").val("");
@@ -200,7 +205,9 @@
             $(".edit").click(function () {
                 $("#addeditmodal .modal-title").html("Edit staff");
                 $("#addedit_user").attr("action", "{{ route('admin_update_clients') }}");
-                $("#profile").hide();
+                
+                $("#profile").remove();
+
                 $("#id").val($(this).data('id'));
                 $("#first_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(4)").html());
                 $("#middle_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(5)").html());
