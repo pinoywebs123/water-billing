@@ -65,4 +65,15 @@ class UserController extends Controller
         $find->update(['worked_by'=> Auth::id(),'status_id'=> 3]);
         return back()->with('success','Sucessfully Accept Job');
     }
+
+    public function maintenance_client_job_info(Request $request){
+        $req = CientRequest::findOrFail($request->data);
+        return $req->with('user')->first();
+    }
+
+    public function maintenance_job_finished($id){
+        $req = CientRequest::findOrFail($id);
+        $req->update(['status_id'=> 4]);
+        return back()->with('success','Client Job Request has been Finished!');
+    }
 }

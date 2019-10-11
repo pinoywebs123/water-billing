@@ -31,7 +31,7 @@
               	<td>
               		<form action="{{route('maintenance_accpet_job')}}" method="POST" id="form{{$req->id}}">
                     @csrf
-                    <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">View</button>
+                    <button class="btn btn-info btn-xs view-jobs" data-toggle="modal" data-target="#myModal" value="{{$req->id}}">View</button>
                     <input type="hidden" name="request_id" value="{{$req->id}}">
                     <button class="btn btn-success btn-xs request_modal" data-toggle="modal" data-target="#myModal2" value="{{$req->id}}">Accept Job</button>  
                   </form>
@@ -50,10 +50,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+        <h4 class="modal-title">User Request Informations</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+        <div id="req_info">
+          
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -78,7 +80,7 @@
       </div>
       <div class="modal-footer">
         <form>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
           <button type="button" class="btn btn-default approved_request">Yes</button>
         </form>
       </div>
@@ -91,6 +93,9 @@
 @section('scripts')
 <script type="text/javascript">
   var id;
+  var url = '{{route('maintenance_client_job_info')}}';
+  var token = '{{Session::token()}}';
+
   $(document).ready(function() {
     $('#example').DataTable();
 
@@ -102,6 +107,25 @@
     $(".approved_request").click(function(){
       $("#form"+id).submit();
     });
+
+    $(".view-jobs").click(function(){
+      var req_id = $(this).val();
+      $.ajax({
+        method: 'POST',
+        url: url,
+        data: {data: req_id, _token: token},
+        success: function(data){
+          $("#req_info").append("<h3> Account ID: "+data.user.account_id+"</h3>");
+          $("#req_info").append("<p> Email : "+data.user.email+"</p>");
+          $("#req_info").append("<p> Title : "+data.title+"</p>");
+          $("#req_info").append("<p> Content : "+data.content+"</p>");
+          console.log(data);
+        }
+
+      });
+
+    });
+
   } );
 </script>
 @endsection

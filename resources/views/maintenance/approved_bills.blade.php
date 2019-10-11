@@ -15,7 +15,7 @@
                 <th>Biller Approved</th>
                 <th>Status</th>
                 <th>Date Created</th>
-                
+                <th>Actions</th>
                 
             </tr>
         </thead>
@@ -28,7 +28,10 @@
               	<td>{{$req->biller->email}}</td>
               	<td>{{$req->status->name}}</td>
               	<td>{{$req->created_at->toDayDateTimeString()}}</td>
-              	
+              	<td>
+              		<a href="{{route('maintenance_job_finished',['id'=> $req->id])}}" class="btn btn-primary btn-xs">Finished Worked</a>
+              	</td>
+
             </tr>
           @endforeach
         </tbody>

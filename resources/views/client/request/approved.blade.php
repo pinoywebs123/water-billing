@@ -31,7 +31,7 @@
                   No working Maintenance
                 @endif
               </td>
-              <td>{{$req->created_at->diffForHumans()}}</td>
+              <td>{{$req->created_at->toDayDateTimeString()}}</td>
             </tr>
           @endforeach
         </tbody>

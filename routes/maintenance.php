@@ -42,6 +42,16 @@ Route::group(['namespace'=> 'Maintenance'], function()
     Route::post('/client-accept-job',[
     	'as'	=> 'maintenance_accpet_job',
     	'uses'	=> 'UserController@maintenance_accpet_job'
+    ]);
+
+    Route::post('/client-job-info/',[
+    	'as'	=> 'maintenance_client_job_info',
+    	'uses'	=> 'UserController@maintenance_client_job_info'
+    ]);
+
+    Route::get('/client-job-finished/{id}',[
+    	'as'	=> 'maintenance_job_finished',
+    	'uses'	=> 'UserController@maintenance_job_finished'
     ]);	
 
 
