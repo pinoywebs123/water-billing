@@ -9,6 +9,7 @@
 	<table id="example" class="display" style="width:100%">
         <thead>
             <tr>
+                <th>Account ID</th>
                 <th>Name</th>
                 <th>Title</th>
                 <th>Content</th>
@@ -21,6 +22,7 @@
         <tbody>
           @foreach($all_request as $req)
             <tr>
+              <td>{{$req->user->account_id}}</td>
               <td>{{$req->user->email}}</td>
               <td>{{$req->title}}</td>
               <td>{{$req->content}}</td>
