@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\Billing\Traits\UserManagement;
+use App\Billing;
 
 class UserController extends Controller
 {
@@ -13,7 +14,9 @@ class UserController extends Controller
     
     public function home()
     {
-    	return view('billing.home');
+        $total = Billing::where('status_id',1)->sum('bill');
+        $unpaid = Billing::where('status_id',1)->paginate(10);
+    	return view('billing.home',compact('unpaid','total'));
     }
 
     public function clients()
