@@ -10,6 +10,7 @@ use App\Profile;
 use App\Billing\Traits\UserManagement;
 use App\Billing\Traits\Billing;
 use App\Billing\Admin\WaterRates;
+use App\Billing as UserBilling;
 
 class ClientsController extends Controller
 {
@@ -89,6 +90,12 @@ class ClientsController extends Controller
         $usertype = 'cashier';
 
         return view('shared.billing_records',compact('client','records', 'usertype'));
+    }
+
+    public function paid_records($id){
+        $find = UserBilling::findOrFail($id);
+        $find->update(['status_id'=>1]);
+        return back()->with('success','User has been paid Successfully!!');
     }
 
     public function view_records_Store($id, WaterRates $water)
