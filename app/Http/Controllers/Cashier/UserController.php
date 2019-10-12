@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\Billing\Traits\UserManagement;
+use App\Billing;
 
 class UserController extends Controller
 {
@@ -13,7 +14,8 @@ class UserController extends Controller
     
     public function home()
     {
-    	return view('cashier.home');
+        $unpaid = Billing::where('status_id',0)->paginate(10);
+    	return view('cashier.home',compact('unpaid'));
     }
 
     public function clients()
