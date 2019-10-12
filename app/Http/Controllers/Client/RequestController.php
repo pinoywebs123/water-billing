@@ -30,6 +30,7 @@ class RequestController extends Controller
         $req->client_id = Auth::id();
         $req->status_id = 1;
         $req->title 	= $request->title;
+        $req->answer 	= $request->answer;
         $req->content 	= $request->content;
         $req->save();
 

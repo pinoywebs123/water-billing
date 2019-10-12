@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Maintenance;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\Profile;
 use App\Model\Request as CientRequest;
 use App\Billing\Traits\UserManagement;
 use App\Billing\Traits\Billing;
@@ -75,5 +76,21 @@ class UserController extends Controller
         $req = CientRequest::findOrFail($id);
         $req->update(['status_id'=> 4]);
         return back()->with('success','Client Job Request has been Finished!');
+    }
+
+    public function maintenance_client_update(){
+        $data = request()->validate([
+            'id' => 'required',
+            'first_name' => 'required',
+            'middle_name' => 'required',
+            'last_name' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'province' => 'required',
+        ]);
+        
+        Profile::where('user_id', $data['id'])->update($data);
+
+        return back();
     }
 }
