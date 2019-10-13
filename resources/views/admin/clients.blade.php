@@ -84,22 +84,36 @@
                     </div>
                     <div class="modal-body">
                         <div id='resproc' class="row">
-                            <div class="col" style="padding: 5px 20px;">
+                            <div class="col" id="edit_client_profile" style="padding: 5px 20px;">
                                 <input type="text" class="form-control" id="id" name="id" style="display: none;">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter first name">
+                                <div class="row" id="numbers">
+                                    <div class="form-group col-md-4">
+                                        <label>zone number & meter</label>
+                                        <input type="text" name="zone" class="form-control" placeholder="Ex: 071" required="" minlength="3" maxlength="3">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>consumer and meter size</label>
+                                        <input type="text" name="meter" class="form-control" placeholder="Ex: 12" required="" minlength="2" maxlength="2">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>concessionaire </label>
+                                        <input type="text" name="account_id" class="form-control" placeholder="Ex: 001" required="" minlength="3" maxlength="3">
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder="Enter middle name">
+                                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter first name" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter last name">
+                                    <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder="Enter middle name" required>
                                 </div>
                                 <div class="form-group">
-                                    <input  class="form-control" id="email" type="string" name="email" placeholder="Enter email">
+                                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter last name" required>
                                 </div>
                                 <div class="form-group">
-                                    <input  class="form-control" id="password" type="password" name="password" placeholder="Enter password">
+                                    <input  class="form-control" id="email" type="string" name="email" placeholder="Enter email" required>
+                                </div>
+                                <div class="form-group">
+                                    <input  class="form-control" id="password" type="password" name="password" placeholder="Enter password" required>
                                 </div>
                                 
                                 <div id="profile">
@@ -186,21 +200,35 @@
         $(document).ready( function () {
             $('#datatable').DataTable();
 
+            var profile = $("#profile");
+            var numbers = $("#numbers");
+
             $(".add").click(function () {
                 $("#addeditmodal .modal-title").html("Add client");
-                $("#profile").show();
+                
+                $("#profile").remove();
+                profile.appendTo('#edit_client_profile');
+
+                $("#numbers").remove();
+                numbers.prependTo('#edit_client_profile');
+
                 $("#addedit_user").attr("action", "{{ route('admin_store_clients') }}");
                 $("#first_name").val("");
                 $("#middle_name").val("");
                 $("#last_name").val("");
                 $("#email").val("");
+                $("#password").attr("required", "");
+                $("#account_id").val("");
                 $("#submit").html("Add");
             });
 
             $(".edit").click(function () {
                 $("#addeditmodal .modal-title").html("Edit staff");
                 $("#addedit_user").attr("action", "{{ route('admin_update_clients') }}");
-                $("#profile").hide();
+                
+                $("#profile").remove();
+                $("#numbers").remove();
+
                 $("#id").val($(this).data('id'));
                 $("#first_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(4)").html());
                 $("#middle_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(5)").html());
@@ -208,6 +236,7 @@
 
                 $("#account_id").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(0)").html());
                 $("#email").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(2)").html());
+                $("#password").removeAttr("required");
                 $("#submit").html("Update");
             });
 

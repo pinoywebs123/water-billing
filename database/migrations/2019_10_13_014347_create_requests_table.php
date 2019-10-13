@@ -20,6 +20,7 @@ class CreateRequestsTable extends Migration
             $table->integer('approved_by')->nullable();
             $table->integer('worked_by')->nullable();
             $table->string('title');
+            $table->string('answer')->nullable();
             $table->text('content');
             $table->timestamps();
         });

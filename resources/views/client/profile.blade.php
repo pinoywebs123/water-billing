@@ -25,6 +25,8 @@
 
 @section('contents')
     <h1>My Profile</h1>
+
+    @include('shared.notif')
     
     <div id="main_profile" class="container-fluid">
         <div class="row">
@@ -104,12 +106,13 @@
                     </div>
                     <div class="row ">
                         <div class="col-md-12">
-                            <a href="#" id="update" class="btn btn-primary">Update info</a>
+                            <a href="#" id="update" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Update info</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            
+            {{-- <div class="col-md-6">
                 <div class="container">
                     <div class="row">
                         <div id="right-panel" class="col-md-12" style="display:none">
@@ -166,7 +169,48 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+          
+                <!-- Modal content-->
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Request Information</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('client_request_pending_store')}}" method="POST">
+                            <div class="form-group">
+                                <label>Request to</label>
+                                
+                                <select class="form-control" id="title" name="title" required>
+                                    <option value="Change name">Change name</option>
+                                    <option value="Change location">Change location</option>  
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Update</label>
+                                <textarea class="form-control" id="answer" name="answer" placeholder="First Name: 
+Middle Name: 
+Last Name: "></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Request Reason/Content</label>
+                                <textarea class="form-control" id="content" name="content" placeholder="Insert more info if needed"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                        @csrf
+                            </div>
+                    </form>
+                </div>
+                
+                </div>
+            
+            </div>
+        </div>	
     </div>
 @endsection
 
@@ -174,6 +218,15 @@
     <script>
         $("#update").click(function() {
             $("#right-panel").fadeToggle("slow");
+        });
+
+        $("#title").change(function () {
+            if ($("#title").val() == "Change name") {
+                $("#title").attr("placeholder", "First Name: \nMiddle Name: \nLast Name: ");
+            }
+            else {
+                $("#title").attr("placeholder", "Address: \nCity: \nProvince: ");
+            }
         });
     </script>
 @endsection
