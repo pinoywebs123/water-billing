@@ -15,7 +15,7 @@ class UserController extends Controller
     public function home()
     {
         $total = Billing::where('status_id',1)->sum('bill');
-        $unpaid = Billing::where('status_id',1)->paginate(10);
+        $unpaid = Billing::where('status_id',1)->get();
     	return view('billing.home',compact('unpaid','total'));
     }
 

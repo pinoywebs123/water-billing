@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
 use App\Billing\Traits\UserManagement;
+use App\Billing;
 
 class UserController extends Controller
 {
@@ -31,7 +32,17 @@ class UserController extends Controller
 
     public function reports()
     {
-    	return view('admin.reports');
+        $start_date = @$_GET['start_date'];
+        $end_date = @$_GET['end_date'];
+        $total = Billing::where('status_id',1)->sum('bill');
+        if($start_date == null && $end_date == null){
+            $paid = Billing::where('status_id',1)->get();
+        }else{
+            $paid = Billing::where('status_id',1)->whereBetween('updated_at', [$start_date, $end_date])->get();
+            
+        }
+        
+    	return view('admin.reports',compact('paid','total'));
     }
 
     public function logout()
