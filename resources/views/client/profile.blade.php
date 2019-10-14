@@ -222,10 +222,10 @@ Last Name: "></textarea>
 
         $("#title").change(function () {
             if ($("#title").val() == "Change name") {
-                $("#title").attr("placeholder", "First Name: \nMiddle Name: \nLast Name: ");
+                $("#answer").attr("placeholder", "First Name: \nMiddle Name: \nLast Name: ");
             }
             else {
-                $("#title").attr("placeholder", "Address: \nCity: \nProvince: ");
+                $("#answer").attr("placeholder", "Address: \nCity: \nProvince: ");
             }
         });
     </script>
