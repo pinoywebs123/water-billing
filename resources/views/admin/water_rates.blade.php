@@ -23,7 +23,7 @@
 						@foreach($rates as $rate)
 						<tr>
 							<td><strong>P</strong>{{$rate->rates}} <strong style="color: red">(cu.m)</strong></td>
-							<td>{{$rate->created_at->diffForHumans()}}</td>
+							<td>{{$rate->created_at->toDayDateTimeString()}}</td>
 						</tr>
 					@endforeach
 

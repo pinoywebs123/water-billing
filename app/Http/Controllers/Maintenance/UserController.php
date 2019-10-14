@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Maintenance;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\Profile;
 use App\Model\Request as CientRequest;
 use App\Billing\Traits\UserManagement;
 use App\Billing\Traits\Billing;
@@ -16,7 +17,8 @@ class UserController extends Controller
 
     public function home()
     {
-    	return view('maintenance.home');
+        $all_request = CientRequest::where('status_id',4)->where('worked_by',Auth::id())->get();
+    	return view('maintenance.home',compact('all_request'));
     }
     //clients
     public function client_records()
@@ -75,5 +77,21 @@ class UserController extends Controller
         $req = CientRequest::findOrFail($id);
         $req->update(['status_id'=> 4]);
         return back()->with('success','Client Job Request has been Finished!');
+    }
+
+    public function maintenance_client_update(){
+        $data = request()->validate([
+            'id' => 'required',
+            'first_name' => 'required',
+            'middle_name' => 'required',
+            'last_name' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'province' => 'required',
+        ]);
+        
+        Profile::where('user_id', $data['id'])->update($data);
+
+        return back();
     }
 }

@@ -54,6 +54,11 @@ Route::group(['namespace'=> 'Maintenance'], function()
     	'uses'	=> 'UserController@maintenance_job_finished'
     ]);	
 
+    Route::post('/client_records/update',[
+    	'as'	=> 'maintenance_client_update',
+    	'uses'	=> 'UserController@maintenance_client_update'
+    ]);
+
 
 	Route::get('/logout', [
 		'as'	=> 'maintenance_logout',
