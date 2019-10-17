@@ -8,6 +8,7 @@ use Auth;
 
 use App\User;
 use App\Profile;
+use App\Billing;
 
 class UserController extends Controller
 {
@@ -42,12 +43,14 @@ class UserController extends Controller
 
     public function current_balance()
     {
-    	return view('client.current_balance');
+        $unpaid = Billing::where('status_id',0)->where('client_id',Auth::id())->get();
+    	return view('client.current_balance',compact('unpaid'));
     }
 
     public function trans_history()
     {
-    	return view('client.trans_history');
+        $paid = Billing::where('status_id',1)->where('client_id',Auth::id())->get();
+    	return view('client.trans_history',compact('paid'));
     }
 
     public function logout()
