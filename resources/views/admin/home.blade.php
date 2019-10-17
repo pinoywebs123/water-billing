@@ -5,9 +5,15 @@
 @endsection
 
 @section('contents')
-	<canvas id="myChart"></canvas>
-
-	<canvas id="myChart2"></canvas>
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="myChart2"></canvas>
+        </div>
+    </div>
+	
 @endsection
 
 @section('scripts')
