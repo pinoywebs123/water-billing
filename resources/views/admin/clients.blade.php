@@ -150,11 +150,6 @@
                                         <input type="text" class="form-control form-control-sm" id="province" name="province" required placeholder="Cebu">
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label>Account ID</label>
-                                    <input type="text" class="form-control" id="account_id" name="account_id" required="" placeholder="001 - 009">
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -218,7 +213,6 @@
                 $("#last_name").val("");
                 $("#email").val("");
                 $("#password").attr("required", "");
-                $("#account_id").val("");
                 $("#submit").html("Add");
             });
 
@@ -234,7 +228,6 @@
                 $("#middle_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(5)").html());
                 $("#last_name").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(6)").html());
 
-                $("#account_id").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(0)").html());
                 $("#email").val($("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(2)").html());
                 $("#password").removeAttr("required");
                 $("#submit").html("Update");
