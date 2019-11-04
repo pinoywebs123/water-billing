@@ -20,10 +20,11 @@ trait Billing {
 
 	public function storeWaterConsumption($id, $water)
 	{
+			$previous_water_consumption = ClientBill::where('client_id',$id)->latest()->first();
 			$data = $this->validateRequest();
 			$data['client_id'] = $id;
 			$data['status_id'] = 0;
-			$data['bill'] = $this->request->water_consumption * $water->getCurrentRate()->rates;
+			$data['bill'] = ($this->request->water_consumption - $previous_water_consumption->water_consumption) * $water->getCurrentRate()->rates;
 			
 			ClientBill::create($data);
 			return redirect()->back()->with('success','Client New Bill Successfully Added!');
@@ -31,10 +32,13 @@ trait Billing {
 
 	public function editWaterConsumption($data, $water)
 	{
+		
+		$previous_water_consumption = ClientBill::where('id',$data['bill_id'] - 1)->latest()->first();
 		$findAndUpdate =  ClientBill::findOrFail($data['bill_id']);
+
 		$findAndUpdate->update([
 			'water_consumption'		=> $data['water_consumption'],
-			'bill'					=> $data['water_consumption'] * $water->getCurrentRate()->rates	
+			'bill'					=> ($data['water_consumption'] - $previous_water_consumption->water_consumption) * $water->getCurrentRate()->rates	
 		]);
 		return redirect()->back()->with('success','Client Water Consumption has been Updated Successfully!');
 	}
