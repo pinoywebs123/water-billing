@@ -8,6 +8,7 @@ use Auth;
 use App\User;
 use App\Billing\Traits\UserManagement;
 use App\Billing;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -15,7 +16,13 @@ class UserController extends Controller
     
     public function home()
     {
-    	return view('admin.home');
+        $income = DB::select('SELECT MONTH(end_date) as month, sum(bill) as monthly_bill
+                FROM billings GROUP BY MONTH(end_date) ORDER BY MONTH(end_date)');
+
+        $consumption = DB::select('SELECT MONTH(end_date) as month, sum(water_consumption) as monthly_ws
+        FROM billings GROUP BY MONTH(end_date) ORDER BY MONTH(end_date)');
+
+    	return view('admin.home', compact('income', 'consumption'));
     }
 
     public function staffs()
