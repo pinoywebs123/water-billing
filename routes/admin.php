@@ -67,7 +67,7 @@ Route::group(['namespace'=> 'Admin', 'middleware'=> 'admin_check'], function()
     	'uses'	=> 'ClientsController@view_records_Store'
     ]);
 
-    Route::get('/client-bill-pay/{id}',[
+    Route::get('/client-bill-pay/{id}/{bill_pay}',[
         'as'    => 'admin_client_paid',
         'uses'  => 'ClientsController@admin_client_paid'
     ]);
