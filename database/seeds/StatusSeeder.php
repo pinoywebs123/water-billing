@@ -19,5 +19,7 @@ class StatusSeeder extends Seeder
         Status::create(['name'=> 'Working']);
 
         Status::create(['name'=> 'Finished']);
+
+        Status::create(['name'=> 'Paid']);
     }
 }
