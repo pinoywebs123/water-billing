@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
@@ -99,7 +99,9 @@ class ClientsController extends Controller
     {
         $client = $this->findClient($id);
         $records = $this->getWaterCosumption($id);
-        return view('shared.client_records',compact('client','records'));
+        $client_id = Request::segment(3);
+
+        return view('shared.client_records',compact('client','records', 'client_id'));
     }
 
     public function view_records_Store($id, WaterRates $water_rates)
@@ -107,9 +109,9 @@ class ClientsController extends Controller
         return $this->storeWaterConsumption($id,$water_rates);
     }
 
-    public function admin_client_paid($id)
+    public function admin_client_paid($id, $client_id)
     {
-        return $this->paidWaterClient($id);
+        return $this->paidWaterClient($id, $client_id);
     }
 
     public function admin_get_client_info(Request $request)

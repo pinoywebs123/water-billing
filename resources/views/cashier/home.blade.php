@@ -64,12 +64,48 @@
 
     // The data for our dataset
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: //['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        [
+            <?php
+            
+            $count = 1;
+            foreach($income as $month) {
+                $month = $month->month;
+                $temp = DateTime::createFromFormat('!m', $month);
+                $month = $temp->format('F');
+                
+                echo "'$month'"; 
+                
+                if ($count < count($income))
+                    echo ", ";
+                    
+                $count++;
+                
+            }
+            
+            ?>
+        ],
         datasets: [{
             label: 'Water Billing',
             
             borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45]
+            data: //[0, 10]
+            [
+                <?php
+                
+                $count = 1;
+                foreach($income as $bill) {
+                    echo $bill->monthly_bill; 
+                    
+                    if ($count < count($income))
+                        echo ", ";
+
+                    $count++;
+                    
+                }
+                
+                ?>
+            ]
         }]
     },
 
