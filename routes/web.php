@@ -26,6 +26,11 @@ Route::group(['prefix'=> 'auth'], function()
 		'as'	=> 'loginCheck',
 		'uses'	=> 'AuthController@loginCheck'
 	]);
+	
+	Route::get('/check_deadline', [
+	    'as'	=> 'loginCheck',
+		'uses'	=> 'AuthController@cron_deadline_email'
+	]);
 });
 
 
