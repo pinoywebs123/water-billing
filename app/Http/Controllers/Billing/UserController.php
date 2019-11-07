@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\Billing\Traits\UserManagement;
 use App\Billing;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -16,7 +17,10 @@ class UserController extends Controller
     {
         $total = Billing::where('status_id',1)->sum('bill');
         $unpaid = Billing::where('status_id',1)->get();
-    	return view('billing.home',compact('unpaid','total'));
+        $consumption = DB::select('SELECT MONTH(end_date) as month, sum(water_consumption) as monthly_ws
+        FROM billings GROUP BY MONTH(end_date) ORDER BY MONTH(end_date)');
+
+    	return view('billing.home',compact('unpaid','total','consumption'));
     }
 
     public function clients()

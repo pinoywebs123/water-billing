@@ -5,9 +5,15 @@
 @endsection
 
 @section('contents')
-	<canvas id="myChart"></canvas>
-
-	<canvas id="myChart2"></canvas>
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="myChart2"></canvas>
+        </div>
+    </div>
+	
 @endsection
 
 @section('scripts')
@@ -21,12 +27,48 @@
 
     // The data for our dataset
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: //['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        [
+            <?php
+            
+            $count = 1;
+            foreach($income as $month) {
+                $month = $month->month;
+                $temp = DateTime::createFromFormat('!m', $month);
+                $month = $temp->format('F');
+                
+                echo "'$month'"; 
+                
+                if ($count < count($income))
+                    echo ", ";
+                    
+                $count++;
+                
+            }
+            
+            ?>
+        ],
         datasets: [{
             label: 'Income Chart',
             
             borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 10]
+            data: //[0, 10]
+            [
+                <?php
+                
+                $count = 1;
+                foreach($income as $bill) {
+                    echo $bill->monthly_bill; 
+                    
+                    if ($count < count($income))
+                        echo ", ";
+
+                    $count++;
+                    
+                }
+                
+                ?>
+            ]
         }]
     },
 
@@ -43,12 +85,48 @@
 
     // The data for our dataset
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: //['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        [
+            <?php
+            
+            $count = 1;
+            foreach($consumption as $month) {
+                $month = $month->month;
+                $temp = DateTime::createFromFormat('!m', $month);
+                $month = $temp->format('F');
+                
+                echo "'$month'"; 
+                
+                if ($count < count($consumption))
+                    echo ", ";
+                    
+                $count++;
+                
+            }
+            
+            ?>
+        ],
         datasets: [{
             label: 'Water Consumptions',
             
             borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 22, 10]
+            data: //[0, 10, 5, 2, 20, 22, 10]
+                [
+                    <?php
+                
+                $count = 1;
+                foreach($consumption as $water_cons) {
+                    echo $water_cons->monthly_ws; 
+                    
+                    if ($count < count($consumption))
+                        echo ", ";
+
+                    $count++;
+                    
+                }
+                
+                ?>
+                ]
         }]
     },
 
