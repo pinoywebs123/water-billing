@@ -63,7 +63,7 @@
         </div>
         <div class="row">
             <div id="user" class="col">
-                <a href="#" class="btn btn-primary add" data-toggle="modal" data-target="#addeditmodal">Add new user</a>
+                <!-- <a href="#" class="btn btn-primary add" data-toggle="modal" data-target="#addeditmodal">Add new user</a> -->
             </div>
         </div>
     </div>
