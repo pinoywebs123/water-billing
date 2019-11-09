@@ -100,7 +100,7 @@
                                 <div class="form-group">
                                     <label for="passw">Role</label>
                                     <select class="form-control" id="role_id" name="role_id">
-                                        <option disabled>Select the role for this staff</option>
+                                        
                                         <option value='1'>Admin</option>
                                         <option value='2'>Billing</option>
                                         <option value='3'>Cashier</option>
