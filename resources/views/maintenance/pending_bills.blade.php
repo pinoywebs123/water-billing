@@ -2,7 +2,7 @@
 
 @section('styles')
     <style>
-        td#answer { white-space:pre }
+        .answer { white-space:pre }
     </style>
 @endsection
 
@@ -27,7 +27,7 @@
                 <td>{{$req->user->account_id}}</td>
                 <td>{{$req->user->email}}</td>
                 <td>{{$req->title}}</td>
-                <td id="answer">{{$req->answer}}</td>
+                <td class="answer">{{$req->answer}}</td>
               	<td>{{$req->biller->email}}</td>
               	<td>
               		<form action="{{route('maintenance_accpet_job')}}" method="POST" id="form{{$req->id}}">
@@ -116,9 +116,10 @@
         url: url,
         data: {data: req_id, _token: token},
         success: function(data){
-          $("#req_info").append("<h3> Account ID: "+data.user.account_id+"</h3>");
-          $("#req_info").append("<p> Email : "+data.user.email+"</p>");
+          $("#req_info").append("");
+          $("#req_info").append("<h3> Account ID: "+data.account_id+"</h3>");
           $("#req_info").append("<p> Title : "+data.title+"</p>");
+          $("#req_info").append("<p> Update Info : "+"<br /><span class='answer'>"+data.answer+"</span></p>");
           $("#req_info").append("<p> Content : "+data.content+"</p>");
           console.log(data);
         }
