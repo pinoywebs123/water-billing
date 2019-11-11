@@ -31,7 +31,7 @@ class RequestController extends Controller
         $req->status_id = 1;
         $req->title 	= $request->title;
         $req->answer 	= $request->answer;
-        $req->content 	= $request->content;
+        $req->content 	= ($request->content?$request->content:'');
         $req->save();
 
         return redirect()->back()->with('success','Request has been sent successfully!');

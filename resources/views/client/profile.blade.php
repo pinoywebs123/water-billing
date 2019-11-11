@@ -188,6 +188,8 @@
                                 <select class="form-control" id="title" name="title" required>
                                     <option value="Change name">Change name</option>
                                     <option value="Change location">Change location</option>  
+                                    <option value="Change birthdate">Change birthdate</option> 
+                                    <option value="Change gender">Change gender</option> 
                                 </select>
                             </div>
                             <div class="form-group">
@@ -195,6 +197,12 @@
                                 <textarea class="form-control" id="answer" name="answer" placeholder="First Name: 
 Middle Name: 
 Last Name: "></textarea>
+                                <input class="form-control" type="date" id="bday" name="answer">
+                                <select class="form-control" id="gender" name="answer">
+                                    <option disabled selected>Select a gender</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Request Reason/Content</label>
@@ -220,12 +228,25 @@ Last Name: "></textarea>
             $("#right-panel").fadeToggle("slow");
         });
 
+        $("#bday").hide();
+        $("#gender").hide();
+
         $("#title").change(function () {
             if ($("#title").val() == "Change name") {
                 $("#answer").attr("placeholder", "First Name: \nMiddle Name: \nLast Name: ");
             }
-            else {
+            else if ($("#title").val() == "Change location") {
                 $("#answer").attr("placeholder", "Address: \nCity: \nProvince: ");
+            }
+            else if ($("#title").val() == "Change birthdate") {
+                $("#bday").show();
+                $("#answer").hide();
+                $("#gender").hide();
+            }
+            else {
+                $("#gender").show();
+                $("#bday").hide();
+                $("#answer").hide();
             }
         });
     </script>
