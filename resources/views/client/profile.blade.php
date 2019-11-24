@@ -10,6 +10,10 @@
             font-size: 14px;
         }
 
+        textarea {
+            height: 100px !important;
+        }
+
         #main_profile {
 
             padding: 20px;
@@ -106,18 +110,19 @@
                     </div>
                     <div class="row ">
                         <div class="col-md-12">
-                            <a href="#" id="update" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Update info</a>
+                            <a href="#" id="update" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Request update</a>
+                            <a href="#" id="update2" class="btn btn-primary">Change info</a>
                         </div>
                     </div>
                 </div>
             </div>
             
-            {{-- <div class="col-md-6">
+            <div class="col-md-6">
                 <div class="container">
                     <div class="row">
                         <div id="right-panel" class="col-md-12" style="display:none">
                             <form action="{{ route('client_store_profile') }}" method="post">
-                                <div class="form-group">
+                                {{--<div class="form-group">
                                     <label for="" class="col-form-label col-form-label-sm" class="col-form-label col-form-label-sm">First Name:</label>
                                     <input type="text" class="form-control form-control-sm" id="first_name" name="first_name" required placeholder="Enter first name" value="{{ $profile->first_name }}">
                                 </div>
@@ -139,7 +144,7 @@
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                     </select>
-                                </div>
+                                </div>--}}
                                 <div class="form-group">
                                     <label for="" class="col-form-label col-form-label-sm">Contact number</label>
                                     <input type="tel" class="form-control form-control-sm" id="contact" name="contact" required pattern="[0-9]{11}" placeholder="09123456789" value="{{ $profile->contact }}">
@@ -148,7 +153,7 @@
                                     <label for="" class="col-form-label col-form-label-sm">E-mail:</label>
                                     <input type="email" class="form-control form-control-sm" id="email" name="email" required placeholder="my_name@email.com" value="{{ $user->email }}">
                                 </div>
-                                <div class="form-group">
+                                {{--<div class="form-group">
                                     <label for="" class="col-form-label col-form-label-sm">Address:</label>
                                     <input type="text" class="form-control form-control-sm" id="address" name="address" required placeholder="123 Street" value="{{ $profile->address }}">
                                 </div>
@@ -159,7 +164,7 @@
                                 <div class="form-group">
                                     <label for="" class="col-form-label col-form-label-sm">Province:</label>
                                     <input type="text" class="form-control form-control-sm" id="province" name="province" required placeholder="Cebu" value="{{ $profile->province }}">
-                                </div>
+                                </div>--}}
 
                                 <button type="submit" class="btn btn-primary">Submit</button>
 
@@ -169,7 +174,7 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -188,6 +193,8 @@
                                 <select class="form-control" id="title" name="title" required>
                                     <option value="Change name">Change name</option>
                                     <option value="Change location">Change location</option>  
+                                    <option value="Change birthdate">Change birthdate</option> 
+                                    <option value="Change gender">Change gender</option> 
                                 </select>
                             </div>
                             <div class="form-group">
@@ -195,6 +202,12 @@
                                 <textarea class="form-control" id="answer" name="answer" placeholder="First Name: 
 Middle Name: 
 Last Name: "></textarea>
+                                <input class="form-control" type="date" id="bday" name="answer">
+                                <select class="form-control" id="gender" name="answer">
+                                    <option disabled selected>Select a gender</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Request Reason/Content</label>
@@ -216,16 +229,35 @@ Last Name: "></textarea>
 
 @section('scripts')
     <script>
-        $("#update").click(function() {
+        $("#update2").click(function() {
+            if ($("#update2").html() == "Change info") {
+                $("#update2").html("Cancel");
+            } else {
+                $("#update2").html("Change info");
+            }
+
             $("#right-panel").fadeToggle("slow");
         });
+
+        $("#bday").hide();
+        $("#gender").hide();
 
         $("#title").change(function () {
             if ($("#title").val() == "Change name") {
                 $("#answer").attr("placeholder", "First Name: \nMiddle Name: \nLast Name: ");
             }
-            else {
+            else if ($("#title").val() == "Change location") {
                 $("#answer").attr("placeholder", "Address: \nCity: \nProvince: ");
+            }
+            else if ($("#title").val() == "Change birthdate") {
+                $("#bday").show();
+                $("#answer").hide();
+                $("#gender").hide();
+            }
+            else if ($("#title").val() == "Change gender") {
+                $("#gender").show();
+                $("#bday").hide();
+                $("#answer").hide();
             }
         });
     </script>

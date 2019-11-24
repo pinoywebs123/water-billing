@@ -25,7 +25,7 @@ class CreateRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'content' => 'required'
+            'content' => ''
         ];
     }
 }

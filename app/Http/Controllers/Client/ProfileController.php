@@ -46,15 +46,15 @@ class ProfileController extends Controller
     public function profile_update($id)
     {
         $data = request()->validate([
-            'first_name' => 'required',
-            'middle_name' => 'required',
-            'last_name' => 'required',
-            'birth_date' => 'required|date',
-            'gender' => 'required',
+            // 'first_name' => 'required',
+            // 'middle_name' => 'required',
+            // 'last_name' => 'required',
+            // 'birth_date' => 'required|date',
+            // 'gender' => 'required',
             'contact' => 'required|numeric',
-            'address' => 'required',
-            'city' => 'required',
-            'province' => 'required'
+            // 'address' => 'required',
+            // 'city' => 'required',
+            // 'province' => 'required'
         ]);
 
         $data['user_id'] = $id;
