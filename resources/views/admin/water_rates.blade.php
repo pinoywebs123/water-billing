@@ -18,6 +18,7 @@
 					<th>To</th>
 					<th>Rate</th>
 					<th>Updated</th>
+					<th>Action</th>
 				</thead>
 				<tbody>
 					@if($new_rates->count() > 0)
@@ -28,6 +29,9 @@
 							<td>{{$rate->to}}<strong style="color: red">(cu.m)</strong></td>
 							<td>{{$rate->summary_rate($rate->id)->price}}</td>
 							<td>{{$rate->updated_at->toDayDateTimeString()}}</td>
+							<td>
+								<button class="btn btn-info btn-xs rateUpdateBtn" value="{{$rate->id}}" data-toggle="modal" data-target="#myModal" id="rateUpdateBtn">Edit Rate</button>
+							</td>
 						</tr>
 					@endforeach
 
@@ -52,7 +56,8 @@
       <div class="modal-body">
        
         	<div class="form-group">
-        		<input type="number" name="rates" class="form-control" >
+        		<input type="text" name="new_rate" class="form-control" required="">
+        		<input type="hidden" name="rate_id" id="rate_id" required="">
         	</div>
         
       </div>
@@ -66,5 +71,11 @@
 
 </div>
 @section('scripts')
-
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".rateUpdateBtn").click(function(){
+			$("#rate_id").val($(this).val());
+		});
+	});
+</script>
 @endsection

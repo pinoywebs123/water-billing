@@ -26,6 +26,7 @@ class WaterRatesControlller extends Controller
 
     public function store()
     {
-    	return $this->water->store();
+        return $this->water->updateRate();
+    	//return $this->water->store();
     }
 }

@@ -11,6 +11,6 @@ class Rate extends Model
 
     public function summary_rate($id)
     {
-    	return SummaryRate::where('id',$id)->orderBy('id','desc')->first();
+    	return SummaryRate::where('rate_id',$id)->orderBy('id','desc')->first();
     }
 }
