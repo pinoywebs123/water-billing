@@ -8,22 +8,26 @@
 	<h1 class="text-center">Water Rates</h1>
 	<div class="row">
 		
-		<div class="col-md-6">
-			<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">New Rate</button>
-			<h3>Previous Rates</h3>
+		<div class="col-md-6 col-md-offset-3">
+			<!-- <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">New Rate</button> -->
+			
 			@include('shared.notif')
 			<table class="table">
 				<thead>
+					<th>From</th>
+					<th>To</th>
 					<th>Rate</th>
-					<th>Date</th>
+					<th>Updated</th>
 				</thead>
 				<tbody>
-					@if($rates->count() > 0)
+					@if($new_rates->count() > 0)
 
-						@foreach($rates as $rate)
+						@foreach($new_rates as $rate)
 						<tr>
-							<td><strong>P</strong>{{$rate->rates}} <strong style="color: red">(cu.m)</strong></td>
-							<td>{{$rate->created_at->toDayDateTimeString()}}</td>
+							<td>{{$rate->from}} <strong style="color: red">(cu.m)</strong></td>
+							<td>{{$rate->to}}<strong style="color: red">(cu.m)</strong></td>
+							<td>{{$rate->summary_rate($rate->id)->price}}</td>
+							<td>{{$rate->updated_at->toDayDateTimeString()}}</td>
 						</tr>
 					@endforeach
 
@@ -31,11 +35,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="col-md-6">
-			
-			<h3>Current Rates: P @if( !is_null($current) ) {{$current->rates}} @else 0 @endif <strong style="color: red">(cu.m)</h3>
-			
-		</div>
+		
 	</div>
 @endsection
 <div id="myModal" class="modal fade" role="dialog">

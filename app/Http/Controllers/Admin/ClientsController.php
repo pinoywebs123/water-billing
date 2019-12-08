@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Request;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
@@ -10,6 +10,7 @@ use App\Profile;
 use App\Billing\Traits\UserManagement;
 use App\Billing\Traits\Billing;
 use App\Billing\Admin\WaterRates;
+use Request as ReqSeg;
 
 class ClientsController extends Controller
 {
@@ -99,7 +100,7 @@ class ClientsController extends Controller
     {
         $client = $this->findClient($id);
         $records = $this->getWaterCosumption($id);
-        $client_id = Request::segment(3);
+        $client_id = ReqSeg::segment(3);
 
         return view('shared.client_records',compact('client','records', 'client_id'));
     }

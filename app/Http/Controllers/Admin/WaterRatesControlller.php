@@ -20,7 +20,8 @@ class WaterRatesControlller extends Controller
     {
     	$current = $this->water->getCurrentRate();
     	$rates = $this->water->getHistoryRates();
-    	return view('admin.water_rates',compact('rates','current'));
+        $new_rates = $this->water->getAllNewRate();
+    	return view('admin.water_rates',compact('new_rates'));
     }
 
     public function store()

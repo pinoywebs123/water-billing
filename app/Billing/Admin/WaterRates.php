@@ -19,6 +19,11 @@ class WaterRates {
 		return Rate::orderBy('id','desc')->first();
 	}
 
+	public function getAllNewRate()
+	{
+		return Rate::all();
+	}
+
 	public function getHistoryRates()
 	{
 		return Rate::orderBy('id','desc')->get();
