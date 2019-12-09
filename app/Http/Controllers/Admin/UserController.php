@@ -27,7 +27,7 @@ class UserController extends Controller
 
     public function staffs()
     {
-        $staffs = User::where('role_id', '!=', 4)->get();
+        $staffs = User::where([['role_id', '!=', 4], ['status_id', '!=', 6]])->get();
     	return view('admin.staffs', compact('staffs'));
     }
 
