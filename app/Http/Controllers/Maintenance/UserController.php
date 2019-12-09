@@ -70,7 +70,7 @@ class UserController extends Controller
 
     public function maintenance_client_job_info(Request $request){
         $req = CientRequest::findOrFail($request->data);
-        return $req->with('user')->first();
+        return $req;
     }
 
     public function maintenance_job_finished($id){

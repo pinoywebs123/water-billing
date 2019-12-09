@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRatesTable extends Migration
+class CreateSummaryRatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateRatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('rates', function (Blueprint $table) {
+        Schema::create('summary_rates', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('from');
-            $table->integer('to');
-            $table->unsignedBigInteger('user_id');
+            $table->bigInteger('rate_id');
+            $table->double('price');
+            $table->text('reason');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateRatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rates');
+        Schema::dropIfExists('summary_rates');
     }
 }
