@@ -35,7 +35,7 @@ trait Billing {
 			}
 
 			$diffrerence_water_consumption = $this->request->water_consumption - $aw;
-			return $this->calculate_amount($diffrerence_water_consumption);
+			//return $this->calculate_amount($diffrerence_water_consumption);
 
 			$data = $this->validateRequest();
 			$data['client_id'] = $id;
