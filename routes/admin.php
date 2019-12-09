@@ -35,6 +35,11 @@ Route::group(['namespace'=> 'Admin', 'middleware'=> 'admin_check'], function()
 		'uses'	=> 'StaffsController@staffs_update'
     ]);
 
+    Route::post('/staffs/resign', [
+		'as'	=> 'admin_resign_staffs',
+		'uses'	=> 'StaffsController@staffs_resign'
+    ]);
+
     //Clients
     
     Route::get('/clients', [

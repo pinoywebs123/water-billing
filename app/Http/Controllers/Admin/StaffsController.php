@@ -105,4 +105,17 @@ class StaffsController extends Controller
 
         return back();
     }
+
+    public function staffs_resign()
+    {
+        $data = request()->validate([
+            'id' => 'required'
+        ]);
+
+        $data['status_id'] = '6';
+
+        User::find($data['id'])->update($data);
+
+        return back();
+    }
 }
