@@ -56,11 +56,12 @@ trait Billing {
 		
 		
 
-		//$diffrerence_water_consumption = $data['water_consumption'] - $previous_water_consumption->water_consumption;
+		$diffrerence_water_consumption = $data['water_consumption'] - $previous_water_consumption->water_consumption;
 
 		$findAndUpdate->update([
-			'water_consumption'		=> $data['water_consumption'],
-			'bill'					=> $this->calculate_amount($data['water_consumption']),
+			'reading'				=> $data['water_consumption'],
+			'water_consumption'		=> $diffrerence_water_consumption,
+			'bill'					=> $this->calculate_amount($diffrerence_water_consumption),
 		]);
 		return redirect()->back()->with('success','Client Water Consumption has been Updated Successfully!');
 	}

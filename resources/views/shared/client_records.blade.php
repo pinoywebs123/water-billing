@@ -73,11 +73,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Water Consumption</h4>
+        <h4 class="modal-title">Water Reading</h4>
       </div>
       <div class="modal-body">
         <div class="form-group">
-        	<label>Water Consumption</label>
+        	<label>Water Reading</label>
         	<input type="number" name="water_consumption" class="form-control" required="">
         </div>
         <div class="form-group">
