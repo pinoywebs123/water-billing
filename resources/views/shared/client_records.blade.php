@@ -11,19 +11,25 @@
 	<table class="table">
 		<thead>
 			<th>Water Consumption</th>
+      <td>Reading</td>
 			<th>Start Date</th>
 			<th>End Date</th>
 			<th>Bill</th>
 			<th>Status</th>
+      <th>Due Date</th>
+      <th>Penalty</th>
+      <th>Total Bill</th>
 			<th>Actions</th>
 		</thead>
 		<tbody>
+      <?php $penalty= 0; ?>
 			@foreach($records as $rec)
 				<tr>
 					<td>{{$rec->water_consumption}} <strong style="color: red">(cu.m)</strong></td>
+          <td>{{$rec->reading}}</td>
 					<td>{{$rec->start_date}}</td>
 					<td>{{$rec->end_date}}</td>
-					<td>{{$rec->bill}}</td>
+					<td>P{{$rec->bill}}</td>
 					<td>
 						@if($rec->status_id == 0)
 							<p style="color: red">Pending Payment</p>
@@ -31,6 +37,23 @@
 							<p style="color: green">Paid</p>
 						@endif
 					</td>
+          <td style="background: @if($rec->status_id == 0)  @if(\Carbon\Carbon::parse($rec->created_at)->diffInDays(now()) < 5) orange @endif  @endif">{{$rec->created_at->addDays(15)->format('Y-m-d')}}</td>
+          <td>
+             
+              @if($rec->created_at->addDays(15)->format('Y m d') == now()->format('Y m d'))
+                {{$penalty = $rec->bill * .2}}
+              @else
+                no
+              @endif
+
+          </td>
+          <td>
+              @if($penalty != 0)
+                  {{$rec->bill = $rec->bill + ($rec->bill * .2)}}
+              @else
+                  {{$rec->bill}}
+              @endif
+          </td>
 					<td>
 						<button class="btn btn-info btn-xs biller_edit" data-toggle="modal" data-target="#myModal2" value="{{$rec->id}}">Edit</button>
 							<a href="{{route('admin_client_paid',['id'=> $rec->id, 'client_id' => $client_id])}}" class="btn btn-danger btn-xs">Paid</a>
