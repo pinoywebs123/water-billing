@@ -62,18 +62,13 @@
         secondChart();
     });
 
-    var months = '';
-    function getMonths() {
-        
-    }
-
     $('#filter_income').click(function() {
         var from = $('#filter_income_from').val();
         var to = $('#filter_income_to').val();
 
         $.ajax({
             method: 'GET', // Type of response and matches what we said in the route
-            url: '{{ route("filter_income_chart")}}', // This is the url we gave in the route
+            url: '{{ route("admin_filter_income_chart") }}', // This is the url we gave in the route
             data: {'from' : from, 'to' : to}, // a JSON object to send back
             success: function(response){ // What to do if we succeed
                 console.log(response);
@@ -114,7 +109,7 @@
 
         $.ajax({
             method: 'GET', // Type of response and matches what we said in the route
-            url: '{{ route("filter_consumption_chart")}}', // This is the url we gave in the route
+            url: '{{ route("admin_filter_consumption_chart") }}', // This is the url we gave in the route
             data: {'from' : from, 'to' : to}, // a JSON object to send back
             success: function(response){ // What to do if we succeed
                 console.log(response);
