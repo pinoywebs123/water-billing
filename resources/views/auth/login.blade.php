@@ -55,7 +55,7 @@
       <form action="{{route('loginCheck')}}" method="POST">
       
         <div class="input-group">
-          <span class="input-group-addon" id="basic-addon1">@</span>
+          <span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon1"></span>
           <input type="email" name="email" class="form-control"  aria-describedby="basic-addon1" data-toggle="tooltip" title="Enter Email" data-placement="right">
         </div>
         <div class="input-group">
