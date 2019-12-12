@@ -37,7 +37,7 @@
 							<p style="color: green">Paid</p>
 						@endif
 					</td>
-          <td style="background: @if($rec->status_id == 0)  @if(\Carbon\Carbon::parse($rec->created_at)->diffInDays(now()) < 5) orange @endif  @endif">{{$rec->created_at->addDays(15)->format('Y-m-d')}}</td>
+          <td style="background: @if($rec->status_id == 0)  @if(\Carbon\Carbon::parse($rec->created_at)->diffInDays(now()) < 5) orange @endif  @endif">{{$rec->created_at->addDays(10)->format('Y-m-d')}}</td>
           <td>
              
               @if($rec->created_at->addDays(15)->format('Y m d') == now()->format('Y m d'))
