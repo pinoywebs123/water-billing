@@ -5,6 +5,8 @@
 @endsection
 
 @section('contents')
+    <h1 class="text-center">Water Consumption Report Graph</h1>
+
     <div class="container">
         <div class="row">
             <div class="col-md-2"></div>

@@ -23,12 +23,6 @@ class UserController extends Controller
     	return view('billing.home',compact('unpaid','total','consumption'));
     }
 
-    public function clients()
-    {
-        $clients = $this->getAllClient();
-    	return view('billing.clients',compact('clients'));
-    }
-
     public function filter_consumption_chart(Request $request)
     {
 
@@ -62,6 +56,12 @@ class UserController extends Controller
 
         return [$months, $consumptions];
 
+    }
+
+    public function clients()
+    {
+        $clients = $this->getAllClient();
+    	return view('billing.clients',compact('clients'));
     }
 
     public function logout()
