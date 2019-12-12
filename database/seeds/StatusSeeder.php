@@ -21,5 +21,7 @@ class StatusSeeder extends Seeder
         Status::create(['name'=> 'Finished']);
 
         Status::create(['name'=> 'Paid']);
+
+        Status::create(['name'=> 'Resigned']);
     }
 }

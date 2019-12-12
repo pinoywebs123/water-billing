@@ -22,7 +22,7 @@
           
            <li >
             <a class="" href="{{route('admin_water_rates')}}">
-                  <i class="icon_currency_alt"></i>
+                  <i>&#8369;</i>
                   <span>Water Rates</span>
             </a>
           </li>
