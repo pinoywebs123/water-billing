@@ -11,20 +11,43 @@
 	@include('shared.notif')
 	<table class="table">
 		<thead>
-			<th>Water Consumption</th>
-			<th>Start Date</th>
-			<th>End Date</th>
-			<th>Bill</th>
-			<th>Status</th>
-			<th>Actions</th>
-		</thead>
+      <th>Water Consumption</th>
+      <td>Reading</td>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Bill</th>
+      <th>Status</th>
+      <th>Due Date</th>
+      <th>Penalty</th>
+      <th>Total Bill</th>
+      <th>Actions</th>
+    </thead>
 		<tbody>
-			@foreach($records as $rec)
-				<tr>
-					<td>{{$rec->water_consumption}} <strong style="color: red">(cu.m)</strong></td>
-					<td>{{$rec->start_date}}</td>
-					<td>{{$rec->end_date}}</td>
-					<td>{{$rec->bill}}</td>
+			<?php $penalty= 0; ?>
+      @foreach($records as $rec)
+        <tr>
+          <td>{{$rec->water_consumption}} <strong style="color: red">(cu.m)</strong></td>
+          <td>{{$rec->reading}}</td>
+          <td>{{$rec->start_date}}</td>
+          <td>{{$rec->end_date}}</td>
+          <td>P{{$rec->bill}}</td>
+          <td>
+            @if($rec->status_id == 0)
+              <p style="color: red">Pending Payment</p>
+            @else
+              <p style="color: green">Paid</p>
+            @endif
+          </td>
+          <td style="background: @if($rec->status_id == 0)  @if(\Carbon\Carbon::parse($rec->created_at)->diffInDays(now()) < 5) orange @endif  @endif">{{$rec->created_at->addDays(15)->format('Y-m-d')}}</td>
+          <td>
+             
+              @if($rec->created_at->addDays(15)->format('Y m d') == now()->format('Y m d'))
+                {{$penalty = $rec->bill * .2}}
+              @else
+                no
+              @endif
+
+          </td>
 					<td>
 						@if($rec->status_id == 0)
 							<p style="color: red">Pending Payment</p>

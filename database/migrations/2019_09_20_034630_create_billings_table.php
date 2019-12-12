@@ -17,9 +17,10 @@ class CreateBillingsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('client_id');
             $table->integer('water_consumption');
+            $table->integer('reading');
             $table->date('start_date');
             $table->date('end_date');
-            $table->integer('bill');
+            $table->float('bill');
             $table->integer('status_id');
             $table->timestamps();
         });
