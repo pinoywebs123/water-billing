@@ -17,6 +17,11 @@ Route::group(['namespace'=> 'Cashier', 'middleware'=> 'cashier_check'], function
 		'as'	=> 'cashier_home',
 		'uses'	=> 'UserController@home'
     ]);
+
+    Route::get('/home/filter_income', [
+        'as'    => 'cashier_filter_income_chart',
+        'uses'  => 'UserController@filter_income_chart'
+    ]);
     
     Route::get('/clients', [
 		'as'	=> 'cashier_clients',

@@ -68,4 +68,24 @@ class ProfileController extends Controller
 
         return back();
     }
+
+    public function profile_update_pic(Request $request)
+    {
+        $user_id = Auth::user()->id;
+
+        $data = request()->validate([
+            'profile_pic_file' => 'required|image'
+        ]);
+
+        $file = $request->file('profile_pic_file');
+
+        $data['profile_pic_file'] = $file->getClientOriginalName();
+
+        Profile::where('user_id', $user_id)->update($data);
+
+        $destinationPath = 'uploads';
+        $file->move($destinationPath, $file->getClientOriginalName());
+
+        return back();
+    }
 }

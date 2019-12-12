@@ -22,6 +22,11 @@ Route::group(['namespace'=> 'Client', 'middleware'=> 'client_check'], function()
 		'uses'	=> 'UserController@profile'
     ]);
 
+    Route::post('/profile/update_profile_pic', [
+		'as'	=> 'client_profile_pic',
+		'uses'	=> 'ProfileController@profile_update_pic'
+    ]);
+
     Route::post('/profile/store', [
 		'as'	=> 'client_store_profile',
 		'uses'	=> 'ProfileController@profile_store'
