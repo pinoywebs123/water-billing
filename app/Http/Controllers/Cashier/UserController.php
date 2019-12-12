@@ -22,6 +22,43 @@ class UserController extends Controller
     	return view('cashier.home',compact('unpaid', 'income'));
     }
 
+    public function filter_income_chart(Request $request)
+    {
+
+        $from = $request->input('from');
+        $to = $request->input('to');
+
+        $months = array();
+        $incomes = array();
+
+        $income = DB::select("SELECT MONTH(end_date) as month, sum(bill) as monthly_bill, start_date, end_date
+                FROM billings GROUP BY MONTH(end_date) HAVING start_date >= '$from' AND end_date <= '$to' ORDER BY MONTH(end_date)");
+        
+        $count = 0;
+        foreach($income as $month) {
+           
+            $month = $month->month;
+            $month = date("F", mktime(0, 0, 0, $month, 10));
+            
+            $months[$count] = $month;                
+            $count++;
+            
+        }
+
+        $count = 0;
+        foreach($income as $bill) {
+           
+            $income = $bill->monthly_bill; 
+            $incomes[$count] = $income;
+
+            $count++;
+            
+        }
+
+        return [$months, $incomes];
+
+    }
+
     public function clients()
     {
         $clients = $this->getAllClient();
