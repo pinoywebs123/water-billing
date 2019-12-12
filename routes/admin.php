@@ -19,12 +19,12 @@ Route::group(['namespace'=> 'Admin', 'middleware'=> 'admin_check'], function()
     ]);
 
     Route::get('/home/filter_income', [
-        'as'    => 'filter_income_chart',
+        'as'    => 'admin_filter_income_chart',
         'uses'  => 'UserController@filter_income_chart'
     ]);
 
     Route::get('/home/filter_consumption', [
-        'as'    => 'filter_consumption_chart',
+        'as'    => 'admin_filter_consumption_chart',
         'uses'  => 'UserController@filter_consumption_chart'
     ]);
 
