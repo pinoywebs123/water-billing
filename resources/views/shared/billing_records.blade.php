@@ -145,7 +145,7 @@
 				url: url,
 				success: function(data){
 					console.log(data.water_consumption);
-					$("#waterConsumption").val(data.water_consumption);
+					$("#waterConsumption").val(data.reading);
 				}
 			});
 		});

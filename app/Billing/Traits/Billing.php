@@ -27,11 +27,13 @@ trait Billing {
 
 	public function storeWaterConsumption($id, $water)
 	{
-		$aw = 0;
+		
 			$previous_water_consumption = ClientBill::where('client_id',$id)->latest()->first();
 
-			if($previous_water_consumption['water_consumption']){
-				$aw = $previous_water_consumption->water_consumption;
+			if($previous_water_consumption){
+				 $aw = $previous_water_consumption->reading;
+			}else{
+				$aw = 0;
 			}
 
 			$diffrerence_water_consumption = $this->request->water_consumption - $aw;
@@ -56,7 +58,7 @@ trait Billing {
 		
 		
 
-		$diffrerence_water_consumption = $data['water_consumption'] - $previous_water_consumption->water_consumption;
+		$diffrerence_water_consumption = $data['water_consumption'] - $previous_water_consumption->reading;
 
 		$findAndUpdate->update([
 			'reading'				=> $data['water_consumption'],
