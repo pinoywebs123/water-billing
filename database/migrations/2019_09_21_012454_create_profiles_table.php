@@ -25,6 +25,7 @@ class CreateProfilesTable extends Migration
             $table->string('address');
             $table->string('city');
             $table->string('province');
+            $table->string('profile_pic_file');
             $table->timestamps();
         });
     }

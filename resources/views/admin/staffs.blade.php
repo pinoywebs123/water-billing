@@ -49,6 +49,9 @@
                                     <a class="edit btn btn-primary btn-xs" href="#" data-id="{{ $staff->id }}" data-toggle="modal" data-target="#addeditmodal"> 
                                         <i class="menu-icon fa fa-edit"></i> Edit 
                                     </a>
+                                    <a class="resign btn btn-danger btn-xs" href="#" data-id="{{ $staff->id }}" data-toggle="modal" data-target="#removemodal"> 
+                                        <i class="menu-icon fa fa-minus"></i> Resign 
+                                    </a>
     
                                     {{-- <a class="remove" href="#" data-id="{{ $staff->id }}" data-toggle="modal" data-target="#removemodal"> 
                                         <i class="menu-icon fa fa-minus"></i> Remove 
@@ -127,28 +130,30 @@
         </div>
     </div>
 
-    {{-- <div class="modal fade" id="removemodal" tabindex="-1" role="dialog" aria-labelledby="removemodalLabel" aria-hidden="true">
+    <div class="modal fade" id="removemodal" tabindex="-1" role="dialog" aria-labelledby="removemodalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form id="remove_user" action="remove_user" method="post">
+                <form id="resign_user" action="{{ route('admin_resign_staffs') }}" method="post">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="removemodalLabel">Remove staff</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                        <h5 class="modal-title" id="removemodalLabel">Resign staff</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: relative; top:-25px;">
+                                <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input type="text" class="d-none form-control" id="id2" name="id2">
+                        <input type="text" class="d-none form-control" id="id2" name="id" style="display: none;">
                         <p id="confirm"></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         <button id="submit" type="submit" class="btn btn-primary">Confirm</button>
                     </div>
+
+                    @csrf
                 </form>
             </div>
         </div>
-    </div> --}}
+    </div>
     
 @endsection
 
@@ -182,10 +187,11 @@
                 $("#submit").html("Update");
             });
 
-            // $(".remove").click(function () {
-            //     $("#id2").val($(this).data('id'));
-            //     $("#confirm").html("Are you sure you want to remove " + $(this).closest('tr').index() +") td:eq(0)").html() + "?");
-            // });
+            $(".resign").click(function () {
+                $("#id2").val($(this).data('id'));
+                
+                $("#confirm").html("Are you sure you want to resign <strong>" + $("tr:eq(" + ($(this).closest('tr').index() + 1) + ") td:eq(1)").html() + "</strong>?");
+            });
         } );
     </script>
 

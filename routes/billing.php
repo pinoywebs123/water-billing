@@ -18,6 +18,11 @@ Route::group(['namespace'=> 'Billing', 'middleware' => 'billing_check'], functio
 		'uses'	=> 'UserController@home'
     ]);
 
+    Route::get('/home/filter_consumption', [
+        'as'    => 'billing_filter_consumption_chart',
+        'uses'  => 'UserController@filter_consumption_chart'
+    ]);
+
     //clients functions
     
     Route::get('/clients', [

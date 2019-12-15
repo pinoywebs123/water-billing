@@ -18,6 +18,16 @@ Route::group(['namespace'=> 'Admin', 'middleware'=> 'admin_check'], function()
 		'uses'	=> 'UserController@home'
     ]);
 
+    Route::get('/home/filter_income', [
+        'as'    => 'admin_filter_income_chart',
+        'uses'  => 'UserController@filter_income_chart'
+    ]);
+
+    Route::get('/home/filter_consumption', [
+        'as'    => 'admin_filter_consumption_chart',
+        'uses'  => 'UserController@filter_consumption_chart'
+    ]);
+
     //Staff
     
     Route::get('/staffs', [
@@ -33,6 +43,11 @@ Route::group(['namespace'=> 'Admin', 'middleware'=> 'admin_check'], function()
     Route::post('/staffs/update', [
 		'as'	=> 'admin_update_staffs',
 		'uses'	=> 'StaffsController@staffs_update'
+    ]);
+
+    Route::post('/staffs/resign', [
+		'as'	=> 'admin_resign_staffs',
+		'uses'	=> 'StaffsController@staffs_resign'
     ]);
 
     //Clients
