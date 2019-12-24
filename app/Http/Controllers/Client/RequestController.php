@@ -25,12 +25,18 @@ class RequestController extends Controller
 
     public function request_pending_store(Request $request,CreateRequest $create_request)
     {
-    	
     	$req = new CientRequest;
         $req->client_id = Auth::id();
         $req->status_id = 1;
         $req->title 	= $request->title;
-        $req->answer 	= $request->answer;
+
+        if ($req->title == "Change name" or $req->title == "Change location")
+            $req->answer 	= $request->full_name;
+        elseif ($req->title == "Change birthdate")
+            $req->answer 	= $request->bday;
+        elseif ($req->title == "Change gender")
+            $req->answer 	= $request->gender;
+        
         $req->content 	= ($request->content?$request->content:'');
         $req->save();
 

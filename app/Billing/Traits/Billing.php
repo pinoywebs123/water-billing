@@ -39,7 +39,7 @@ trait Billing {
 
 			$data = $this->validateRequest();
 			$data['client_id'] = $id;
-			$data['status_id'] = 0;
+			$data['status_id'] = 1; // Previously 0, so it wasn't showing at Billings' Homepage's Total Income table 
 			$data['reading'] = $this->request->water_consumption;
 			$data['water_consumption'] = $diffrerence_water_consumption;
 			$data['bill'] = $this->calculate_amount($diffrerence_water_consumption);

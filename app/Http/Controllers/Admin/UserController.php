@@ -10,6 +10,7 @@ use App\User;
 use App\Billing\Traits\UserManagement;
 use App\Billing;
 use Illuminate\Support\Facades\DB;
+use App\Model\Request as CientRequest;
 
 class UserController extends Controller
 {
@@ -23,7 +24,9 @@ class UserController extends Controller
         $consumption = DB::select('SELECT MONTH(end_date) as month, sum(water_consumption) as monthly_ws
         FROM billings GROUP BY MONTH(end_date) ORDER BY MONTH(end_date)');
 
-    	return view('admin.home', compact('income', 'consumption'));
+        $all_request = CientRequest::where('status_id',4)->where('worked_by',Auth::id())->get();
+
+    	return view('admin.home', compact('income', 'consumption', 'all_request'));
     }
 
     public function filter_income_chart(Request $request)

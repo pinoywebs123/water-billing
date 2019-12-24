@@ -272,7 +272,7 @@
                     <h4 class="modal-title">Request Information</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('client_request_pending_store')}}" method="POST">
+                    <form id="request" action="{{route('client_request_pending_store')}}" method="POST">
                             <div class="form-group">
                                 <label>Request to</label>
                                 
@@ -285,11 +285,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Update</label>
-                                <textarea class="form-control" id="answer" name="answer" placeholder="First Name: 
+                                <textarea class="form-control" id="full_name" name="full_name" placeholder="First Name: 
 Middle Name: 
 Last Name: "></textarea>
-                                <input class="form-control" type="date" id="bday" name="answer">
-                                <select class="form-control" id="gender" name="answer">
+                                <input class="form-control" type="date" id="bday" name="bday">
+                                <select class="form-control" id="gender" name="gender">
                                     <option disabled selected>Select a gender</option>
                                     <option>Male</option>
                                     <option>Female</option>
@@ -315,51 +315,61 @@ Last Name: "></textarea>
 
 @section('scripts')
     <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#imagePreview').css('background-image', 'url('+e.target.result +')');
-                    $('#imagePreview').hide();
-                    $('#imagePreview').fadeIn(650);
+        $( document ).ready(function() {
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+                        $('#imagePreview').hide();
+                        $('#imagePreview').fadeIn(650);
+                    }
+                    reader.readAsDataURL(input.files[0]);
                 }
-                reader.readAsDataURL(input.files[0]);
             }
-        }
-        $("#imageUpload").change(function() {
-            readURL(this);
-        });
+            $("#imageUpload").change(function() {
+                readURL(this);
+            });
 
-        $("#update2").click(function() {
-            if ($("#update2").html() == "Change info") {
-                $("#update2").html("Cancel");
-            } else {
-                $("#update2").html("Change info");
-            }
+            $("cupdate2").click(function() {
+                if ($("#update2").html() == "Change info") {
+                    $("#update2").html("Cancel");
+                } else {
+                    $("#update2").html("Change info");
+                }
 
-            $("#right-panel").fadeToggle("slow");
-        });
+                $("#right-panel").fadeToggle("slow");
+            });
 
-        $("#bday").hide();
-        $("#gender").hide();
+            $("#bday").hide();
+            $("#gender").hide();
 
-        $("#title").change(function () {
-            if ($("#title").val() == "Change name") {
-                $("#answer").attr("placeholder", "First Name: \nMiddle Name: \nLast Name: ");
-            }
-            else if ($("#title").val() == "Change location") {
-                $("#answer").attr("placeholder", "Address: \nCity: \nProvince: ");
-            }
-            else if ($("#title").val() == "Change birthdate") {
-                $("#bday").show();
-                $("#answer").hide();
-                $("#gender").hide();
-            }
-            else if ($("#title").val() == "Change gender") {
-                $("#gender").show();
-                $("#bday").hide();
-                $("#answer").hide();
-            }
+            $("#title").change(function () {
+                if ($("#title").val() == "Change name") {
+                    $("#full_name").attr("placeholder", "First Name: \nMiddle Name: \nLast Name: ");
+
+                    $("#full_name").show();
+                    $("#bday").hide();
+                    $("#gender").hide();
+                }
+                else if ($("#title").val() == "Change location") {
+                    $("#full_name").attr("placeholder", "Address: \nCity: \nProvince: ");
+
+                    $("#full_name").show();
+                    $("#bday").hide();
+                    $("#gender").hide();
+                }
+                else if ($("#title").val() == "Change birthdate") {
+                    $("#bday").show();
+                    $("#full_name").hide();
+                    $("#gender").hide();
+                }
+                else if ($("#title").val() == "Change gender") {
+                    $("#gender").show();
+                    $("#bday").hide();
+                    $("#full_name").hide();
+                }
+            });
         });
     </script>
 @endsection
