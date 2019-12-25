@@ -94,4 +94,9 @@ class UserController extends Controller
 
         return back();
     }
+
+    public function view_records_store($id,WaterRates $water)
+    {
+        return $this->storeWaterConsumption($id,$water);
+    }
 }

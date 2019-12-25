@@ -64,4 +64,10 @@ Route::group(['namespace'=> 'Maintenance'], function()
 		'as'	=> 'maintenance_logout',
 		'uses'	=> 'UserController@logout'
 	]);
+
+    Route::post('/client-store-records/{id}',[
+        'as'    => 'maintenance_client_store',
+        'uses'  => 'UserController@view_records_store'
+    ]);
+
 });

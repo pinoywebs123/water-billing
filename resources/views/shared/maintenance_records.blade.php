@@ -7,7 +7,7 @@
 
 @section('contents')
 	<h1 class="text-center">{{$client->name}} Records</h1>
-	<!-- <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">New Bill</button> -->
+	<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">New Bill</button>
 	@include('shared.notif')
 	<table class="table">
 		<thead>
@@ -67,17 +67,17 @@
 
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-  	<form action="{{route('billing_client_store',['id'=> Request::segment(3)])}}" method="POST">
+  	<form action="{{route('maintenance_client_store',['id'=> Request::segment(3)])}}" method="POST">
   	@csrf	
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Water Consumption</h4>
+        <h4 class="modal-title">Water Reading</h4>
       </div>
       <div class="modal-body">
         <div class="form-group">
-        	<label>Water Consumption</label>
+        	<label>Water Reading</label>
         	<input type="number" name="water_consumption" class="form-control" required="">
         </div>
         <div class="form-group">
