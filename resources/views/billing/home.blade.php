@@ -31,7 +31,18 @@
     </div>
 
     <br><br><br><hr style="border-color: #333">
-	<h1 class="text-center">Total Income: P{{number_format($total)}}</h1>
+    <h1 class="text-center" id="total_income">Total Income: P{{number_format($total, 2)}}</h1>
+    
+    <br>
+    <div class="col-md-2">
+        <input type="date" id="filter_income_from" class="form-control">
+    </div>
+    <div class="col-md-2">
+            <input type="date" id="filter_income_to" class="form-control">
+    </div>
+    <div class="col-md-4">
+        <button id="filter_income" class="btn btn-primary">Filter income</button>
+    </div>
 	<table id="example" class="display" style="width:100%">
     @include('shared.notif')
         <thead>
@@ -48,7 +59,7 @@
                 
             </tr>
         </thead>
-        <tbody>
+        <tbody id="income_table">
           @foreach($unpaid as $un)
             <tr>
                 <td>{{$un->user->account_id}}</td>
@@ -56,7 +67,7 @@
               	<td>{{$un->water_consumption}}</td>
               	<td>{{$un->start_date}}</td>
               	<td>{{$un->end_date}}</td>
-              	<td>{{$un->bill}}</td>
+              	<td>{{number_format($un->bill, 2)}}</td>
               	<td style="color: green">Paid</td>
               	<td>{{$un->created_at->toDayDateTimeString()}}</td>
               	
@@ -173,6 +184,30 @@
             error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
                 console.log(JSON.stringify(jqXHR));
                 console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+            }
+        });
+        
+    });
+
+    $('#filter_income').click(function() {
+        var from = $('#filter_income_from').val();
+        var to = $('#filter_income_to').val();
+
+        $.ajax({
+            method: 'GET', // Type of response and matches what we said in the route
+            url: '{{ route("billing_filter_income_table") }}', // This is the url we gave in the route
+            data: {'from' : from, 'to' : to}, // a JSON object to send back
+            success: function(response){ // What to do if we succeed
+                console.log(response);
+                $('#total_income').text('Total Income: P' + (response[0].toFixed(2)).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,') );
+                $('#income_table').html('');
+                response[1].forEach(function(item, index) {
+                    $('#income_table').append(item);
+                });
+            },
+            error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                console.log(JSON.stringify(jqXHR));
+                console.log('AJAX error: ' + textStatus + ' : ' + errorThrown);
             }
         });
         

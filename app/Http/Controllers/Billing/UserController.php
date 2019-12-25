@@ -58,6 +58,44 @@ class UserController extends Controller
 
     }
 
+    public function filter_income_table(Request $request)
+    {
+
+        $from = $request->input('from');
+        $to = $request->input('to');
+
+        $total = Billing::where('status_id', 1)
+                ->where('start_date', ">=" , $from)
+                ->where('end_date', "<=" , $to)
+                ->sum('bill');
+
+        $unpaid = Billing::where('status_id',1)
+                ->where('start_date', ">=" , $from)
+                ->where('end_date', "<=" , $to)
+                ->get();
+                
+        $count = 0;
+        $final_unpaid = array();
+        
+        foreach($unpaid as $row) {
+            $final_unpaid[$count] = 
+                "<tr>
+                    <td>" . $row->user->account_id . "</td>
+                    <td>" . $row->user->email . "</td>
+                    <td>$row->water_consumption</td>
+                    <td>$row->start_date</td>
+                    <td>$row->end_date</td>
+                    <td>" . number_format($row->bill, 2) . "</td>
+                    <td style='color: green'>Paid</td>
+                    <td>" . $row->created_at->toDayDateTimeString() . "</td>
+                </tr>";
+            $count++;
+        }
+
+    	return [$total, $final_unpaid];
+
+    }
+
     public function clients()
     {
         $clients = $this->getAllClient();
