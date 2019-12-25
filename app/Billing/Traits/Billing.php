@@ -71,7 +71,7 @@ trait Billing {
 	public function paidWaterClient($id, $client_id)
 	{
 		$findClient = ClientBill::where('id',$id)->first();
-		$findClient->update(['status_id'=> 1]);
+		$findClient->update(['status_id'=> 5]);
 
 		$user = User::where('id', $client_id)->first();
 

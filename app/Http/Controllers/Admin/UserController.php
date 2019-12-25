@@ -119,9 +119,9 @@ class UserController extends Controller
         $end_date = @$_GET['end_date'];
         $total = Billing::where('status_id',1)->sum('bill');
         if($start_date == null && $end_date == null){
-            $paid = Billing::where('status_id',1)->get();
+            $paid = Billing::where('status_id',2)->get();
         }else{
-            $paid = Billing::where('status_id',1)->whereBetween('updated_at', [$start_date, $end_date])->get();
+            $paid = Billing::where('status_id',2)->whereBetween('updated_at', [$start_date, $end_date])->get();
             
         }
         

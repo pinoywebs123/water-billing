@@ -31,13 +31,9 @@
 					<td>{{$rec->end_date}}</td>
 					<td>P{{$rec->bill}}</td>
 					<td>
-						@if($rec->status_id == 0)
-							<p style="color: red">Pending Payment</p>
-						@else
-							<p style="color: green">Paid</p>
-						@endif
+						{{$rec->status['name']}}
 					</td>
-          <td style="background: @if($rec->status_id == 0)  @if(\Carbon\Carbon::parse($rec->created_at)->diffInDays(now()) < 5) orange @endif  @endif">{{$rec->created_at->addDays(10)->format('Y-m-d')}}</td>
+          <td style="background: @if($rec->status_id == 1)  @if(\Carbon\Carbon::parse($rec->created_at)->diffInDays(now()) < 5) orange @endif  @endif">{{$rec->created_at->addDays(10)->format('Y-m-d')}}</td>
           <td>
              
               @if($rec->created_at->addDays(15)->format('Y m d') == now()->format('Y m d'))
