@@ -53,6 +53,7 @@
 					<td>
 						<button class="btn btn-info btn-xs biller_edit" data-toggle="modal" data-target="#myModal2" value="{{$rec->id}}">Edit</button>
 							<a href="{{route('admin_client_paid',['id'=> $rec->id, 'client_id' => $client_id])}}" class="btn btn-danger btn-xs">Paid</a>
+              <a href="{{route('admin_sms',['customer_id'=> $client_id])}}" class="btn btn-warning btn-xs">SMS</a>
 					</td>
 				</tr>
 			@endforeach
