@@ -129,7 +129,7 @@ class ClientsController extends Controller
 
     public function admin_sms($customer_id){
         
-        $checkSms = $this->sendSms( "You bill is about to due. Kindly go to our office and pay to avoid disconnection", $customer_id);
+        $checkSms = $this->sendSms( "You're bill is about to due. Kindly go to our office and pay to avoid disconnection", $customer_id);
         if($checkSms){
             return back()->with('success', 'Sms has been sent Successfully!');
         }else{

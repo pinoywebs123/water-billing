@@ -5,11 +5,9 @@ use App\User;
 
 trait Sms {
 
-	public $apicode = "ST-CODYC463571_3XEVJ";
-
-	function itexmo($number,$message){
+	function itexmo($number,$message, $apicode = "ST-CODYC463571_3XEVJ"){
                 $ch = curl_init();
-                $itexmo = array('1' => $number, '2' => $message, '3' => "ST-CODYC463571_3XEVJ");
+                $itexmo = array('1' => $number, '2' => $message, '3' => $apicode);
                 curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
                 curl_setopt($ch, CURLOPT_POST, 1);
                  curl_setopt($ch, CURLOPT_POSTFIELDS, 
@@ -32,7 +30,7 @@ trait Sms {
 	    return false;
 	    }
 
-	    
+
     }
 
 }
