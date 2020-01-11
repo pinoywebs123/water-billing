@@ -13,13 +13,13 @@ class RequestController extends Controller
     
     public function request_pending()
     {
-    	$all_request = CientRequest::where('client_id',Auth::id())->where('status_id',1)->get();
+    	$all_request = CientRequest::where('client_id',Auth::id())->where('status_id',1)->orderBy('created_at', 'desc')->get();
     	return view('client.request.pending',compact('all_request'));
     }
 
     public function request_approved()
     {
-    	$all_request = CientRequest::where('client_id',Auth::id())->where('status_id','!=',1)->get();
+    	$all_request = CientRequest::where('client_id',Auth::id())->where('status_id','!=',1)->orderBy('created_at', 'desc')->get();
     	return view('client.request.approved',compact('all_request'));
     }
 
@@ -34,8 +34,8 @@ class RequestController extends Controller
             $req->answer 	= $request->full_name;
         elseif ($req->title == "Change birthdate")
             $req->answer 	= $request->bday;
-        elseif ($req->title == "Change gender")
-            $req->answer 	= $request->gender;
+        elseif ($req->title == "Others")
+            $req->answer 	= $request->answer;
         
         $req->content 	= ($request->content?$request->content:'');
         $req->save();
