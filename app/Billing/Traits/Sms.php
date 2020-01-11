@@ -2,6 +2,7 @@
 
 namespace App\Billing\Traits;
 use App\User;
+use App\Billing as BillModel;
 
 trait Sms {
 
@@ -17,8 +18,13 @@ trait Sms {
                 curl_close ($ch);
     }
 
-    public function sendSms($message, $customer_id){
+    public function sendSms($customer_id, $bill_id){
     	$number =  User::find($customer_id)->profile->contact;
+    	$account_id = User::find($customer_id)->account_id;
+    	$bill = BillModel::find($bill_id)->bill;
+    	$due_date = BillModel::find($bill_id)->end_date;
+
+    	$message = "Dear valued customer Your balance for the month of ".$due_date.", For the account no. ".$account_id." is P".$bill.". To pay your bill, please visit us at the Sibalom Water District office";
     	$result = $this->itexmo($number,$message);
 	    if ($result == ""){
 	    return false;
