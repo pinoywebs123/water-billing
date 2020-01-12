@@ -17,7 +17,7 @@ Route::group(['namespace'=> 'Maintenance'], function()
     Route::get('/pending_bills', [
 		'as'	=> 'maintenance_pending_bills',
 		'uses'	=> 'UserController@pending_bills'
-	]);
+    ]);
 
 	Route::get('/client-view-records/{id}',[
 		'as'	=> 'maintenance_client_view_records',
@@ -43,6 +43,11 @@ Route::group(['namespace'=> 'Maintenance'], function()
     	'as'	=> 'maintenance_accpet_job',
     	'uses'	=> 'UserController@maintenance_accpet_job'
     ]);
+
+    Route::post('/pending_bills/accept_repair', [
+		'as'	=> 'maintenance_accept_repair',
+		'uses'	=> 'UserController@maintenance_accept_repair'
+	]);
 
     Route::post('/client-job-info/',[
     	'as'	=> 'maintenance_client_job_info',

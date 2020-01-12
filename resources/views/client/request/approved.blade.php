@@ -23,7 +23,7 @@
             <tr>
               <td>{{$req->created_at->toDayDateTimeString()}}</td>
               <td>{{$req->title}}</td>
-              <td id="answer">{{$req->answer}}</td>
+              <td id="answer">{!!$req->answer!!}</td>
               <td>{{$req->content}}</td>
               <td>{{$req->status->name}}</td>
               <td>{{ $req->biller->email }}</td>
