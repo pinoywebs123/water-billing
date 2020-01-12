@@ -81,7 +81,9 @@
 @section('scripts')
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#example').DataTable();
+    $('#example').DataTable({
+		"order": []
+	});
 
     $('.approved').click(()=> {
       var id = $('.approved').val();

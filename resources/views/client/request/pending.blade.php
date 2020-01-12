@@ -93,7 +93,9 @@ Last Name: "></textarea>
 @section('scripts')
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#example').DataTable();
+    $('#example').DataTable({
+		"order": []
+	});
   
     var update = $("#update");
     $("#title").change(function () {

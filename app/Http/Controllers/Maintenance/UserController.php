@@ -36,13 +36,13 @@ class UserController extends Controller
 
     public function pending_bills()
     {
-        $all_request = CientRequest::where('status_id',2)->get();
+        $all_request = CientRequest::where('status_id',2)->orderBy('created_at', 'desc')->get();
     	return view('maintenance.pending_bills',compact('all_request'));
     }
 
     public function approved_bills()
     {
-        $all_request = CientRequest::where('status_id',3)->where('worked_by',Auth::id())->get();
+        $all_request = CientRequest::where('status_id',3)->where('worked_by',Auth::id())->orderBy('created_at', 'desc')->get();
     	return view('maintenance.approved_bills',compact('all_request'));
     }
 

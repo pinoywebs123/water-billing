@@ -98,7 +98,9 @@
   var token = '{{Session::token()}}';
 
   $(document).ready(function() {
-    $('#example').DataTable();
+    $('#example').DataTable({
+		"order": []
+	});
 
     $(".request_modal").click(function(){
       id = $(this).val();
