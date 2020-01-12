@@ -16,6 +16,7 @@
             	<th>Customer</th>
                 <th>Title</th>
                 <th>Update info</th>
+                <th>Content</th>
                 <th>Biller</th>
                 <th>Actions</th>
             </tr>
@@ -28,14 +29,15 @@
                 <td>{{$req->user->email}}</td>
                 <td>{{$req->title}}</td>
                 <td class="answer">{{$req->answer}}</td>
+                <td>{{$req->content}}</td>
               	<td>{{$req->biller->email}}</td>
               	<td>
-              		<form action="{{route('maintenance_accpet_job')}}" method="POST" id="form{{$req->id}}">
-                    @csrf
-                    <button class="btn btn-info btn-xs view-jobs" data-toggle="modal" data-target="#myModal" value="{{$req->id}}">View</button>
-                    <input type="hidden" name="request_id" value="{{$req->id}}">
-                    <button class="btn btn-success btn-xs request_modal" data-toggle="modal" data-target="#myModal2" value="{{$req->id}}">Accept Job</button>  
-                  </form>
+              		<form action="{{route('maintenance_accpet_job')}}" method="POST" id="form_accept_job">
+                        <button class="btn btn-info btn-xs view-jobs" data-toggle="modal" data-target="#myModal" value="{{$req->id}}">View</button>
+                        <input type="hidden" name="id" value="{{$req->id}}">
+                        <button class="btn btn-success btn-xs request_modal accept-jobs" data-toggle="modal" data-target="#myModal2" data-repair=<?php if ($req->title == 'Repair') echo true; else echo false; ?>>Accept Job</button>  
+                        @csrf
+                    </form>
               	</td>
             </tr>
           @endforeach
@@ -74,15 +76,21 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Oppps!!!</h4>
+        <h4 class="modal-title">Request approval</h4>
       </div>
       <div class="modal-body">
-        <h3 class="text-center">Are you sure want to approved?</h3>
+        <form id="confirm_ar" method="POST" action="{{route('maintenance_accept_repair')}}">
+            <h3 id="confirm_accept" class="text-center">Are you sure want to approve?</h3>
+            <div id="confirm_repair">
+                <h3 class="text-center">Set the schedule of the repairing:</h3>
+                <input type="hidden" name="id" value="<?php try { echo $req->id; } catch(Exception $e){} ?>">
+                <input type="datetime-local" class="form-control" name="answer" style="width: 50%; margin: 0 auto;" required>
+            </div>
       </div>
       <div class="modal-footer">
-        <form>
           <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-          <button type="button" class="btn btn-default approved_request">Yes</button>
+          <button type="submit" class="btn btn-default approved_request">Yes</button>
+          @csrf
         </form>
       </div>
     </div>
@@ -108,26 +116,49 @@
     });
 
     $(".approved_request").click(function(){
-      $("#form"+id).submit();
+        if ($(this).data("repair") != true) {
+            $("#confirm_ar").submit(function(e){
+                e.preventDefault();
+            });
+            
+            $("#form_accept_job").submit();
+        }
     });
 
     $(".view-jobs").click(function(){
-      var req_id = $(this).val();
-      $.ajax({
-        method: 'POST',
-        url: url,
-        data: {data: req_id, _token: token},
-        success: function(data){
-          $("#req_info").append("");
-          $("#req_info").append("<h3> Account ID: "+data.account_id+"</h3>");
-          $("#req_info").append("<p> Title : "+data.title+"</p>");
-          $("#req_info").append("<p> Update Info : "+"<br /><span class='answer'>"+data.answer+"</span></p>");
-          $("#req_info").append("<p> Content : "+data.content+"</p>");
-          console.log(data);
+        $("#req_info").html("");
+        $("#req_info").append("");
+        $("#req_info").append("<h3>" + $("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(1)").html() + "</h3>");
+        $("#req_info").append("<p> Title : " + $("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(3)").html() + "</p>");
+        
+        var info = $("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(4)").html();
+        if (info != '')
+        $("#req_info").append("<p> Update info: " + info + "</p>");
+
+        var reason = $("tr:eq(" + ($(this).closest('tr').index() + 1) +") td:eq(5)").html();
+        if (reason != '')
+        $("#req_info").append("<p> Content: " + reason + "</p>");
+    });
+
+    var accept = $("#confirm_accept");
+    var repair = $("#confirm_repair");
+    $(".accept-jobs").click(function(){
+        if ($(this).data("repair") == true) {
+
+            $(".approved_request").data("repair", true);
+
+            $("#confirm_accept").remove();
+            $("#confirm_ar").append(repair);
+
         }
+        else {
 
-      });
+            $(".approved_request").data("repair", false);
 
+            $("#confirm_repair").remove();
+            $("#confirm_ar").append(accept);
+
+        }
     });
 
   } );

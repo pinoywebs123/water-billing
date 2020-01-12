@@ -62,10 +62,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Informations!!!</h4>
+        <h4 class="modal-title">Request approval</h4>
       </div>
       <div class="modal-body">
-        <h3>Are you sure want yo approved?</h3>
+        <h3 class="text-center">Are you sure want to approve?</h3>
       </div>
       <div class="modal-footer">
         <button class="btn btn-primary approved_yes">Yes</button>

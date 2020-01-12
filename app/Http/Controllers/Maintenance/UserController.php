@@ -63,8 +63,16 @@ class UserController extends Controller
     }
 
     public function maintenance_accpet_job(Request $request){
-        $find = CientRequest::findOrFail($request->request_id);
+        $find = CientRequest::findOrFail($request->input('id'));
         $find->update(['worked_by'=> Auth::id(),'status_id'=> 3]);
+        return back()->with('success','Sucessfully Accept Job');
+
+    }
+
+    public function maintenance_accept_repair(Request $request){
+
+        $find = CientRequest::findOrFail($request->input('id'));
+        $find->update(['answer' => "Scheduled appointment: <br>" . date("F j, Y, g:i a", strtotime($request->answer)), 'worked_by'=> Auth::id(),'status_id'=> 3]);
         return back()->with('success','Sucessfully Accept Job');
     }
 
