@@ -80,7 +80,7 @@ trait Billing {
 
         //Mail::to($user->email)->send(new Paid($user));
 
-        $checkSms = $this->sendPaidSms($user);
+        $checkSms = $this->sendPaidSms($user->id);
         if($checkSms){
             return back()->with('success', 'Sms has been sent Successfully!');
         }else{
