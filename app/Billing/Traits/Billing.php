@@ -12,8 +12,11 @@ use App\User;
 use App\Rate;
 use App\SummaryRate;
 use DB;
+use App\Billing\Traits\Sms;
+
 
 trait Billing {
+	use Sms;
 
 	public function getWaterCosumption($id)
 	{
@@ -75,9 +78,17 @@ trait Billing {
 
 		$user = User::where('id', $client_id)->first();
 
-        Mail::to($user->email)->send(new Paid($user));
+        //Mail::to($user->email)->send(new Paid($user));
 
-        return redirect()->back()->with('success','Client Has Paid Successfully! <br /> Your email will receive a copy of this notification.');
+        $checkSms = $this->sendPaidSms($user);
+        if($checkSms){
+            return back()->with('success', 'Sms has been sent Successfully!');
+        }else{
+            return back()->with('error','Something wrong with SMS!');
+        }
+
+
+       
     }
 
 	public function validateRequest(){

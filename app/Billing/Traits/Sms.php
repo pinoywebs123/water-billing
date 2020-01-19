@@ -39,4 +39,22 @@ trait Sms {
 
     }
 
+    public function sendPaidSms($user){
+        $number =  User::find($user)->profile->contact;
+
+        $message = "Dear customer thank you for paying your outstanding balance";
+        $result = $this->itexmo($number,$message);
+        if ($result == ""){
+        return false;
+        
+        }else if ($result == 0){
+        return true;
+        }
+        else{   
+        return false;
+        }
+    }
+
+
+
 }
