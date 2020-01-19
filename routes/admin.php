@@ -122,4 +122,9 @@ Route::group(['namespace'=> 'Admin', 'middleware'=> 'admin_check'], function()
 		'uses'	=> 'UserController@logout'
 	]);
 
+    Route::get('/consumer-sms/{consumer_id}/{bill_id}', [
+        'as'    => 'admin_sms',
+        'uses'  => 'ClientsController@admin_sms'
+    ]);
+
 });

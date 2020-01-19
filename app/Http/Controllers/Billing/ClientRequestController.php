@@ -11,13 +11,13 @@ class ClientRequestController extends Controller
 {
 	public function pending_bills()
     {
-    	$all_request = CientRequest::where('status_id',1)->get();
+    	$all_request = CientRequest::where('status_id',1)->orderBy('created_at', 'desc')->get();
     	return view('billing.pending_bills',compact('all_request'));
     }
 
     public function approved_bills()
     {
-    	$all_request = CientRequest::where('approved_by',Auth::id())->where('status_id','!=',1)->get();
+    	$all_request = CientRequest::where('approved_by',Auth::id())->where('status_id','!=',1)->orderBy('created_at', 'desc')->get();
     	return view('billing.approved_bills',compact('all_request'));
     }
 

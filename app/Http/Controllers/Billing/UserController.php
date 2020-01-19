@@ -15,8 +15,8 @@ class UserController extends Controller
     
     public function home()
     {
-        $total = Billing::where('status_id',1)->sum('bill');
-        $unpaid = Billing::where('status_id',1)->get();
+        $total = Billing::where('status_id',5)->sum('bill');
+        $unpaid = Billing::where('status_id',5)->get();
         $consumption = DB::select('SELECT MONTH(end_date) as month, sum(water_consumption) as monthly_ws
         FROM billings GROUP BY MONTH(end_date) ORDER BY MONTH(end_date)');
 
@@ -55,6 +55,44 @@ class UserController extends Controller
         }
 
         return [$months, $consumptions];
+
+    }
+
+    public function filter_income_table(Request $request)
+    {
+
+        $from = $request->input('from');
+        $to = $request->input('to');
+
+        $total = Billing::where('status_id', 1)
+                ->where('start_date', ">=" , $from)
+                ->where('end_date', "<=" , $to)
+                ->sum('bill');
+
+        $unpaid = Billing::where('status_id',1)
+                ->where('start_date', ">=" , $from)
+                ->where('end_date', "<=" , $to)
+                ->get();
+                
+        $count = 0;
+        $final_unpaid = array();
+        
+        foreach($unpaid as $row) {
+            $final_unpaid[$count] = 
+                "<tr>
+                    <td>" . $row->user->account_id . "</td>
+                    <td>" . $row->user->email . "</td>
+                    <td>$row->water_consumption</td>
+                    <td>$row->start_date</td>
+                    <td>$row->end_date</td>
+                    <td>" . number_format($row->bill, 2) . "</td>
+                    <td style='color: green'>Paid</td>
+                    <td>" . $row->created_at->toDayDateTimeString() . "</td>
+                </tr>";
+            $count++;
+        }
+
+    	return [$total, $final_unpaid];
 
     }
 

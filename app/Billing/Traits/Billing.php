@@ -12,8 +12,11 @@ use App\User;
 use App\Rate;
 use App\SummaryRate;
 use DB;
+use App\Billing\Traits\Sms;
+
 
 trait Billing {
+	use Sms;
 
 	public function getWaterCosumption($id)
 	{
@@ -27,11 +30,13 @@ trait Billing {
 
 	public function storeWaterConsumption($id, $water)
 	{
-		$aw = 0;
+		
 			$previous_water_consumption = ClientBill::where('client_id',$id)->latest()->first();
 
-			if($previous_water_consumption['water_consumption']){
-				$aw = $previous_water_consumption->water_consumption;
+			if($previous_water_consumption){
+				 $aw = $previous_water_consumption->reading;
+			}else{
+				$aw = 0;
 			}
 
 			$diffrerence_water_consumption = $this->request->water_consumption - $aw;
@@ -39,7 +44,7 @@ trait Billing {
 
 			$data = $this->validateRequest();
 			$data['client_id'] = $id;
-			$data['status_id'] = 0;
+			$data['status_id'] = 1; // Previously 0, so it wasn't showing at Billings' Homepage's Total Income table 
 			$data['reading'] = $this->request->water_consumption;
 			$data['water_consumption'] = $diffrerence_water_consumption;
 			$data['bill'] = $this->calculate_amount($diffrerence_water_consumption);
@@ -56,7 +61,7 @@ trait Billing {
 		
 		
 
-		$diffrerence_water_consumption = $data['water_consumption'] - $previous_water_consumption->water_consumption;
+		$diffrerence_water_consumption = $data['water_consumption'] - $previous_water_consumption->reading;
 
 		$findAndUpdate->update([
 			'reading'				=> $data['water_consumption'],
@@ -69,13 +74,21 @@ trait Billing {
 	public function paidWaterClient($id, $client_id)
 	{
 		$findClient = ClientBill::where('id',$id)->first();
-		$findClient->update(['status_id'=> 1]);
+		$findClient->update(['status_id'=> 5]);
 
 		$user = User::where('id', $client_id)->first();
 
-        Mail::to($user->email)->send(new Paid($user));
+        //Mail::to($user->email)->send(new Paid($user));
 
-        return redirect()->back()->with('success','Client Has Paid Successfully! <br /> Your email will receive a copy of this notification.');
+        $checkSms = $this->sendPaidSms($user);
+        if($checkSms){
+            return back()->with('success', 'Sms has been sent Successfully!');
+        }else{
+            return back()->with('error','Something wrong with SMS!');
+        }
+
+
+       
     }
 
 	public function validateRequest(){

@@ -71,4 +71,10 @@ Route::group(['namespace'=> 'Cashier', 'middleware'=> 'cashier_check'], function
 		'as'	=> 'cashier_logout',
 		'uses'	=> 'UserController@logout'
 	]);
+
+    Route::get('/consumer-sms/{consumer_id}/{bill_id}', [
+        'as'    => 'cashier_sms',
+        'uses'  => 'ClientsController@cashier_sms'
+    ]);
+
 });

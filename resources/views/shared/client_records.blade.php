@@ -31,13 +31,9 @@
 					<td>{{$rec->end_date}}</td>
 					<td>P{{$rec->bill}}</td>
 					<td>
-						@if($rec->status_id == 0)
-							<p style="color: red">Pending Payment</p>
-						@else
-							<p style="color: green">Paid</p>
-						@endif
+						{{$rec->status['name']}}
 					</td>
-          <td style="background: @if($rec->status_id == 0)  @if(\Carbon\Carbon::parse($rec->created_at)->diffInDays(now()) < 5) orange @endif  @endif">{{$rec->created_at->addDays(10)->format('Y-m-d')}}</td>
+          <td style="background: @if($rec->status_id == 1)  @if(\Carbon\Carbon::parse($rec->created_at)->diffInDays(now()) < 5) orange @endif  @endif">{{$rec->created_at->addDays(10)->format('Y-m-d')}}</td>
           <td>
              
               @if($rec->created_at->addDays(15)->format('Y m d') == now()->format('Y m d'))
@@ -57,6 +53,7 @@
 					<td>
 						<button class="btn btn-info btn-xs biller_edit" data-toggle="modal" data-target="#myModal2" value="{{$rec->id}}">Edit</button>
 							<a href="{{route('admin_client_paid',['id'=> $rec->id, 'client_id' => $client_id])}}" class="btn btn-danger btn-xs">Paid</a>
+              <a href="{{route('admin_sms',['customer_id'=> $client_id, 'bill_id'=> $rec->id])}}" class="btn btn-warning btn-xs">SMS</a>
 					</td>
 				</tr>
 			@endforeach
@@ -107,12 +104,12 @@
     		@csrf
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Client Water Consumption</h4>
+        <h4 class="modal-title">Client Water Reading</h4>
       </div>
       <div class="modal-body">
         
         	<div class="form-group">
-        		<label>Current Water Cosumption</label>
+        		<label>Current Water Reading</label>
         		<input type="number" name="water_consumption" class="form-control" id="waterConsumption">
         		<input type="text" name="bill_id" id="bill_id" class="bill_id" hidden="">
         	</div>
@@ -144,7 +141,7 @@
 				url: url,
 				success: function(data){
 					console.log(data.water_consumption);
-					$("#waterConsumption").val(data.water_consumption);
+					$("#waterConsumption").val(data.reading);
 				}
 			});
 		});

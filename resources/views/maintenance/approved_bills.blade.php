@@ -15,6 +15,7 @@
             	<th>Customer</th>
                 <th>Title</th>
                 <th>Update info</th>
+                <th>Content</th>
                 <th>Biller Approved</th>
                 <th>Status</th>
                 <th>Actions</th>
@@ -28,7 +29,8 @@
                 <td>{{$req->user->account_id}}</td>
                 <td>{{$req->user->email}}</td>
                 <td>{{$req->title}}</td>
-                <td id="answer">{{$req->answer}}</td>
+                <td id="answer">{!!$req->answer!!}</td>
+                <th>{{$req->content}}</th>
               	<td>{{$req->biller->email}}</td>
               	<td>{{$req->status->name}}</td>
               	<td>
@@ -50,7 +52,9 @@
 <script type="text/javascript">
  
   $(document).ready(function() {
-    $('#example').DataTable();
+    $('#example').DataTable({
+		"order": []
+	});
 
    
   } );

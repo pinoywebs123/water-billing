@@ -10,11 +10,12 @@ use App\Profile;
 use App\Billing\Traits\UserManagement;
 use App\Billing\Traits\Billing;
 use App\Billing\Admin\WaterRates;
+use App\Billing\Traits\Sms;
 use Request as ReqSeg;
 
 class ClientsController extends Controller
 {
-    use UserManagement, Billing;
+    use UserManagement, Billing, Sms;
 
     public function clients_store()
     {
@@ -124,4 +125,19 @@ class ClientsController extends Controller
     {
         return $this->editWaterConsumption($request->except('_token'),$water);
     }
+
+    public function admin_sms($customer_id, $bill_id){
+    
+        $checkSms = $this->sendSms($customer_id, $bill_id);
+        if($checkSms){
+            return back()->with('success', 'Sms has been sent Successfully!');
+        }else{
+            return back()->with('error','Something wrong with SMS!');
+        }
+    }
+
+    
+
+    
+
 }

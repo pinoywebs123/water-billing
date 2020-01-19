@@ -28,7 +28,7 @@
               <td>{{$req->user->account_id}}</td>
               <td>{{ $req->user->profile->first_name }} {{ $req->user->profile->middle_name }} {{ $req->user->profile->last_name }}</td>
               <td>{{$req->title}}</td>
-              <td id="answer">{{$req->answer}}</td>
+              <td id="answer">{!!$req->answer!!}</td>
               <td>{{$req->content}}</td>
               <td>{{$req->status->name}}</td>
               <td>
@@ -49,7 +49,9 @@
 @section('scripts')
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#example').DataTable();
+    $('#example').DataTable({
+		"order": []
+	});
   } );
 </script>
 @endsection

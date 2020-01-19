@@ -62,6 +62,7 @@
                     <option value="Change name">Change name</option>
                     <option value="Change location">Change location</option>  
                     <option value="Temporary closed/Disconnection">Temporary closed/Disconnection</option> 
+                    <option value="Repair">Repair</option>
                     <option value="Others">Others</option>  
                 </select>
             </div>
@@ -93,7 +94,9 @@ Last Name: "></textarea>
 @section('scripts')
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#example').DataTable();
+    $('#example').DataTable({
+		"order": []
+	});
   
     var update = $("#update");
     $("#title").change(function () {
@@ -108,12 +111,12 @@ Last Name: "></textarea>
             update.appendTo("#update_container");
             $("#answer").attr("placeholder", "Address: \nCity: \nProvince: ");
         }
-        else if ($("#title").val() == "Temporary closed/Disconnection")
+        else if ($("#title").val() == "Temporary closed/Disconnection" || $("#title").val() == "Repair")
             $("#update").remove();
         else {
             $("#update").remove();
             update.appendTo("#update_container");
-            $("#answer").attr("placeholder", "Add more info");
+            $("#answer").attr("placeholder", "Re");
         }
     });
   });
