@@ -9,7 +9,10 @@ use App\User;
 use App\Profile;
 use App\Billing\Traits\UserManagement;
 use App\Billing\Traits\Billing;
+use App\Billing\Traits\Sms;
 use App\Billing\Admin\WaterRates;
+use App\Billing as UserBilling;
+use Request as ReqSeg;
 
 class ClientsController extends Controller
 {
@@ -160,8 +163,9 @@ class ClientsController extends Controller
         $client = $this->findClient($id);
         $records = $this->getWaterCosumption($id);
         $usertype = 'billing';
+        $client_id = ReqSeg::segment(3);
 
-        return view('shared.billing_records',compact('client','records', 'usertype'));
+        return view('shared.billing_records',compact('client','records', 'usertype','client_id'));
     }
 
     public function view_records_Store($id,WaterRates $water)
@@ -177,5 +181,23 @@ class ClientsController extends Controller
     public function admin_client_update_water(Request $request, WaterRates $water)
     {
         return $this->editWaterConsumption($request->except('_token'),$water);
+    }
+
+    public function paid_records($id, $client_id){
+        return $this->paidWaterClient($id, $client_id);
+
+        // $find = UserBilling::findOrFail($id);
+        // $find->update(['status_id'=>1]);
+        // return back()->with('success','User has been paid Successfully!!');
+    }
+
+    public function cashier_sms($customer_id, $bill_id){
+    
+        $checkSms = $this->sendSms($customer_id, $bill_id);
+        if($checkSms){
+            return back()->with('success', 'Sms has been sent Successfully!');
+        }else{
+            return back()->with('error','Something wrong with SMS!');
+        }
     }
 }
