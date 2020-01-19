@@ -12,6 +12,7 @@ use App\Billing\Traits\Billing;
 use App\Billing\Traits\Sms;
 use App\Billing\Admin\WaterRates;
 use App\Billing as UserBilling;
+use Request as ReqSeg;
 
 class ClientsController extends Controller
 {
@@ -89,14 +90,17 @@ class ClientsController extends Controller
         $client = $this->findClient($id);
         $records = $this->getWaterCosumption($id);
         $usertype = 'cashier';
+        $client_id = ReqSeg::segment(3);
 
-        return view('shared.billing_records',compact('client','records', 'usertype'));
+        return view('shared.cashier_records',compact('client','records', 'usertype','client_id'));
     }
 
-    public function paid_records($id){
-        $find = UserBilling::findOrFail($id);
-        $find->update(['status_id'=>1]);
-        return back()->with('success','User has been paid Successfully!!');
+    public function paid_records($id, $client_id){
+        return $this->paidWaterClient($id, $client_id);
+        
+        // $find = UserBilling::findOrFail($id);
+        // $find->update(['status_id'=>1]);
+        // return back()->with('success','User has been paid Successfully!!');
     }
 
     public function view_records_Store($id, WaterRates $water)

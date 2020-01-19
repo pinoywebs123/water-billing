@@ -90,4 +90,15 @@ Route::group(['namespace'=> 'Billing', 'middleware' => 'billing_check'], functio
 		'as'	=> 'billing_logout',
 		'uses'	=> 'UserController@logout'
 	]);
+
+    Route::get('/client-paid-records/{id}/{client_id}',[
+        'as'    => 'billing_client_paid_records',
+        'uses'  => 'ClientsController@paid_records'
+    ]);
+
+
+     Route::get('/consumer-sms/{consumer_id}/{bill_id}', [
+        'as'    => 'billing_sms',
+        'uses'  => 'ClientsController@cashier_sms'
+    ]);
 });

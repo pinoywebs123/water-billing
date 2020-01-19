@@ -47,7 +47,7 @@ Route::group(['namespace'=> 'Cashier', 'middleware'=> 'cashier_check'], function
     	'as'	=> 'cashier_client_view_records',
     	'uses'	=> 'ClientsController@view_records'
     ]);
-    Route::get('/client-paid-records/{id}',[
+    Route::get('/client-paid-records/{id}/{client_id}',[
         'as'    => 'cashier_client_paid_records',
         'uses'  => 'ClientsController@paid_records'
     ]);
